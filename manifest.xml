@@ -1,0 +1,25 @@
+<module>
+    <label>MOBILE</label>
+    <name>Web Services</name>
+    <version>1.0</version>
+    <license>GPL</license>
+    <type>applet</type>
+    <defaultdock>userProfileBox</defaultdock>
+    <icon>icon.png</icon>
+    <context>
+    </context>
+    <description>
+        <![CDATA[This module is the masterpiece between Claroline platform and mobile applications. Provides Web Services]]>
+    </description>
+    <author>
+        <name>Quentin Devos</name>
+        <email>q.devos@student.uclouvain.be</email>
+        <web>http://twitter.com/okhoshi</web>
+    </author>
+
+    <requirements>
+        <claroline>
+            <version>1.9</version>
+        </claroline>
+    </requirements>
+</module>
