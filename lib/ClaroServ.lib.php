@@ -23,7 +23,7 @@ class ClaroWeb {
 			  $userData['picture']);
 		$userData['platformName'] = get_conf('siteName', "Claroline");
 		$userData['institutionName'] = get_conf('institution_name',"");
-		$userData['platformTextAuth'] = strip_tags(claro_text_zone::get_content("textzone_top.authenticated"));
+		$userData['platformTextAuth'] = trim(strip_tags(claro_text_zone::get_content("textzone_top.authenticated")));
 		$userData['platformTextAnonym'] = trim(strip_tags(claro_text_zone::get_content("textzone_top.anonymous")));
 		return $userData;
 	}

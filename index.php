@@ -89,5 +89,6 @@
 	if(isset($_REQUEST['debug'])){
 		print_r($result);
 	}
-	echo claro_utf8_encode(json_encode($result));
+	claro_utf8_encode_array($result);
+	echo json_encode($result);
 ?>
