@@ -1,5 +1,5 @@
 <?php
-class ClaroWeb {
+class Documents {
 	    // Singleton instance
     private static $instance = false; // this class is a singleton
 
@@ -10,65 +10,6 @@ class ClaroWeb {
         }
 
         return self::$instance;
-	}
-	
-	function getUserData() {
-		$userData = claro_get_current_user_data();
-		unset($userData['authSource'],
-			  $userData['creatorId'],
-			  $userData['lastLogin'],
-			  $userData['mail'],
-			  $userData['officialEmail'],
-			  $userData['phone'],
-			  $userData['picture']);
-		$userData['platformName'] = get_conf('siteName', "Claroline");
-		$userData['institutionName'] = get_conf('institution_name',"");
-		$userData['platformTextAuth'] = trim(strip_tags(claro_text_zone::get_content("textzone_top.authenticated")));
-		$userData['platformTextAnonym'] = trim(strip_tags(claro_text_zone::get_content("textzone_top.anonymous")));
-		return $userData;
-	}
-
-	function getCourseList(){
-		FromKernel::uses('courselist.lib');
-		$claroNotification = Claroline::getInstance()->notification;
-		$date = $claroNotification->getLastActionBeforeLoginDate(claro_get_current_user_id());
-		$courseList = array();
-		$notifiedCourses = $claroNotification->getNotifiedCourses($date,claro_get_current_user_id());
-		foreach (get_user_course_list(claro_get_current_user_id()) as $course){
-			$course_data = claro_get_course_data($course['sysCode']);
-			$course['officialEmail'] = $course_data['email'];
-			$course['notified'] = in_array($course['sysCode'],$notifiedCourses);
-			$courseList[] = $course;
-		}
-		return $courseList;
-	}
-	
-	function getCourseToolList(){
-		FromKernel::uses('courselist.lib');
-		$claroNotification = Claroline::getInstance()->notification;
-		$date = $claroNotification->getLastActionBeforeLoginDate(claro_get_current_user_id());
-		$course = array();
-		$course['sysCode'] = claro_get_current_course_id();
-		$course['isAnn'] = false;
-		$course['annNotif'] = false;
-		$course['isDnL'] = false;
-		$course['dnlNotif'] = false;
-		$notifiedTools = $claroNotification->getNotifiedTools(claro_get_current_course_id(),$date,claro_get_current_user_id());
-		foreach(claro_get_course_tool_list($course['sysCode'],claro_get_current_user_profile_id_in_course(claro_get_current_course_id())) as $tool){ 
-			switch($tool['label']){
-				case 'CLANN':
-					$course['isAnn'] = ($tool['visibility'] || claro_is_allowed_to_edit());
-					$course['annNotif'] = in_array($tool['tool_id'],$notifiedTools);
-					break;
-				case 'CLDOC':
-					$course['isDnL'] = ($tool['visibility'] || claro_is_allowed_to_edit());
-					$course['dnlNotif'] = in_array($tool['tool_id'],$notifiedTools);
-					break;
-				default:
-					break;
-			}
-		}
-		return $course;
 	}
 	
 	function getDocList($cid, $curDirPath = '', $recursive = true){
@@ -215,64 +156,6 @@ class ClaroWeb {
 		}
 		
 		return $fileList;
-	}
-	
-	function getAnnounceList($cid){
-		From::Module('CLANN')->uses('announcement.lib');
-		$claroNotification = Claroline::getInstance()->notification;
-		$date = $claroNotification->getLastActionBeforeLoginDate(claro_get_current_user_id());
-		$annList = array();
-		foreach ( announcement_get_item_list(array('course'=>$cid)) as $announce ) {
-			$announce['notified'] = $claroNotification->isANotifiedRessource($cid,
-				$date,
-				claro_get_current_user_id(),
-				claro_get_current_group_id(),
-				get_tool_id_from_module_label('CLANN'),
-				$announce['id'],
-				false);
-			$announce['visibility'] = ($announce['visibility'] != 'HIDE');
-			$announce['cours']['sysCode'] = $cid;
-			$announce['date'] = $announce['time'];
-			$announce['ressourceId'] = $announce['id'];
-			$announce['content'] = trim(strip_tags($announce['content']));
-			unset($announce['id']);
-			if(claro_is_allowed_to_edit() || $announce['visibility'])
-				$annList[] = $announce;
-		}
-		return $annList;
-	}
-	
-	function getSingleAnnounce($cid, $resourceId){
-		$claroNotification = Claroline::getInstance()->notification;
-		From::Module('CLANN')->uses('announcement.lib');
-		$announce = announcement_get_item($resourceId,$cid);
-		$announce['visibility'] = ($announce['visibility'] != 'HIDE');
-		$announce['content'] = trim(strip_tags($announce['content']));
-		$announce['cours']['sysCode'] = $cid;
-		$announce['ressourceId'] = $announce['id'];
-		$announce['date'] = $claroNotification->getLastActionBeforeLoginDate(claro_get_current_user_id());
-		$announce['notified'] = $claroNotification->isANotifiedRessource($cid,
-				$date,
-				claro_get_current_user_id(),
-				claro_get_current_group_id(),
-				get_tool_id_from_module_label('CLANN'),
-				$announce['id'],
-				false);
-		unset($announce['id']);
-		return (claro_is_allowed_to_edit() || $announce['visibility'])?$announce:null;
-	}
-	
-	function getUpdates(){
-		$claroNotification = Claroline::getInstance()->notification;
-		$gid = 0;
-		$date = $claroNotification->getLastActionBeforeLoginDate(claro_get_current_user_id());
-		$result = array();
-		foreach($claroNotification->getNotifiedCourses($date, claro_get_current_user_id()) as $cid){
-			foreach ( $claroNotification->getNotifiedTools($cid, $date, claro_get_current_user_id()) as $tid ) {
-				$result[$cid][get_module_label_from_tool_id($tid)] = $claroNotification->getNotifiedRessources($cid,$date,claro_get_current_user_id(),$gid,$tid);
-			}
-		}
-		return $result;
 	}
 }
 ?>
