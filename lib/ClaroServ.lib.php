@@ -23,6 +23,8 @@ class ClaroWeb {
 			  $userData['picture']);
 		$userData['platformName'] = get_conf('siteName', "Claroline");
 		$userData['institutionName'] = get_conf('institution_name',"");
+		$userData['platformTextAuth'] = strip_tags(claro_text_zone::get_content("textzone_top.authenticated"));
+		$userData['platformTextAnonym'] = trim(strip_tags(claro_text_zone::get_content("textzone_top.anonymous")));
 		return $userData;
 	}
 
@@ -181,7 +183,7 @@ class ClaroWeb {
 					$fileAttributeList['size'] = claro_get_file_size($baseWorkDir.$thisFile);
 					$fileAttributeList['date'] = date('Y-m-d',filemtime($baseWorkDir.$thisFile));
 					$fileAttributeList['extension'] = get_file_extension($baseWorkDir.$thisFile);
-					$fileAttributeList['url'] = claro_get_file_download_url($thisFile);
+					$fileAttributeList['url'] = $_SERVER['SERVER_NAME'] . claro_get_file_download_url($thisFile);
 				}
 	
 				$xtraAttributeKey = array_search($thisFile, $xtraAttributeList['path']);
@@ -232,6 +234,7 @@ class ClaroWeb {
 			$announce['cours']['sysCode'] = $cid;
 			$announce['date'] = $announce['time'];
 			$announce['ressourceId'] = $announce['id'];
+			$announce['content'] = trim(strip_tags($announce['content']));
 			unset($announce['id']);
 			if(claro_is_allowed_to_edit() || $announce['visibility'])
 				$annList[] = $announce;
@@ -244,6 +247,7 @@ class ClaroWeb {
 		From::Module('CLANN')->uses('announcement.lib');
 		$announce = announcement_get_item($resourceId,$cid);
 		$announce['visibility'] = ($announce['visibility'] != 'HIDE');
+		$announce['content'] = trim(strip_tags($announce['content']));
 		$announce['cours']['sysCode'] = $cid;
 		$announce['ressourceId'] = $announce['id'];
 		$announce['date'] = $claroNotification->getLastActionBeforeLoginDate(claro_get_current_user_id());

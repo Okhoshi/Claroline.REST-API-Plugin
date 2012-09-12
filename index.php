@@ -9,7 +9,6 @@
  * @author      Quentin Devos <q.devos@student.uclouvain.be>
  */
     $tlabelReq = 'MOBILE';
-	
     
     require dirname( __FILE__ ) . '/../../claroline/inc/claro_init_global.inc.php';
     $allowed = array('getUserData',
