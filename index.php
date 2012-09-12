@@ -2,7 +2,7 @@
 /**
  * Web Services Provider
  *
- * @version     MOBILE 1 $Revision: 2 $ - Claroline 1.9
+ * @version     MOBILE 1 $Revision: 3 $ - Claroline 1.11
  * @copyright   2001-2012 Universite Catholique de Louvain (UCL)
  * @license     http://www.gnu.org/copyleft/gpl.html (GPL) GENERAL PUBLIC LICENSE
  * @package     MOBILE
@@ -11,13 +11,6 @@
     $tlabelReq = 'MOBILE';
     
     require dirname( __FILE__ ) . '/../../claroline/inc/claro_init_global.inc.php';
-    $allowed = array('getUserData',
-					 'getCourseList',
-					 'getDocList',
-					 'getCourseToolList',
-					 'getAnnounceList',
-					 'getSingleAnnounce',
-					 'getUpdates');
 	
 	if(!claro_is_user_authenticated()){
 		header('Forbidden',true,403);
@@ -29,12 +22,10 @@
 		die();
 	}
 	
-	if(!isset($_REQUEST['Method']) || !in_array($_REQUEST['Method'],$allowed)){
-		header('Not Implemented',true,501);
+	if(!isset($_REQUEST['Method'])){
+		header('Missing Argument',true, 400);
 		die();
 	}
-	
-	From::Module( 'MOBILE' )->uses('ClaroServ.lib.php');
 	
 	/*
 	 * Force headers
@@ -45,23 +36,40 @@
 	header("Last-Modified: " . gmdate( "D, d M Y H:i:s" ) . "GMT" );
 	header("Pragma: no-cache" );
 	
-	$serv = ClaroWeb::getInstance();
-	
 	switch($_REQUEST['Method']){
+	//GENERAL.LIB
 		case 'getUserData':
-			$result =  $serv->getUserData();
+			From::Module( 'MOBILE' )->uses('General.lib.php');
+			$result =  General::getInstance()->getUserData();
 			break;
 		case 'getCourseList':
-			$result = $serv->getCourseList();
+			From::Module( 'MOBILE' )->uses('General.lib.php');
+			$result = General::getInstance()->getCourseList();
 			break;
+		case 'getUpdates':
+			From::Module( 'MOBILE' )->uses('General.lib.php');
+			$result = General::getInstance()->getUpdates();
+			break;
+		case 'getCourseToolList':
+			if(claro_get_current_course_id() == null){
+				header('Missing Argument',true, 400);
+				die();
+			}
+			From::Module( 'MOBILE' )->uses('Announce.lib.php');
+			$result = Announce::getInstance()->getCourseToolList(claro_get_current_course_id(),$_profileId,$is_courseAdmin);
+			break;
+	//DOCUMENTS.LIB
 		case 'getDocList':
 			if(claro_get_current_course_id() == null){
 				header('Missing Argument',true, 400);
 				die();
 			}
-			$result = $serv->getDocList(claro_get_current_course_id(),'',true);
+			From::Module( 'MOBILE' )->uses('Documents.lib.php');
+			$result = Documents::getInstance()->getDocList(claro_get_current_course_id(),'',true);
 			break;
+	//ANNOUNCE.LIB
 		case 'getAnnounceList':
+			From::Module( 'MOBILE' )->uses('General.lib.php');
 			if(claro_get_current_course_id() == null){
 				header('Missing Argument',true, 400);
 				die();
@@ -73,22 +81,22 @@
 				header('Missing Argument',true, 400);
 				die();
 			}
-			$result = $serv->getSingleAnnounce(claro_get_current_course_id(), $_REQUEST['resId']);
+			From::Module( 'MOBILE' )->uses('Announce.lib.php');
+			$result = Announce::getInstance()->getSingleAnnounce(claro_get_current_course_id(), $_REQUEST['resId']);
 			break;
-		case 'getCourseToolList':
-			if(claro_get_current_course_id() == null){
-				header('Missing Argument',true, 400);
-				die();
-			}
-			$result = $serv->getCourseToolList(claro_get_current_course_id(),$_profileId,$is_courseAdmin);
-			break;
-		case 'getUpdates':
-			$result = $serv->getUpdates();
+//\\INSERT NEW CASES BEFORE THIS LINE
+	//NOT IMPLEMENTED -> NO LIB
+		default :
+			header('Not Implemented',true,501);
+			die();
 			break;
 	}
+	
+	claro_utf8_encode_array($result);
+	echo json_encode($result);
+	
+	//Debug Mode
 	if(isset($_REQUEST['debug'])){
 		print_r($result);
 	}
-	claro_utf8_encode_array($result);
-	echo json_encode($result);
 ?>

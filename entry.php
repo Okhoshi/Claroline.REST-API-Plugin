@@ -19,12 +19,12 @@ if(get_conf('activeWebService',true)){
 	.	 '</div>'
 	.	 "\n</br>" . get_lang('Get the Claroline application for your smartphone soon !') . "\n"
 	.	 '<div style="text-align:center"></br>'
-	.	 '<a href="" alt="Claroline Mobile on iPhone AppStore">'
-	.    '<img src="'.get_module_url('MOBILE').'/img/ios_badge.png" alt="Claroline Mobile on iPhone AppStore" id="ios_bagde" width="150" height="50" /></a>' . "\n"
-	.	 '<a href="" alt="Claroline Mobile on Android Google Play Store">'
+	.	 '<a href="' . get_conf('iOSAppLink','') . '" alt="Claroline Mobile on Apple iOS App Store" target="_blank">'
+	.    '<img src="'.get_module_url('MOBILE').'/img/ios_badge.png" alt="Claroline Mobile on Apple iOS App Store" id="ios_bagde" width="150" height="50" /></a>' . "\n"
+	.	 '<a href="' . get_conf('AndAppLink','') . '" alt="Claroline Mobile on Android Google Play Store" target="_blank">'
 	.    '<img src="'.get_module_url('MOBILE').'/img/and_badge.png" alt="Claroline Mobile on Android Google Play Store" id="and_bagde" width="150" height="52" /></a>' . "\n"
-	.	 '<a href="" alt="Claroline Mobile on Windows Phone MarketPlace">'
-	.    '<img src="'.get_module_url('MOBILE').'/img/wp_badge.png" alt="Claroline Mobile on Windows Phone MarketPlace" id="wp_bagde" width="150" height="49" /></a>' . "\n"
+	.	 '<a href="' . get_conf('WPAppLink','') . '" alt="Claroline Mobile on Microsoft WindowsPhone MarketPlace" target="_blank">'
+	.    '<img src="'.get_module_url('MOBILE').'/img/wp_badge.png" alt="Claroline Mobile on Microsoft WindowsPhone MarketPlace" id="wp_bagde" width="150" height="49" /></a>' . "\n"
 	.	 '</div>'
 	. 	"\n\n";
 
