@@ -149,7 +149,11 @@ class Documents {
 		if($recursive){
 			foreach ($fileList as $thisFile){
 				if($thisFile['type'] == A_DIRECTORY){
+<<<<<<< HEAD
 					$new_list = Documents::getDocList($cid, $thisFile['path'],true);
+=======
+					$new_list = ClaroWeb::getDocList($cid, $thisFile['path'],true);
+>>>>>>> a9aa70af4b6bffd78c22a1dc4039a17fdf9f65fa
 					$fileList = array_merge($fileList,$new_list);
 				}
 			}
