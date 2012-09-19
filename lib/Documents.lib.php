@@ -13,6 +13,10 @@ class Documents {
 	}
 	
 	function getDocList($cid, $curDirPath = '', $recursive = true){
+		if($cid == null){
+			throw new InvalidArgumentException('Missing cid argument!');
+		}
+
 		/* READ CURRENT DIRECTORY CONTENT
 		= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = */
 		$claroline = Claroline::getInstance();

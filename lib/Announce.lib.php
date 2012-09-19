@@ -13,6 +13,11 @@ class Announce {
 	}
 	
 	function getAnnounceList($cid){
+
+		if($cid == null){
+			throw new InvalidArgumentException('Missing cid argument!');
+		}
+
 		From::Module('CLANN')->uses('announcement.lib');
 		$claroNotification = Claroline::getInstance()->notification;
 		$date = $claroNotification->getLastActionBeforeLoginDate(claro_get_current_user_id());
@@ -38,6 +43,11 @@ class Announce {
 	}
 	
 	function getSingleAnnounce($cid, $resourceId){
+		
+		if($cid == null || $resourceId == null){
+			throw new InvalidArgumentException('Missing cid or resourceId argument!');
+		}
+
 		$claroNotification = Claroline::getInstance()->notification;
 		From::Module('CLANN')->uses('announcement.lib');
 		$announce = announcement_get_item($resourceId,$cid);

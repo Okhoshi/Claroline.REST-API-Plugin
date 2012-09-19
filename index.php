@@ -35,68 +35,35 @@
 	header("Expires: Mon, 26 Jul 1997 05:00:00 GMT" );
 	header("Last-Modified: " . gmdate( "D, d M Y H:i:s" ) . "GMT" );
 	header("Pragma: no-cache" );
+
+	//LOAD ALL LIBS
+	From::Module($tlabelReq)->uses('*');
 	
-	switch($_REQUEST['Method']){
-	//GENERAL.LIB
-		case 'getUserData':
-			From::Module( 'MOBILE' )->uses('General.lib.php');
-			$result =  General::getInstance()->getUserData();
-			break;
-		case 'getCourseList':
-			From::Module( 'MOBILE' )->uses('General.lib.php');
-			$result = General::getInstance()->getCourseList();
-			break;
-		case 'getUpdates':
-			From::Module( 'MOBILE' )->uses('General.lib.php');
-			$result = General::getInstance()->getUpdates();
-			break;
-		case 'getCourseToolList':
-			if(claro_get_current_course_id() == null){
-				header('Missing Argument',true, 400);
-				die();
+	try{
+		if(is_callable($_REQUEST['Method']){
+			if(isset($_REQUEST['reqCid'])){
+				$args[] = claro_get_current_course_id();
 			}
-			From::Module( 'MOBILE' )->uses('Announce.lib.php');
-			$result = Announce::getInstance()->getCourseToolList(claro_get_current_course_id(),$_profileId,$is_courseAdmin);
-			break;
-	//DOCUMENTS.LIB
-		case 'getDocList':
-			if(claro_get_current_course_id() == null){
-				header('Missing Argument',true, 400);
-				die();
+			if(isset($_REQUEST['resID'])){
+				$args[] = $_REQUEST['resID'];
 			}
-			From::Module( 'MOBILE' )->uses('Documents.lib.php');
-			$result = Documents::getInstance()->getDocList(claro_get_current_course_id(),'',true);
-			break;
-	//ANNOUNCE.LIB
-		case 'getAnnounceList':
-			From::Module( 'MOBILE' )->uses('General.lib.php');
-			if(claro_get_current_course_id() == null){
-				header('Missing Argument',true, 400);
-				die();
-			}
-			$result = $serv->getAnnounceList(claro_get_current_course_id());
-			break;
-		case 'getSingleAnnounce':
-			if(claro_get_current_course_id() == null || !isset($_REQUEST['resId'])){
-				header('Missing Argument',true, 400);
-				die();
-			}
-			From::Module( 'MOBILE' )->uses('Announce.lib.php');
-			$result = Announce::getInstance()->getSingleAnnounce(claro_get_current_course_id(), $_REQUEST['resId']);
-			break;
-//\\INSERT NEW CASES BEFORE THIS LINE
-	//NOT IMPLEMENTED -> NO LIB
-		default :
+			
+			$result = call_user_func_array($_REQUEST['Method'],$args ))
+		} else {
 			header('Not Implemented',true,501);
 			die();
-			break;
-	}
-	
-	claro_utf8_encode_array($result);
-	echo json_encode($result);
-	
-	//Debug Mode
-	if(isset($_REQUEST['debug'])){
-		print_r($result);
+		}
+		
+		claro_utf8_encode_array($result);
+		echo json_encode($result);
+		
+		//Debug Mode
+		if(isset($_REQUEST['debug'])){
+			print_r($result);
+		}
+		
+	} catch (InvalidArgumentException){
+		header('Missing Argument',true, 400);
+		die();
 	}
 ?>
