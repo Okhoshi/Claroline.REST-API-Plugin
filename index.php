@@ -22,7 +22,7 @@
 		die();
 	}
 	
-	if(!isset($_REQUEST['Method'])){
+	if(!(isset($_REQUEST['Method']) && isset($_REQUEST['Package']))){
 		header('Missing Argument',true, 400);
 		die();
 	}
@@ -40,7 +40,9 @@
 	From::Module($tlabelReq)->uses('*');
 	
 	try{
-		if(is_callable($_REQUEST['Method']){
+		if(is_callable($_REQUEST['Package'] . '::' . $_REQUEST['Method'])){
+			$args = array();
+			
 			if(isset($_REQUEST['reqCid'])){
 				$args[] = claro_get_current_course_id();
 			}
@@ -48,7 +50,7 @@
 				$args[] = $_REQUEST['resID'];
 			}
 			
-			$result = call_user_func_array($_REQUEST['Method'],$args ))
+			$result = call_user_func_array($_REQUEST['Package'] . '::' . $_REQUEST['Method'],$args);
 		} else {
 			header('Not Implemented',true,501);
 			die();
@@ -62,8 +64,9 @@
 			print_r($result);
 		}
 		
-	} catch (InvalidArgumentException){
-		header('Missing Argument',true, 400);
+	} catch (Exception $ex){
+		header('Bad Request',true, 400);
+		echo $ex->getMessage();
 		die();
 	}
 ?>
