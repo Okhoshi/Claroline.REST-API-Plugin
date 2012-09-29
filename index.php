@@ -37,13 +37,13 @@
 	header("Pragma: no-cache" );
 
 	//LOAD ALL LIBS
-	From::Module($tlabelReq)->uses('*');
+	From::Module($tlabelReq)->uses($_REQUEST['Package'] . '.lib');
 	
 	try{
 		if(is_callable($_REQUEST['Package'] . '::' . $_REQUEST['Method'])){
 			$args = array();
 			
-			if(isset($_REQUEST['reqCid'])){
+			if(claro_get_current_course_id() != null){
 				$args[] = claro_get_current_course_id();
 			}
 			if(isset($_REQUEST['resID'])){

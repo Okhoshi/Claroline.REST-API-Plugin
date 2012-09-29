@@ -14,7 +14,7 @@ class Documents {
 	
 	function getDocList($cid, $curDirPath = '', $recursive = true){
 		if($cid == null){
-			throw new InvalidArgumentException('Missing cid argument!');
+			throw new InvalidArgumentException('Missing cid argument! session : ' . claro_get_current_course_id());
 		}
 
 		/* READ CURRENT DIRECTORY CONTENT
