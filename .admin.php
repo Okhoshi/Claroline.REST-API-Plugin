@@ -9,5 +9,13 @@
  * @author      Quentin Devos <q.devos@student.uclouvain.be>
  */
 
+$tlabelReq = 'MOBILE';
+
+require_once '../../claroline/inc/claro_init_global.inc.php';
+
+if(!calro_is_platform_admin()){
+	claro_die('Not Allowed');
+}
+
 
 ?>
