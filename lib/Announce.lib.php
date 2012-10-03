@@ -47,24 +47,30 @@ class Announce {
 		if($cid == null || $resourceId == null){
 			throw new InvalidArgumentException('Missing cid or resourceId argument!');
 		}
-
+		
 		$claroNotification = Claroline::getInstance()->notification;
+		$date = $claroNotification->getLastActionBeforeLoginDate(claro_get_current_user_id());
+
 		From::Module('CLANN')->uses('announcement.lib');
-		$announce = announcement_get_item($resourceId,$cid);
-		$announce['visibility'] = ($announce['visibility'] != 'HIDE');
-		$announce['content'] = trim(strip_tags($announce['content']));
-		$announce['cours']['sysCode'] = $cid;
-		$announce['ressourceId'] = $announce['id'];
-		$announce['date'] = $claroNotification->getLastActionBeforeLoginDate(claro_get_current_user_id());
-		$announce['notified'] = $claroNotification->isANotifiedRessource($cid,
-				$date,
-				claro_get_current_user_id(),
-				claro_get_current_group_id(),
-				get_tool_id_from_module_label('CLANN'),
-				$announce['id'],
-				false);
-		unset($announce['id']);
-		return (claro_is_allowed_to_edit() || $announce['visibility'])?$announce:null;
+		
+		if($announce = announcement_get_item($resourceId,$cid)){
+			$announce['visibility'] = ($announce['visibility'] != 'HIDE');
+			$announce['content'] = trim(strip_tags($announce['content']));
+			$announce['cours']['sysCode'] = $cid;
+			$announce['ressourceId'] = $announce['id'];
+			$announce['date'] = $date;
+			$announce['notified'] = $claroNotification->isANotifiedRessource($cid,
+					$date,
+					claro_get_current_user_id(),
+					claro_get_current_group_id(),
+					get_tool_id_from_module_label('CLANN'),
+					$announce['id'],
+					false);
+			unset($announce['id']);
+			return (claro_is_allowed_to_edit() || $announce['visibility'])?$announce:null;
+		} else {
+			throw new InvalidArgumentException('Resource not found');
+		}
 	}
 }
 ?>
