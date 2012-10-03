@@ -36,14 +36,6 @@
 		? $_REQUEST['cmd']
 		: '';
 		
-	$libName = isset($_REQUEST['libName'])
-		? $_REQUEST['libName']
-		: '';
-		
-	$libFuncs = isset($_REQUEST['libFuncs'])
-		? $_REQUEST['libFuncs']
-		: '';
-		
 	$libFile = isset($_REQUEST['libFile'])
 		? $_REQUEST['libFile']
 		: '';
@@ -87,8 +79,8 @@
                 }
                 else
                 {    
-				 $file = explode('.',$_FILES['libFile']['name']);
-				 $file = $file[0]. '.addlib.php';
+				 $file = explode('.',$_FILES['libFile']['name'],-2);
+				 $file = $file[0] . '.addlib.php';
 				 
 					if ( file_exists( LIB_DIRECTORY . '/' . $file ) )
 					{
