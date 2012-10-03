@@ -2,7 +2,7 @@
 /**
  * Web Services Provider
  *
- * @version     MOBILE 1 $Revision: 3 $ - Claroline 1.11
+ * @version     MOBILE 1 $Revision: 4 $ - Claroline 1.11
  * @copyright   2001-2012 Universite Catholique de Louvain (UCL)
  * @license     http://www.gnu.org/copyleft/gpl.html (GPL) GENERAL PUBLIC LICENSE
  * @package     MOBILE
@@ -22,25 +22,45 @@
 		die();
 	}
 	
-	if(!(isset($_REQUEST['Method']) && isset($_REQUEST['Package']))){
+	if(!(isset($_REQUEST['Method'])) || empty($_REQUEST['Method'])){
 		header('Missing Argument',true, 400);
 		die();
 	}
 	
+	$tableName = get_module_main_tbl(array('mobile_libs'));
+	$tableName = $tableName['mobile_libs'];
+	
+	$method = $_REQUEST['Method'];
+	
+	/*
+	 * Retrieve from db the library which implements the required method, if any.
+	 */
+	 
+	$sql = "SELECT `lib_name`,`lib_file` FROM `" . $tableName . "` WHERE functions LIKE '%" . claro_sql_escape($method) . "%' LIMIT 1;";
+	$class = Claroline::getDatabase()->query($sql);
+	
+	if($class->isEmpty()){
+		header('Not Implemented',true,501);
+		die();
+	}
+	
+	$class = $class->fetch();
+	
 	/*
 	 * Force headers
 	 */
-	header("Content-Type: application/json; charset=utf-8");
+	if(!isset($_REQUEST['debug']))
+		header("Content-Type: application/json; charset=utf-8");
 	header("Cache-Control: no-cache, must-revalidate" );
 	header("Expires: Mon, 26 Jul 1997 05:00:00 GMT" );
 	header("Last-Modified: " . gmdate( "D, d M Y H:i:s" ) . "GMT" );
 	header("Pragma: no-cache" );
-
-	//LOAD ALL LIBS
-	From::Module($tlabelReq)->uses($_REQUEST['Package'] . '.lib');
+	
+	//LOAD REQUESTED LIB
+	From::Module($tlabelReq)->uses($class['lib_file']);
 	
 	try{
-		if(is_callable($_REQUEST['Package'] . '::' . $_REQUEST['Method'])){
+		if(is_callable($class['lib_name'] . '::' . $method)){
 			$args = array();
 			
 			if(claro_get_current_course_id() != null){
@@ -50,7 +70,7 @@
 				$args[] = $_REQUEST['resID'];
 			}
 			
-			$result = call_user_func_array($_REQUEST['Package'] . '::' . $_REQUEST['Method'],$args);
+			$result = call_user_func_array($class['lib_name'] . '::' . $method,$args);
 		} else {
 			header('Not Implemented',true,501);
 			die();
@@ -61,7 +81,7 @@
 		
 		//Debug Mode
 		if(isset($_REQUEST['debug'])){
-			print_r($result);
+			var_dump($result);
 		}
 		
 	} catch (Exception $ex){
