@@ -65,6 +65,8 @@
 			
 			if(claro_get_current_course_id() != null){
 				$args['cid'] = claro_get_current_course_id();
+			} else {
+				$args['cid'] = null;
 			}
 			
 			$args['params'] = $_REQUEST;
