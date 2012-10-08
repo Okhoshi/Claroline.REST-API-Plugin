@@ -12,7 +12,10 @@ class Documents {
         return self::$instance;
 	}
 	
-	function getDocList($cid, $curDirPath = '', $recursive = true){
+	function getDocList($cid, $args){
+		$recursive = isset($args['recursive'])?$args['recursive']:true;
+		$curDirPath = isset($args['curDirPath'])?$args['curDirPath']:'';
+	
 		if($cid == null){
 			throw new InvalidArgumentException('Missing cid argument! session : ' . claro_get_current_course_id());
 		}
@@ -153,7 +156,8 @@ class Documents {
 		if($recursive){
 			foreach ($fileList as $thisFile){
 				if($thisFile['type'] == A_DIRECTORY){
-					$new_list = Documents::getDocList($cid, $thisFile['path'],true);
+					$args = array('curDirPath' => $thisFile['path'],'recursive' => true);
+					$new_list = Documents::getDocList($cid, $args);
 					$fileList = array_merge($fileList,$new_list);
 				}
 			}

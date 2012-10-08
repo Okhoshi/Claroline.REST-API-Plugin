@@ -64,25 +64,25 @@
 			$args = array();
 			
 			if(claro_get_current_course_id() != null){
-				$args[] = claro_get_current_course_id();
+				$args['cid'] = claro_get_current_course_id();
 			}
-			if(isset($_REQUEST['resID'])){
-				$args[] = $_REQUEST['resID'];
-			}
+			
+			$args['params'] = $_REQUEST;
 			
 			$result = call_user_func_array($class['lib_name'] . '::' . $method,$args);
 		} else {
 			header('Not Implemented',true,501);
 			die();
 		}
+		//Debug Mode
+		if(isset($_REQUEST['debug'])){
+			echo "\n";
+			var_dump($result);
+		}
 		
 		claro_utf8_encode_array($result);
 		echo json_encode($result);
 		
-		//Debug Mode
-		if(isset($_REQUEST['debug'])){
-			var_dump($result);
-		}
 		
 	} catch (Exception $ex){
 		header('Bad Request',true, 400);

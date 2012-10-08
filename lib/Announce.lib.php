@@ -42,7 +42,8 @@ class Announce {
 		return $annList;
 	}
 	
-	function getSingleAnnounce($cid, $resourceId){
+	function getSingleAnnounce($cid, $args){
+		$resourceId = isset($args['resID'])?$args['resID']:null;
 		
 		if($cid == null || $resourceId == null){
 			throw new InvalidArgumentException('Missing cid or resourceId argument!');
