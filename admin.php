@@ -80,25 +80,32 @@
                 else
                 {    
 				 $file = explode('.',$_FILES['libFile']['name'],-2);
-				 $file = $file[0] . '.addlib.php';
+				 $file = $file[0] . '.addlib.sql';
 				 
 					if ( file_exists( LIB_DIRECTORY . '/' . $file ) )
 					{
-						include LIB_DIRECTORY . '/' . $file ;
-					}
+						$sql = file_get_contents( LIB_DIRECTORY . '/' . $file );
+ 
+                         if (!empty($sql))
+                         {
+                             $sql = str_replace ('__TABLENAME__',$tableName, $sql);
+
+                             if ( claro_sql_multi_query($sql) === false )
+                             {
+                                 $errorMsg = get_lang( 'Sql installation query failed' );
+                             }
+                             else
+                             {
+                                 $succesMsg = get_lang( 'Sql installation query succeeded' );
+                             }
+                         }					
+                    }
 					else
 					{
 						claro_failure::set_failure('FILE_NOT_FOUND');
 					}
-					echo "('".$libName."','".$libFuncs."','".$libFile."')";
-					if(isset($libFile) && !empty($libFile)){
-						$sql = "REPLACE INTO `".$tableName."` (`lib_name`, `functions`, `lib_file`) VALUES ('".$libName."','".$libFuncs."','".$libFile."');";
-						Claroline::getDatabase()->exec($sql);
 						deleteLibrary( $file );
 						$successMsg = get_lang( 'File added' );
-					} else {
-						$errorMsg = get_lang('Installation failed');
-					}
                 }
             } break;
 		}
