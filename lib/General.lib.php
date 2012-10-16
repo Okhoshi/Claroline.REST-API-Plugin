@@ -12,7 +12,7 @@ class General {
         return self::$instance;
 	}
 	
-	function getUserData() {
+	static function getUserData() {
 		$userData = claro_get_current_user_data();
 		unset($userData['authSource'],
 			  $userData['creatorId'],
@@ -28,7 +28,7 @@ class General {
 		return $userData;
 	}
 
-	function getCourseList(){
+	static function getCourseList(){
 		FromKernel::uses('courselist.lib');
 		$claroNotification = Claroline::getInstance()->notification;
 		$date = $claroNotification->getLastActionBeforeLoginDate(claro_get_current_user_id());
@@ -43,7 +43,7 @@ class General {
 		return $courseList;
 	}
 	
-	function getCourseToolList(){
+	static function getCourseToolList(){
 		FromKernel::uses('courselist.lib');
 		$claroNotification = Claroline::getInstance()->notification;
 		$date = $claroNotification->getLastActionBeforeLoginDate(claro_get_current_user_id());
@@ -71,7 +71,7 @@ class General {
 		return $course;
 	}
 	
-	function getUpdates(){
+	static function getUpdates(){
 		$claroNotification = Claroline::getInstance()->notification;
 		$gid = 0;
 		$date = $claroNotification->getLastActionBeforeLoginDate(claro_get_current_user_id());

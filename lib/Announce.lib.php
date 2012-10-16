@@ -12,7 +12,7 @@ class Announce {
         return self::$instance;
 	}
 	
-	function getAnnounceList($cid){
+	static function getAnnounceList($cid){
 
 		if($cid == null){
 			throw new InvalidArgumentException('Missing cid argument!');
@@ -42,7 +42,7 @@ class Announce {
 		return $annList;
 	}
 	
-	function getSingleAnnounce($cid, $args){
+	static function getSingleAnnounce($cid, $args){
 		$resourceId = isset($args['resID'])?$args['resID']:null;
 		
 		if($cid == null || $resourceId == null){

@@ -12,7 +12,7 @@ class Documents {
         return self::$instance;
 	}
 	
-	function getDocList($cid, $args){
+	static function getDocList($cid, $args){
 		$recursive = isset($args['recursive'])?$args['recursive']:true;
 		$curDirPath = isset($args['curDirPath'])?$args['curDirPath']:'';
 	
