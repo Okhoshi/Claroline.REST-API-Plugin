@@ -115,7 +115,7 @@ class Documents {
 	
 				if( is_dir($baseWorkDir.$thisFile) )
 				{
-					$fileAttributeList['name'] = $tmp[count($tmp) -1];
+					$fileAttributeList['title'] = $tmp[count($tmp) -1];
 					$fileAttributeList['isFolder'] = true;
 					$fileAttributeList['type'] = A_DIRECTORY;
 					$fileAttributeList['size'] = false;
@@ -125,7 +125,7 @@ class Documents {
 				}
 				elseif( is_file($baseWorkDir.$thisFile) )
 				{
-					$fileAttributeList['name'] = implode('.',explode('.',$tmp[count($tmp)-1],-1));
+					$fileAttributeList['title'] = implode('.',explode('.',$tmp[count($tmp)-1],-1));
 					$fileAttributeList['type'] = A_FILE;
 					$fileAttributeList['isFolder'] = false;
 					$fileAttributeList['size'] = claro_get_file_size($baseWorkDir.$thisFile);
