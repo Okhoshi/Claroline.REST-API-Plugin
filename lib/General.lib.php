@@ -14,17 +14,19 @@ class General {
 	
 	static function getUserData() {
 		$userData = claro_get_current_user_data();
+		//Bug fix for kernel bug, into user_get_picture_***() into user.lib. Bad index ?
+		$userData['user_id'] = $userData['userId'];
+		$userData['picture'] = $_SERVER['SERVER_NAME'] . user_get_picture_url($userData);
 		unset($userData['authSource'],
 			  $userData['creatorId'],
 			  $userData['lastLogin'],
 			  $userData['mail'],
 			  $userData['officialEmail'],
-			  $userData['phone'],
-			  $userData['picture']);
+			  $userData['phone']);
 		$userData['platformName'] = get_conf('siteName', "Claroline");
 		$userData['institutionName'] = get_conf('institution_name',"");
-		$userData['platformTextAuth'] = trim(strip_tags(claro_text_zone::get_content("textzone_top.authenticated")));
-		$userData['platformTextAnonym'] = trim(strip_tags(claro_text_zone::get_content("textzone_top.anonymous")));
+		//$userData['platformTextAuth'] = trim(strip_tags(claro_text_zone::get_content("textzone_top.authenticated")));
+		//$userData['platformTextAnonym'] = trim(strip_tags(claro_text_zone::get_content("textzone_top.anonymous")));
 		return $userData;
 	}
 
