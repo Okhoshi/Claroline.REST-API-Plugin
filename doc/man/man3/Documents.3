@@ -1,0 +1,80 @@
+.TH "Documents" 3 "Tue Jan 8 2013" "Version 1" "Web Service Module for Claroline" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Documents \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static \fBgetResourcesList\fP ($cid, $args)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line 10 of file Documents.lib.php.
+.SH "Member Function Documentation"
+.PP 
+.SS "static getResourcesList ($cid, $args)\fC [static]\fP"Returns the documents contained into args['curDirPath'] 
+.PP
+\fBParameters:\fP
+.RS 4
+\fI$cid\fP unique identifier of requested course 
+.br
+\fI$args\fP array of parameters, can contain :
+.IP "\(bu" 2
+(boolean) recursive : if true, return the content of the requested directory and its subdirectories, if any. Default = true
+.IP "\(bu" 2
+(String) curDirPath : returns the content of the directory specified by this path. Default = '' (root) 
+.PP
+.RE
+.PP
+\fBExceptions:\fP
+.RS 4
+\fIInvalidArgumentException\fP if $cid is missing 
+.RE
+.PP
+\fBWeb Service call:\fP
+.RS 4
+
+.RE
+.PP
+.PP
+.nf
+        Method : \fIgetResourcesList\fP
+.fi
+.PP
+.PP
+.PP
+.nf
+        cidReq : \fISYSCODE of requested cours\fP
+.fi
+.PP
+.PP
+.PP
+.nf
+        recursive : \fI[Optionnal: if true, return the content of the requested directory and its subdirectories, if any. Default = true]\fP
+.fi
+.PP
+.PP
+.PP
+.nf
+        curDirPath : \fI[Optionnal: returns the content of the directory specified by this path. Default = '' (root)]\fP
+.fi
+.PP
+.PP
+\fBReturns:\fP
+.RS 4
+array of document object 
+.RE
+.PP
+
+.PP
+Definition at line 26 of file Documents.lib.php.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Web Service Module for Claroline from the source code.

@@ -1,6 +1,6 @@
 <module>
     <label>MOBILE</label>
-    <name>Web Services</name>
+    <name>Web Service Controller for Claroline</name>
     <version>1.0</version>
     <license>GPL</license>
     <type>applet</type>
@@ -9,7 +9,7 @@
     <context>
     </context>
     <description>
-        <![CDATA[This module is the masterpiece between Claroline platform and mobile applications. Provides Web Services]]>
+        <![CDATA[This module is the masterpiece between Claroline platform and mobile applications. Provides a Web Service Controller]]>
     </description>
     <author>
         <name>Quentin Devos</name>

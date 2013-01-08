@@ -1,0 +1,76 @@
+\hypertarget{class_documents}{
+\section{Documents Class Reference}
+\label{class_documents}\index{Documents@{Documents}}
+}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{class_documents_aa6a32caeca124be35431bd703baa720f}{getResourcesList} (\$cid, \$args)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 10 of file Documents.lib.php.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_documents_aa6a32caeca124be35431bd703baa720f}{
+\index{Documents@{Documents}!getResourcesList@{getResourcesList}}
+\index{getResourcesList@{getResourcesList}!Documents@{Documents}}
+\subsubsection[{getResourcesList}]{\setlength{\rightskip}{0pt plus 5cm}static getResourcesList (
+\begin{DoxyParamCaption}
+\item[{\$}]{cid, }
+\item[{\$}]{args}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}static\mbox{]}}}}
+\label{class_documents_aa6a32caeca124be35431bd703baa720f}
+Returns the documents contained into args\mbox{[}'curDirPath'\mbox{]} 
+\begin{DoxyParams}[1]{Parameters}
+string & {\em \$cid} & unique identifier of requested course \\
+\hline
+array & {\em \$args} & array of parameters, can contain :
+\begin{DoxyItemize}
+\item (boolean) recursive : if true, return the content of the requested directory and its subdirectories, if any. Default = true
+\item (String) curDirPath : returns the content of the directory specified by this path. Default = '' (root) 
+\end{DoxyItemize}\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em InvalidArgumentException} & if \$cid is missing \\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyParagraph}{Web Service call:}
+
+\end{DoxyParagraph}
+
+\begin{DoxyPre}        Method : {\itshape getResourcesList\/}\end{DoxyPre}
+
+
+
+\begin{DoxyPre}        cidReq : {\itshape SYSCODE of requested cours\/}\end{DoxyPre}
+
+
+
+\begin{DoxyPre}        recursive : {\itshape [Optionnal: if true, return the content of the requested directory and its subdirectories, if any. Default = true]\/}\end{DoxyPre}
+
+
+
+\begin{DoxyPre}        curDirPath : {\itshape [Optionnal: returns the content of the directory specified by this path. Default = '' (root)]\/}\end{DoxyPre}
+
+
+\begin{DoxyReturn}{Returns}
+array of document object 
+\end{DoxyReturn}
+
+
+Definition at line 26 of file Documents.lib.php.
+
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+C:/Users/Quentin/GIT/claromobile-\/module/lib/Documents.lib.php\end{DoxyCompactItemize}

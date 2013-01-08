@@ -1,0 +1,109 @@
+.TH "Announce" 3 "Tue Jan 8 2013" "Version 1" "Web Service Module for Claroline" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Announce \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static \fBgetResourcesList\fP ($cid)"
+.br
+.ti -1c
+.RI "static \fBgetSingleResource\fP ($cid, $args)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line 10 of file Announce.lib.php.
+.SH "Member Function Documentation"
+.PP 
+.SS "static getResourcesList ($cid)\fC [static]\fP"Returns all the announces of a course. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fI$cid\fP unique identifier of requested course 
+.RE
+.PP
+\fBExceptions:\fP
+.RS 4
+\fIInvalidArgumentException\fP if the $cid in not provided. 
+.RE
+.PP
+\fBWeb Service call:\fP
+.RS 4
+
+.RE
+.PP
+.PP
+.nf
+        Method : \fIgetResourcesList\fP
+.fi
+.PP
+.PP
+.PP
+.nf
+        cidReq : \fISYSCODE of requested cours\fP
+.fi
+.PP
+.PP
+\fBReturns:\fP
+.RS 4
+array of \fBAnnounce\fP object 
+.RE
+.PP
+
+.PP
+Definition at line 21 of file Announce.lib.php.
+.SS "static getSingleResource ($cid, $args)\fC [static]\fP"Returns a single resquested announce. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fI$cid\fP unique identifier of requested course 
+.br
+\fI$args\fP must contain 'resID' key with the resource identifier of the requested resource 
+.RE
+.PP
+\fBExceptions:\fP
+.RS 4
+\fIInvalidArgumentException\fP if one of the paramaters is missing 
+.RE
+.PP
+\fBWeb Service call:\fP
+.RS 4
+
+.RE
+.PP
+.PP
+.nf
+        Method : \fIgetSingleResource\fP
+.fi
+.PP
+.PP
+.PP
+.nf
+        cidReq : \fISYSCODE of requested cours\fP
+.fi
+.PP
+.PP
+.PP
+.nf
+        resId : \fIResource Id of requested resource\fP
+.fi
+.PP
+.PP
+\fBReturns:\fP
+.RS 4
+announce object (can be null if not visible for the current user) 
+.RE
+.PP
+
+.PP
+Definition at line 62 of file Announce.lib.php.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Web Service Module for Claroline from the source code.

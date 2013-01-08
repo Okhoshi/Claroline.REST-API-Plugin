@@ -1,0 +1,138 @@
+\hypertarget{class_general}{
+\section{General Class Reference}
+\label{class_general}\index{General@{General}}
+}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{class_general_a6b8ba1fa8e7948a0a99e6cd86a18b5b4}{getUserData} ()
+\item 
+static \hyperlink{class_general_addeab7cda23ea1ad98532f26cae3a94d}{getCourseList} ()
+\item 
+static \hyperlink{class_general_a324f09b59c9498088da6cd3b57529608}{getCourseToolList} (\$cid)
+\item 
+static \hyperlink{class_general_ac29b1824cdcbd9d818a8686c72c3b115}{getUpdates} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 10 of file General.lib.php.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_general_addeab7cda23ea1ad98532f26cae3a94d}{
+\index{General@{General}!getCourseList@{getCourseList}}
+\index{getCourseList@{getCourseList}!General@{General}}
+\subsubsection[{getCourseList}]{\setlength{\rightskip}{0pt plus 5cm}static getCourseList (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}static\mbox{]}}}}
+\label{class_general_addeab7cda23ea1ad98532f26cae3a94d}
+Returns the list of courses followed by the user. \begin{DoxyParagraph}{Web Service call:}
+
+\end{DoxyParagraph}
+
+\begin{DoxyPre}        Method : {\itshape getCourseList\/}\end{DoxyPre}
+
+
+\begin{DoxyReturn}{Returns}
+array of course object 
+\end{DoxyReturn}
+
+
+Definition at line 40 of file General.lib.php.
+
+\hypertarget{class_general_a324f09b59c9498088da6cd3b57529608}{
+\index{General@{General}!getCourseToolList@{getCourseToolList}}
+\index{getCourseToolList@{getCourseToolList}!General@{General}}
+\subsubsection[{getCourseToolList}]{\setlength{\rightskip}{0pt plus 5cm}static getCourseToolList (
+\begin{DoxyParamCaption}
+\item[{\$}]{cid}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}static\mbox{]}}}}
+\label{class_general_a324f09b59c9498088da6cd3b57529608}
+Returns the tool list for each cours of the user.
+
+
+\begin{DoxyParams}[1]{Parameters}
+string & {\em \$cid} & unique identifier of requested course \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em InvalidArgumentException} & if the \$cid in not provided. \\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyParagraph}{Web Service call:}
+
+\end{DoxyParagraph}
+
+\begin{DoxyPre}        Method : {\itshape getCourseToolList\/}\end{DoxyPre}
+
+
+
+\begin{DoxyPre}        cidReq : {\itshape SYSCODE of requested cours\/}\end{DoxyPre}
+
+
+\begin{DoxyReturn}{Returns}
+array of course object with only the syscode and tool-\/related fields filled. 
+\end{DoxyReturn}
+
+
+Definition at line 65 of file General.lib.php.
+
+\hypertarget{class_general_ac29b1824cdcbd9d818a8686c72c3b115}{
+\index{General@{General}!getUpdates@{getUpdates}}
+\index{getUpdates@{getUpdates}!General@{General}}
+\subsubsection[{getUpdates}]{\setlength{\rightskip}{0pt plus 5cm}static getUpdates (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}static\mbox{]}}}}
+\label{class_general_ac29b1824cdcbd9d818a8686c72c3b115}
+Retrieve the notified items for the current user. Do not mark them as showed. \begin{DoxyParagraph}{Web Service call:}
+
+\end{DoxyParagraph}
+
+\begin{DoxyPre}        Method : {\itshape  getUpdates\/}\end{DoxyPre}
+
+
+\begin{DoxyReturn}{Returns}
+empty array if no notification. Else, return array(\mbox{[}SYSCODE\mbox{]} =$>$ array(\mbox{[}LABEL\mbox{]} =$>$ notified resource object, ...), ...) 
+\end{DoxyReturn}
+
+
+Definition at line 105 of file General.lib.php.
+
+\hypertarget{class_general_a6b8ba1fa8e7948a0a99e6cd86a18b5b4}{
+\index{General@{General}!getUserData@{getUserData}}
+\index{getUserData@{getUserData}!General@{General}}
+\subsubsection[{getUserData}]{\setlength{\rightskip}{0pt plus 5cm}static getUserData (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}static\mbox{]}}}}
+\label{class_general_a6b8ba1fa8e7948a0a99e6cd86a18b5b4}
+Returns the data of the current user. \begin{DoxyParagraph}{Web Service call:}
+
+\end{DoxyParagraph}
+
+\begin{DoxyPre}        Method : {\itshape getUserData\/}\end{DoxyPre}
+
+
+\begin{DoxyReturn}{Returns}
+array of string 
+\end{DoxyReturn}
+
+
+Definition at line 18 of file General.lib.php.
+
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+C:/Users/Quentin/GIT/claromobile-\/module/lib/General.lib.php\end{DoxyCompactItemize}
