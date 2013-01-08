@@ -1,0 +1,7 @@
+bin
+
+.metadata
+
+/gen
+/.settings
+lint.xml
