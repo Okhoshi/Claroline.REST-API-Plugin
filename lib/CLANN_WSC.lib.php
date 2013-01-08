@@ -1,18 +1,24 @@
 <?php
-class Announce {
-	    // Singleton instance
-    private static $instance = false; // this class is a singleton
-
-	static function getInstance(){
-        if ( ! self::$instance )
-        {
-            self::$instance = new self;
-        }
-
-        return self::$instance;
-	}
+/**
+ * Web Service Controller - CLANN library
+ *
+ * @copyright   2001-2013 Universite Catholique de Louvain (UCL)
+ * @license     http://www.gnu.org/copyleft/gpl.html (GPL) GENERAL PUBLIC LICENSE
+ * @package     MOBILE
+ * @author      Quentin Devos <q.devos@student.uclouvain.be>
+ */
+class CLANNWebServiceController {
 	
-	static function getAnnounceList($cid){
+	/**
+	 * Returns all the announces of a course.
+	 * @param string $cid unique identifier of requested course
+	 * @throws InvalidArgumentException if the $cid in not provided.
+	 * @webservice
+	 * @ws_arg{Method,getResourcesList}
+	 * @ws_arg{cidReq,SYSCODE of requested cours}
+	 * @return array of Announce object
+	 */
+	static function getResourcesList($cid){
 
 		if($cid == null){
 			throw new InvalidArgumentException('Missing cid argument!');
@@ -42,7 +48,18 @@ class Announce {
 		return $annList;
 	}
 	
-	static function getSingleAnnounce($cid, $args){
+	/**
+	 * Returns a single resquested announce.
+	 * @param string $cid unique identifier of requested course
+	 * @param array $args must contain 'resID' key with the resource identifier of the requested resource
+	 * @throws InvalidArgumentException if one of the paramaters is missing
+	 * @webservice
+	 * @ws_arg{Method,getSingleResource}
+	 * @ws_arg{cidReq,SYSCODE of requested cours}
+	 * @ws_arg{resId,Resource Id of requested resource}
+	 * @return announce object (can be null if not visible for the current user)
+	 */
+	static function getSingleResource($cid, $args){
 		$resourceId = isset($args['resID'])?$args['resID']:null;
 		
 		if($cid == null || $resourceId == null){

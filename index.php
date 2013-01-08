@@ -1,9 +1,9 @@
 <?php
 /**
- * Web Services Provider
+ * Web Service Controller
  *
- * @version     MOBILE 1 $Revision: 4 $ - Claroline 1.11
- * @copyright   2001-2012 Universite Catholique de Louvain (UCL)
+ * @version     MOBILE 1 $Revision: 8 $ - Claroline 1.11
+ * @copyright   2001-2013 Universite Catholique de Louvain (UCL)
  * @license     http://www.gnu.org/copyleft/gpl.html (GPL) GENERAL PUBLIC LICENSE
  * @package     MOBILE
  * @author      Quentin Devos <q.devos@student.uclouvain.be>
@@ -22,29 +22,25 @@
 		die();
 	}
 	
+	/*
+	 * Check that the class provided and existing
+	 */
+	
+
+	if(!(isset($_REQUEST['WS_Module'])) || empty($_REQUEST['WS_Module'])){
+		header('Missing Argument',true, 400);
+		die();
+	} elseif(!file_exists('/lib/' + $_REQUEST['WS_Module'] + '_WSC.lib.php')){
+		header('Not Implemented : Missing library', true, 501);
+		die();
+	}
+	
 	if(!(isset($_REQUEST['Method'])) || empty($_REQUEST['Method'])){
 		header('Missing Argument',true, 400);
 		die();
 	}
 	
-	$tableName = get_module_main_tbl(array('mobile_libs'));
-	$tableName = $tableName['mobile_libs'];
-	
 	$method = $_REQUEST['Method'];
-	
-	/*
-	 * Retrieve from db the library which implements the required method, if any.
-	 */
-	 
-	$sql = "SELECT `lib_name`,`lib_file` FROM `" . $tableName . "` WHERE functions LIKE '%" . claro_sql_escape($method) . "%' LIMIT 1;";
-	$class = Claroline::getDatabase()->query($sql);
-	
-	if($class->isEmpty()){
-		header('Not Implemented',true,501);
-		die();
-	}
-	
-	$class = $class->fetch();
 	
 	/*
 	 * Force headers
@@ -56,7 +52,9 @@
 	header("Last-Modified: " . gmdate( "D, d M Y H:i:s" ) . "GMT" );
 	header("Pragma: no-cache" );
 	
-	//LOAD REQUESTED LIB
+	/*
+	 * Load the needed lib
+	 */
 	From::Module($tlabelReq)->uses($class['lib_file']);
 	
 	try{

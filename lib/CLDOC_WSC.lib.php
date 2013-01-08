@@ -1,18 +1,29 @@
 <?php
-class Documents {
-	    // Singleton instance
-    private static $instance = false; // this class is a singleton
-
-	static function getInstance(){
-        if ( ! self::$instance )
-        {
-            self::$instance = new self;
-        }
-
-        return self::$instance;
-	}
+/**
+ * Web Service Controller - CLDOC library
+ *
+ * @copyright   2001-2013 Universite Catholique de Louvain (UCL)
+ * @license     http://www.gnu.org/copyleft/gpl.html (GPL) GENERAL PUBLIC LICENSE
+ * @package     MOBILE
+ * @author      Quentin Devos <q.devos@student.uclouvain.be>
+ */
+class CLDOCWebServiceController {
 	
-	static function getDocList($cid, $args){
+	/**
+	 * Returns the documents contained into args['curDirPath']
+	 * @param string $cid unique identifier of requested course
+	 * @param array $args array of parameters, can contain :
+	 * - (boolean) recursive : if true, return the content of the requested directory and its subdirectories, if any. Default = true
+	 * - (String) curDirPath : returns the content of the directory specified by this path. Default = '' (root)
+	 * @throws InvalidArgumentException if $cid is missing
+	 * @webservice
+	 * @ws_arg{Method,getResourcesList}
+	 * @ws_arg{cidReq,SYSCODE of requested cours}
+	 * @ws_arg{recursive,[Optionnal: if true\, return the content of the requested directory and its subdirectories\, if any. Default = true]}
+	 * @ws_arg{curDirPath,[Optionnal: returns the content of the directory specified by this path. Default = '' (root)]}
+	 * @return array of document object
+	 */
+	static function getResourcesList($cid, $args){
 		$recursive = isset($args['recursive'])?$args['recursive']:true;
 		$curDirPath = isset($args['curDirPath'])?$args['curDirPath']:'';
 	
@@ -46,7 +57,7 @@ class Documents {
 		 LOAD FILES AND DIRECTORIES INTO ARRAYS
 		----------------------------------------------------------------------------*/
 	
-		$searchPattern   = '';
+		/*$searchPattern   = '';
 		$searchRecursive = false;
 		$searchBasePath  = $baseWorkDir.$curDirPath;
 		$searchExcludeList = array();
@@ -63,9 +74,9 @@ class Documents {
 				default :
 					pushClaroMessage('Search failed');
 					break;
-			}
+			}*/
 			$filePathList=array();
-		}
+		//}
 	
 		for ($i =0; $i < count($filePathList); $i++ )
 		{

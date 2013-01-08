@@ -1,17 +1,20 @@
 <?php
-class General {
-	    // Singleton instance
-    private static $instance = false; // this class is a singleton
-
-	static function getInstance(){
-        if ( ! self::$instance )
-        {
-            self::$instance = new self;
-        }
-
-        return self::$instance;
-	}
+/**
+ * Web Service Controller - User library
+ *
+ * @copyright   2001-2013 Universite Catholique de Louvain (UCL)
+ * @license     http://www.gnu.org/copyleft/gpl.html (GPL) GENERAL PUBLIC LICENSE
+ * @package     MOBILE
+ * @author      Quentin Devos <q.devos@student.uclouvain.be>
+ */
+class UserWebServiceController {
 	
+	/**
+	 * Returns the data of the current user.
+	 * @webservice
+	 * @ws_arg{Method,getUserData}
+	 * @return array of string
+	 */
 	static function getUserData() {
 		$userData = claro_get_current_user_data();
 		//Bug fix for kernel bug, into user_get_picture_***() into user.lib. Bad index ?
@@ -25,11 +28,15 @@ class General {
 			  $userData['phone']);
 		$userData['platformName'] = get_conf('siteName', "Claroline");
 		$userData['institutionName'] = get_conf('institution_name',"");
-		//$userData['platformTextAuth'] = trim(strip_tags(claro_text_zone::get_content("textzone_top.authenticated")));
-		//$userData['platformTextAnonym'] = trim(strip_tags(claro_text_zone::get_content("textzone_top.anonymous")));
 		return $userData;
 	}
 
+	/**
+	 * Returns the list of courses followed by the user.
+	 * @webservice
+	 * @ws_arg{Method,getCourseList}
+	 * @return array of course object
+	 */
 	static function getCourseList(){
 		FromKernel::uses('courselist.lib');
 		$claroNotification = Claroline::getInstance()->notification;
@@ -45,12 +52,27 @@ class General {
 		return $courseList;
 	}
 	
-	static function getCourseToolList(){
+	/**
+	 * Returns the tool list for each cours of the user.
+	 * 
+	 * @param string $cid unique identifier of requested course
+	 * @throws InvalidArgumentException if the $cid in not provided.
+	 * @webservice
+	 * @ws_arg{Method,getCourseToolList}
+	 * @ws_arg{cidReq,SYSCODE of requested cours}
+	 * @return array of course object with only the syscode and tool-related fields filled.
+	 */
+	static function getCourseToolList($cid){
+		
+		if($cid == null){
+			throw new InvalidArgumentException('Missing cid argument!');
+		}
+		
 		FromKernel::uses('courselist.lib');
 		$claroNotification = Claroline::getInstance()->notification;
 		$date = $claroNotification->getLastActionBeforeLoginDate(claro_get_current_user_id());
 		$course = array();
-		$course['sysCode'] = claro_get_current_course_id();
+		$course['sysCode'] = $cid;
 		$course['isAnn'] = false;
 		$course['annNotif'] = false;
 		$course['isDnL'] = false;
@@ -73,6 +95,13 @@ class General {
 		return $course;
 	}
 	
+	/**
+	 * Retrieve the notified items for the current user. Do not mark them as showed.
+	 * @webservice
+	 * @ws_arg{Method, getUpdates}
+	 * @return empty array if no notification.
+	 * 		   Else, return array([SYSCODE] => array([LABEL] => notified resource object, ...), ...)
+	 */
 	static function getUpdates(){
 		$claroNotification = Claroline::getInstance()->notification;
 		$gid = 0;
