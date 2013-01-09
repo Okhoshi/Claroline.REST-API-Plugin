@@ -15,6 +15,12 @@ RewriteEngine on
 # 
 RewriteBase /Claroline/module/MOBILE/
 
+#In case of CLDOC/getResources, Query String must be used
+RewriteCond %{QUERY_STRING} recursive=|curDirPath=
+RewriteRule ^([a-zA-Z]+)/([a-zA-Z]+)/?([a-zA-Z0-9]*)/?$ ?WS_Module=$1&Method=$2&cidReq=$3 [QSA,L]
+
+#Detect the debug flag
 RewriteCond %{QUERY_STRING} debug
 RewriteRule ^([a-zA-Z]+)/([a-zA-Z]+)/?([a-zA-Z0-9]*)/?([0-9]*)/?$ ?WS_Module=$1&Method=$2&cidReq=$3&resId=$4&debug [L]
+
 RewriteRule ^([a-zA-Z]+)/([a-zA-Z]+)/?([a-zA-Z0-9]*)/?([0-9]*)/?$ ?WS_Module=$1&Method=$2&cidReq=$3&resId=$4 [L]
