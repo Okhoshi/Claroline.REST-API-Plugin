@@ -1,0 +1,20 @@
+#--------------------------------------------------
+# Répertoire : /articles/
+#--------------------------------------------------
+
+# Le serveur doit suivre les liens symboliques :
+Options +FollowSymlinks
+
+# Activation du module de réécriture d'URL :
+RewriteEngine on
+
+#--------------------------------------------------
+# Règles de réécriture d'URL :
+#--------------------------------------------------
+
+# 
+RewriteBase /Claroline/module/MOBILE/
+
+RewriteCond %{QUERY_STRING} debug
+RewriteRule ^([a-zA-Z]+)/([a-zA-Z]+)/?([a-zA-Z0-9]*)/?([0-9]*)/?$ ?WS_Module=$1&Method=$2&cidReq=$3&resId=$4&debug [L]
+RewriteRule ^([a-zA-Z]+)/([a-zA-Z]+)/?([a-zA-Z0-9]*)/?([0-9]*)/?$ ?WS_Module=$1&Method=$2&cidReq=$3&resId=$4 [L]

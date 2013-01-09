@@ -11,7 +11,7 @@
 	
     define ( 'LIB_DIRECTORY', dirname(__FILE__));
 	
-    static function deleteLibrary( $file )
+    function deleteLibrary( $file )
     {
         FromKernel::uses('fileManage.lib');
 		

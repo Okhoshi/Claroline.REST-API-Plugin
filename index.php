@@ -30,10 +30,13 @@
 	if(!(isset($_REQUEST['WS_Module'])) || empty($_REQUEST['WS_Module'])){
 		header('Missing Argument',true, 400);
 		die();
-	} elseif(!file_exists('/lib/' + $_REQUEST['WS_Module'] + '_WSC.lib.php')){
+	} elseif(!file_exists('./lib/' . $_REQUEST['WS_Module'] . '_WSC.lib.php')){
 		header('Not Implemented : Missing library', true, 501);
 		die();
 	}
+	
+	$class = $_REQUEST['WS_Module'] . 'WebServiceController';
+	$classFile = $_REQUEST['WS_Module'] . '_WSC.lib';
 	
 	if(!(isset($_REQUEST['Method'])) || empty($_REQUEST['Method'])){
 		header('Missing Argument',true, 400);
@@ -55,10 +58,10 @@
 	/*
 	 * Load the needed lib
 	 */
-	From::Module($tlabelReq)->uses($class['lib_file']);
+	From::Module($tlabelReq)->uses($classFile);
 	
 	try{
-		if(is_callable($class['lib_name'] . '::' . $method)){
+		if(is_callable($class . '::' . $method)){
 			$args = array();
 			
 			if(claro_get_current_course_id() != null){
@@ -69,7 +72,7 @@
 			
 			$args['params'] = $_REQUEST;
 			
-			$result = call_user_func_array($class['lib_name'] . '::' . $method,$args);
+			$result = call_user_func_array($class . '::' . $method,$args);
 		} else {
 			header('Not Implemented',true,501);
 			die();
