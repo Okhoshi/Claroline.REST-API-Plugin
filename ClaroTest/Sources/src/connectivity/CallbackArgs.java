@@ -17,6 +17,7 @@ public class CallbackArgs {
 	public int resId;
 	public AllowedOperations operation;
 	public UrlEncodedFormEntity entity;
+	public String resourceURL;
 	
 	public CallbackArgs(String login,String password,Cours cidReq, int resId, AllowedOperations operation){
 		this.login = login;
@@ -25,6 +26,7 @@ public class CallbackArgs {
 		this.operation = operation;
 		this.resId = resId;
 		List<NameValuePair> args = new ArrayList<NameValuePair>();
+		resourceURL = "/";
 		
 		switch (operation) {
 		case authenticate:
@@ -32,15 +34,20 @@ public class CallbackArgs {
 			args.add(new BasicNameValuePair("password", password));
 			break;
 		case getSingleAnnounce:
-			args.add(new BasicNameValuePair("resId",resId + ""));
+			resourceURL = "CLANN/getSingleResource/" + cidReq.getSysCode() + "/" + resId + "/";
+			break;
 		case getAnnounceList:
-		case getCourseToolList:
+			resourceURL = "CLANN/getResourcesList/" + cidReq.getSysCode() + "/";
+			break;
 		case getDocList:
-			args.add(new BasicNameValuePair("cidReq",cidReq.getSysCode()));
+			resourceURL = "CLDOC/getResourcesList/" + cidReq.getSysCode() + resourceURL;
+			break;
+		case getCourseToolList:
+			resourceURL = cidReq.getSysCode() + resourceURL;
 		case getCourseList:
 		case getUpdates:
 		case getUserData:
-			args.add(new BasicNameValuePair("Method",operation.name()));
+			resourceURL = "User/" + operation.name() + "/" + resourceURL;
 			break;
 		default:
 			break;

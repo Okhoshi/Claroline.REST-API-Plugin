@@ -13,7 +13,7 @@ class CLANNWebServiceController {
 	 * Returns all the announces of a course.
 	 * @param string $cid unique identifier of requested course
 	 * @throws InvalidArgumentException if the $cid in not provided.
-	 * @webservice /module/MOBILE/CLANN/getResourcesList/cidReq
+	 * @webservice{/module/MOBILE/CLANN/getResourcesList/cidReq}
 	 * @ws_arg{Method,getResourcesList}
 	 * @ws_arg{cidReq,SYSCODE of requested cours}
 	 * @return array of Announce object
@@ -53,7 +53,7 @@ class CLANNWebServiceController {
 	 * @param string $cid unique identifier of requested course
 	 * @param array $args must contain 'resID' key with the resource identifier of the requested resource
 	 * @throws InvalidArgumentException if one of the paramaters is missing
-	 * @webservice /module/MOBILE/CLANN/getSingleResource/cidReq/resId
+	 * @webservice{/module/MOBILE/CLANN/getSingleResource/cidReq/resId}
 	 * @ws_arg{Method,getSingleResource}
 	 * @ws_arg{cidReq,SYSCODE of requested cours}
 	 * @ws_arg{resId,Resource Id of requested resource}

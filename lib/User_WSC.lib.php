@@ -11,7 +11,7 @@ class UserWebServiceController {
 	
 	/**
 	 * Returns the data of the current user.
-	 * @webservice /module/MOBILE/User/getUserData
+	 * @webservice{/module/MOBILE/User/getUserData}
 	 * @ws_arg{Method,getUserData}
 	 * @return array of string
 	 */
@@ -33,7 +33,7 @@ class UserWebServiceController {
 
 	/**
 	 * Returns the list of courses followed by the user.
-	 * @webservice /module/MOBILE/User/getCourseList
+	 * @webservice{/module/MOBILE/User/getCourseList}
 	 * @ws_arg{Method,getCourseList}
 	 * @return array of course object
 	 */
@@ -57,7 +57,7 @@ class UserWebServiceController {
 	 * 
 	 * @param string $cid unique identifier of requested course
 	 * @throws InvalidArgumentException if the $cid in not provided.
-	 * @webservice /module/MOBILE/User/getCourseToolList/cidReq
+	 * @webservice{/module/MOBILE/User/getCourseToolList/cidReq}
 	 * @ws_arg{Method,getCourseToolList}
 	 * @ws_arg{cidReq,SYSCODE of requested cours}
 	 * @return array of course object with only the syscode and tool-related fields filled.
@@ -97,7 +97,7 @@ class UserWebServiceController {
 	
 	/**
 	 * Retrieve the notified items for the current user. Do not mark them as showed.
-	 * @webservice /module/MOBILE/User/getUpdates
+	 * @webservice{/module/MOBILE/User/getUpdates}
 	 * @ws_arg{Method, getUpdates}
 	 * @return empty array if no notification.
 	 * 		   Else, return array([SYSCODE] => array([LABEL] => notified resource object, ...), ...)

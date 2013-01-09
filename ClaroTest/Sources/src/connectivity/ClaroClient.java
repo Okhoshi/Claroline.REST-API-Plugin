@@ -54,7 +54,7 @@ public class ClaroClient {
 		if(forAuth){
 			postMessage = new HttpPost(platformURL + "/claroline/auth/login.php");
 		} else {
-			postMessage = new HttpPost(platformURL + "/module/MOBILE/");
+			postMessage = new HttpPost(platformURL + "/module/MOBILE/" + args.resourceURL);
 		}
 		postMessage.addHeader("Content-Type", "application/x-www-form-urlencoded");
 		postMessage.setEntity(args.entity);
@@ -138,8 +138,7 @@ public class ClaroClient {
 					}
 					break;
 				case getSingleAnnounce:
-					JSONresponse = new JSONArray(_res);
-					JSONObject object = JSONresponse.getJSONObject(0);
+					JSONObject object = new JSONObject(_res);
 					JSONAnnonce.fromJSONObject(object, args.cidReq).saveInDB(Main.Main.mAnnList);
 					break;
 				case getUpdates:
