@@ -40,11 +40,15 @@ public class Main {
 		mAnnList = new ArrayList<Annonce>();
 		mDocList = new ArrayList<Documents>();
 		
+		String login;
+		String password;
+		do {
 		String platformURL = (args.length > 0 && args[0] != null && args[0] != "")?args[0]:readInput("Enter the platform URL : ", false);
-		String login = (args.length > 1 && args[1] != null && args[1] != "")?args[1]:readInput("Enter your login : ", false);
-		String password = (args.length > 2 && args[2] != null && args[2] != "")?args[2]:readInput("Enter your password : ", false);
+		login = (args.length > 1 && args[1] != null && args[1] != "")?args[1]:readInput("Enter your login : ", false);
+		password = (args.length > 2 && args[2] != null && args[2] != "")?args[2]:readInput("Enter your password : ", false);
 		
 		mClient = new ClaroClient(platformURL);
+		} while(!mClient.getSessionCookie(new CallbackArgs(login, password, null, -1, AllowedOperations.authenticate)));
 		mClient.Execute(new CallbackArgs(login, password, null, -1, AllowedOperations.getUserData));
 		mClient.Execute(new CallbackArgs(AllowedOperations.getCourseList));
 		
@@ -55,7 +59,8 @@ public class Main {
 		}
 		
 		while(mContinued){
-			String meth = readInput("Choose the method to call ('Q' for exit) : \n" + methods, false);
+			String meth = readInput("\nChoose the method to call ('Q' for exit) : \n" + methods + "\n", false);
+			
 			if(meth.equalsIgnoreCase("Q")){
 				mContinued = false;
 				break;
@@ -64,7 +69,7 @@ public class Main {
 			try {
 				op = AllowedOperations.valueOf(meth);
 			} catch (IllegalArgumentException e) {
-				System.err.println(meth + " is not a valid method!");
+				System.err.println(meth + " is not a valid method!\n");
 				continue;
 			}
 			CallbackArgs ca = null;
@@ -107,6 +112,7 @@ public class Main {
 			default:
 				break;
 			}
+			System.out.println("");
 			mClient.Execute(ca);
 		}
 	}

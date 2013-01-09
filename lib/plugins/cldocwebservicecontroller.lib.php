@@ -15,7 +15,7 @@ class CLDOCWebServiceController {
 	 * - (boolean) recursive : if true, return the content of the requested directory and its subdirectories, if any. Default = true
 	 * - (String) curDirPath : returns the content of the directory specified by this path. Default = '' (root)
 	 * @throws InvalidArgumentException if $cid is missing
-	 * @webservice /module/MOBILE/CLDOC/getResourceList/cidReq/[?recursive=BOOL&curDirPath='']
+	 * @webservice{/module/MOBILE/CLDOC/getResourceList/cidReq/[?recursive=BOOL&curDirPath='']}
 	 * @ws_arg{Method,getResourcesList}
 	 * @ws_arg{cidReq,SYSCODE of requested cours}
 	 * @ws_arg{recursive,[Optionnal: if true\, return the content of the requested directory and its subdirectories\, if any. Default = true]}

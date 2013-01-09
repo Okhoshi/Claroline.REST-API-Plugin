@@ -2,9 +2,9 @@ var NAVTREE =
 [
   [ "Web Service Module for Claroline", "index.html", [
     [ "Data Structures", "annotated.html", [
-      [ "Announce", "class_announce.html", null ],
-      [ "Documents", "class_documents.html", null ],
-      [ "General", "class_general.html", null ]
+      [ "CLANNWebServiceController", "class_c_l_a_n_n_web_service_controller.html", null ],
+      [ "CLDOCWebServiceController", "class_c_l_d_o_c_web_service_controller.html", null ],
+      [ "UserWebServiceController", "class_user_web_service_controller.html", null ]
     ] ],
     [ "Data Structure Index", "classes.html", null ],
     [ "Data Fields", "functions.html", null ],
@@ -13,9 +13,9 @@ var NAVTREE =
     ] ],
     [ "File List", "files.html", [
       [ "C:/Users/Quentin/GIT/claromobile-module/lib/Admin.lib.php", null, null ],
-      [ "C:/Users/Quentin/GIT/claromobile-module/lib/Announce.lib.php", null, null ],
-      [ "C:/Users/Quentin/GIT/claromobile-module/lib/Documents.lib.php", null, null ],
-      [ "C:/Users/Quentin/GIT/claromobile-module/lib/General.lib.php", null, null ]
+      [ "C:/Users/Quentin/GIT/claromobile-module/lib/CLANN_WSC.lib.php", null, null ],
+      [ "C:/Users/Quentin/GIT/claromobile-module/lib/CLDOC_WSC.lib.php", null, null ],
+      [ "C:/Users/Quentin/GIT/claromobile-module/lib/User_WSC.lib.php", null, null ]
     ] ]
   ] ]
 ];
