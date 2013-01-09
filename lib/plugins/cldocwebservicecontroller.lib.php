@@ -1,6 +1,6 @@
 <?php
 /**
- * Web Service Controller - CLDOC library
+ * Web Service Controller - CLDOC plugin
  *
  * @copyright   2001-2013 Universite Catholique de Louvain (UCL)
  * @license     http://www.gnu.org/copyleft/gpl.html (GPL) GENERAL PUBLIC LICENSE
@@ -11,7 +11,6 @@ class CLDOCWebServiceController {
 	
 	/**
 	 * Returns the documents contained into args['curDirPath']
-	 * @param string $cid unique identifier of requested course
 	 * @param array $args array of parameters, can contain :
 	 * - (boolean) recursive : if true, return the content of the requested directory and its subdirectories, if any. Default = true
 	 * - (String) curDirPath : returns the content of the directory specified by this path. Default = '' (root)
@@ -23,10 +22,10 @@ class CLDOCWebServiceController {
 	 * @ws_arg{curDirPath,[Optionnal: returns the content of the directory specified by this path. Default = '' (root)]}
 	 * @return array of document object
 	 */
-	static function getResourcesList($cid, $args){
+	function getResourcesList($args){
 		$recursive = isset($args['recursive'])?$args['recursive']:true;
 		$curDirPath = isset($args['curDirPath'])?$args['curDirPath']:'';
-	
+		$cid = claro_get_current_course_id();
 		if($cid == null){
 			throw new InvalidArgumentException('Missing cid argument! session : ' . claro_get_current_course_id());
 		}
@@ -177,4 +176,3 @@ class CLDOCWebServiceController {
 		return $fileList;
 	}
 }
-?>

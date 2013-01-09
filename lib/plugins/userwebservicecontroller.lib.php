@@ -1,13 +1,13 @@
 <?php
 /**
- * Web Service Controller - User library
+ * Web Service Controller - User plugin
  *
  * @copyright   2001-2013 Universite Catholique de Louvain (UCL)
  * @license     http://www.gnu.org/copyleft/gpl.html (GPL) GENERAL PUBLIC LICENSE
  * @package     MOBILE
  * @author      Quentin Devos <q.devos@student.uclouvain.be>
  */
-class UserWebServiceController {
+class USERWebServiceController {
 	
 	/**
 	 * Returns the data of the current user.
@@ -15,7 +15,7 @@ class UserWebServiceController {
 	 * @ws_arg{Method,getUserData}
 	 * @return array of string
 	 */
-	static function getUserData() {
+	function getUserData() {
 		$userData = claro_get_current_user_data();
 		//Bug fix for kernel bug, into user_get_picture_***() into user.lib. Bad index ?
 		$userData['user_id'] = $userData['userId'];
@@ -37,7 +37,7 @@ class UserWebServiceController {
 	 * @ws_arg{Method,getCourseList}
 	 * @return array of course object
 	 */
-	static function getCourseList(){
+	function getCourseList(){
 		FromKernel::uses('courselist.lib');
 		$claroNotification = Claroline::getInstance()->notification;
 		$date = $claroNotification->getLastActionBeforeLoginDate(claro_get_current_user_id());
@@ -55,15 +55,14 @@ class UserWebServiceController {
 	/**
 	 * Returns the tool list for each cours of the user.
 	 * 
-	 * @param string $cid unique identifier of requested course
-	 * @throws InvalidArgumentException if the $cid in not provided.
+	 * @throws InvalidArgumentException if the cid in not provided.
 	 * @webservice /module/MOBILE/User/getCourseToolList/cidReq
 	 * @ws_arg{Method,getCourseToolList}
 	 * @ws_arg{cidReq,SYSCODE of requested cours}
 	 * @return array of course object with only the syscode and tool-related fields filled.
 	 */
-	static function getCourseToolList($cid){
-		
+	function getCourseToolList(){
+		$cid = claro_get_current_course_id();
 		if($cid == null){
 			throw new InvalidArgumentException('Missing cid argument!');
 		}
@@ -77,8 +76,8 @@ class UserWebServiceController {
 		$course['annNotif'] = false;
 		$course['isDnL'] = false;
 		$course['dnlNotif'] = false;
-		$notifiedTools = $claroNotification->getNotifiedTools(claro_get_current_course_id(),$date,claro_get_current_user_id());
-		foreach(claro_get_course_tool_list($course['sysCode'],claro_get_current_user_profile_id_in_course(claro_get_current_course_id())) as $tool){ 
+		$notifiedTools = $claroNotification->getNotifiedTools($cid,$date,claro_get_current_user_id());
+		foreach(claro_get_course_tool_list($course['sysCode'],claro_get_current_user_profile_id_in_course($cid)) as $tool){ 
 			switch($tool['label']){
 				case 'CLANN':
 					$course['isAnn'] = ($tool['visibility'] || claro_is_allowed_to_edit());
@@ -102,7 +101,7 @@ class UserWebServiceController {
 	 * @return empty array if no notification.
 	 * 		   Else, return array([SYSCODE] => array([LABEL] => notified resource object, ...), ...)
 	 */
-	static function getUpdates(){
+	function getUpdates(){
 		$claroNotification = Claroline::getInstance()->notification;
 		$gid = 0;
 		$date = $claroNotification->getLastActionBeforeLoginDate(claro_get_current_user_id());
@@ -115,4 +114,3 @@ class UserWebServiceController {
 		return $result;
 	}
 }
-?>

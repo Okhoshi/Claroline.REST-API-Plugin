@@ -11,15 +11,14 @@ class CLANNWebServiceController {
 	
 	/**
 	 * Returns all the announces of a course.
-	 * @param string $cid unique identifier of requested course
 	 * @throws InvalidArgumentException if the $cid in not provided.
 	 * @webservice /module/MOBILE/CLANN/getResourcesList/cidReq
 	 * @ws_arg{Method,getResourcesList}
 	 * @ws_arg{cidReq,SYSCODE of requested cours}
 	 * @return array of Announce object
 	 */
-	static function getResourcesList($cid){
-
+	function getResourcesList(){
+		$cid = claro_get_current_course_id();
 		if($cid == null){
 			throw new InvalidArgumentException('Missing cid argument!');
 		}
@@ -50,7 +49,6 @@ class CLANNWebServiceController {
 	
 	/**
 	 * Returns a single resquested announce.
-	 * @param string $cid unique identifier of requested course
 	 * @param array $args must contain 'resID' key with the resource identifier of the requested resource
 	 * @throws InvalidArgumentException if one of the paramaters is missing
 	 * @webservice /module/MOBILE/CLANN/getSingleResource/cidReq/resID
@@ -59,9 +57,9 @@ class CLANNWebServiceController {
 	 * @ws_arg{resID,Resource Id of requested resource}
 	 * @return announce object (can be null if not visible for the current user)
 	 */
-	static function getSingleResource($cid, $args){
+	function getSingleResource($args){
 		$resourceId = isset($args['resID'])?$args['resID']:null;
-		
+		$cid = claro_get_current_cours_id();
 		if($cid == null || $resourceId == null){
 			throw new InvalidArgumentException('Missing cid or resourceId argument!');
 		}
@@ -91,4 +89,3 @@ class CLANNWebServiceController {
 		}
 	}
 }
-?>
