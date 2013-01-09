@@ -1,0 +1,133 @@
+\hypertarget{class_u_s_e_r_web_service_controller}{
+\section{USERWebServiceController Class Reference}
+\label{class_u_s_e_r_web_service_controller}\index{USERWebServiceController@{USERWebServiceController}}
+}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_u_s_e_r_web_service_controller_a5dbf7007493710c53d8a131e55bbb1a0}{getUserData} ()
+\item 
+\hyperlink{class_u_s_e_r_web_service_controller_a3781010b458f2d98d846dc2e2bcf4e07}{getCourseList} ()
+\item 
+\hyperlink{class_u_s_e_r_web_service_controller_abdc81b3a85b81e14603342bf2d4a66ae}{getCourseToolList} ()
+\item 
+\hyperlink{class_u_s_e_r_web_service_controller_a3d11b893dad6de79541fb58f46f6bf5b}{getUpdates} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 10 of file userwebservicecontroller.lib.php.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_u_s_e_r_web_service_controller_a3781010b458f2d98d846dc2e2bcf4e07}{
+\index{USERWebServiceController@{USERWebServiceController}!getCourseList@{getCourseList}}
+\index{getCourseList@{getCourseList}!USERWebServiceController@{USERWebServiceController}}
+\subsubsection[{getCourseList}]{\setlength{\rightskip}{0pt plus 5cm}getCourseList (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{class_u_s_e_r_web_service_controller_a3781010b458f2d98d846dc2e2bcf4e07}
+Returns the list of courses followed by the user. \begin{DoxyParagraph}{Web Service call: /module/MOBILE/User/getCourseList}
+
+\end{DoxyParagraph}
+
+\begin{DoxyPre}        Method : {\itshape getCourseList\/}\end{DoxyPre}
+
+
+\begin{DoxyReturn}{Returns}
+array of course object 
+\end{DoxyReturn}
+
+
+Definition at line 40 of file userwebservicecontroller.lib.php.
+
+\hypertarget{class_u_s_e_r_web_service_controller_abdc81b3a85b81e14603342bf2d4a66ae}{
+\index{USERWebServiceController@{USERWebServiceController}!getCourseToolList@{getCourseToolList}}
+\index{getCourseToolList@{getCourseToolList}!USERWebServiceController@{USERWebServiceController}}
+\subsubsection[{getCourseToolList}]{\setlength{\rightskip}{0pt plus 5cm}getCourseToolList (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{class_u_s_e_r_web_service_controller_abdc81b3a85b81e14603342bf2d4a66ae}
+Returns the tool list for each cours of the user.
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em InvalidArgumentException} & if the cid in not provided. \\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyParagraph}{Web Service call: /module/MOBILE/User/getCourseToolList/cidReq}
+
+\end{DoxyParagraph}
+
+\begin{DoxyPre}        Method : {\itshape getCourseToolList\/}\end{DoxyPre}
+
+
+
+\begin{DoxyPre}        cidReq : {\itshape SYSCODE of requested cours\/}\end{DoxyPre}
+
+
+\begin{DoxyReturn}{Returns}
+array of course object with only the syscode and tool-\/related fields filled. 
+\end{DoxyReturn}
+
+
+Definition at line 64 of file userwebservicecontroller.lib.php.
+
+\hypertarget{class_u_s_e_r_web_service_controller_a3d11b893dad6de79541fb58f46f6bf5b}{
+\index{USERWebServiceController@{USERWebServiceController}!getUpdates@{getUpdates}}
+\index{getUpdates@{getUpdates}!USERWebServiceController@{USERWebServiceController}}
+\subsubsection[{getUpdates}]{\setlength{\rightskip}{0pt plus 5cm}getUpdates (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{class_u_s_e_r_web_service_controller_a3d11b893dad6de79541fb58f46f6bf5b}
+Retrieve the notified items for the current user. Do not mark them as showed. \begin{DoxyParagraph}{Web Service call: /module/MOBILE/User/getUpdates}
+
+\end{DoxyParagraph}
+
+\begin{DoxyPre}        Method : {\itshape  getUpdates\/}\end{DoxyPre}
+
+
+\begin{DoxyReturn}{Returns}
+empty array if no notification. Else, return array(\mbox{[}SYSCODE\mbox{]} =$>$ array(\mbox{[}LABEL\mbox{]} =$>$ notified resource object, ...), ...) 
+\end{DoxyReturn}
+
+
+Definition at line 104 of file userwebservicecontroller.lib.php.
+
+\hypertarget{class_u_s_e_r_web_service_controller_a5dbf7007493710c53d8a131e55bbb1a0}{
+\index{USERWebServiceController@{USERWebServiceController}!getUserData@{getUserData}}
+\index{getUserData@{getUserData}!USERWebServiceController@{USERWebServiceController}}
+\subsubsection[{getUserData}]{\setlength{\rightskip}{0pt plus 5cm}getUserData (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{class_u_s_e_r_web_service_controller_a5dbf7007493710c53d8a131e55bbb1a0}
+Returns the data of the current user. \begin{DoxyParagraph}{Web Service call: /module/MOBILE/User/getUserData}
+
+\end{DoxyParagraph}
+
+\begin{DoxyPre}        Method : {\itshape getUserData\/}\end{DoxyPre}
+
+
+\begin{DoxyReturn}{Returns}
+array of string 
+\end{DoxyReturn}
+
+
+Definition at line 18 of file userwebservicecontroller.lib.php.
+
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+C:/Applications/wamp/www/Claroline/module/MOBILE/lib/plugins/userwebservicecontroller.lib.php\end{DoxyCompactItemize}

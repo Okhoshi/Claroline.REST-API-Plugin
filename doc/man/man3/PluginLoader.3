@@ -1,0 +1,39 @@
+.TH "PluginLoader" 3 "Wed Jan 9 2013" "Version 1" "Web Service Module for Claroline" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+PluginLoader \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBload\fP ($requestedLabel)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line 11 of file pluginloader.lib.php.
+.SH "Member Function Documentation"
+.PP 
+.SS "load ($requestedLabel)"Checks the Web Service Controller for the requested module is installed, and then instanciates it. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fI$requestedLabel\fP the module label which must be instantiated 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+WebServiceController object|boolean a new instance of the Web Service Controller requested if found, else false 
+.RE
+.PP
+
+.PP
+Definition at line 20 of file pluginloader.lib.php.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Web Service Module for Claroline from the source code.

@@ -1,39 +1,34 @@
-.TH "Announce" 3 "Tue Jan 8 2013" "Version 1" "Web Service Module for Claroline" \" -*- nroff -*-
+.TH "CLANNWebServiceController" 3 "Wed Jan 9 2013" "Version 1" "Web Service Module for Claroline" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
-Announce \- 
+CLANNWebServiceController \- 
 .SH SYNOPSIS
 .br
 .PP
-.SS "Static Public Member Functions"
+.SS "Public Member Functions"
 
 .in +1c
 .ti -1c
-.RI "static \fBgetResourcesList\fP ($cid)"
+.RI "\fBgetResourcesList\fP ()"
 .br
 .ti -1c
-.RI "static \fBgetSingleResource\fP ($cid, $args)"
+.RI "\fBgetSingleResource\fP ($args)"
 .br
 .in -1c
 .SH "Detailed Description"
 .PP 
-Definition at line 10 of file Announce.lib.php.
+Definition at line 10 of file clannwebservicecontroller.lib.php.
 .SH "Member Function Documentation"
 .PP 
-.SS "static getResourcesList ($cid)\fC [static]\fP"Returns all the announces of a course. 
-.PP
-\fBParameters:\fP
-.RS 4
-\fI$cid\fP unique identifier of requested course 
-.RE
+.SS "getResourcesList ()"Returns all the announces of a course. 
 .PP
 \fBExceptions:\fP
 .RS 4
 \fIInvalidArgumentException\fP if the $cid in not provided. 
 .RE
 .PP
-\fBWeb Service call:\fP
+\fBWeb Service call: /module/MOBILE/CLANN/getResourcesList/cidReq\fP
 .RS 4
 
 .RE
@@ -52,18 +47,16 @@ Definition at line 10 of file Announce.lib.php.
 .PP
 \fBReturns:\fP
 .RS 4
-array of \fBAnnounce\fP object 
+array of Announce object 
 .RE
 .PP
 
 .PP
-Definition at line 21 of file Announce.lib.php.
-.SS "static getSingleResource ($cid, $args)\fC [static]\fP"Returns a single resquested announce. 
+Definition at line 20 of file clannwebservicecontroller.lib.php.
+.SS "getSingleResource ($args)"Returns a single resquested announce. 
 .PP
 \fBParameters:\fP
 .RS 4
-\fI$cid\fP unique identifier of requested course 
-.br
 \fI$args\fP must contain 'resID' key with the resource identifier of the requested resource 
 .RE
 .PP
@@ -72,7 +65,7 @@ Definition at line 21 of file Announce.lib.php.
 \fIInvalidArgumentException\fP if one of the paramaters is missing 
 .RE
 .PP
-\fBWeb Service call:\fP
+\fBWeb Service call: /module/MOBILE/CLANN/getSingleResource/cidReq/resId\fP
 .RS 4
 
 .RE
@@ -91,7 +84,7 @@ Definition at line 21 of file Announce.lib.php.
 .PP
 .PP
 .nf
-        resId : \fIResource Id of requested resource\fP
+        resID : \fIResource Id of requested resource\fP
 .fi
 .PP
 .PP
@@ -102,7 +95,7 @@ announce object (can be null if not visible for the current user)
 .PP
 
 .PP
-Definition at line 62 of file Announce.lib.php.
+Definition at line 60 of file clannwebservicecontroller.lib.php.
 
 .SH "Author"
 .PP 

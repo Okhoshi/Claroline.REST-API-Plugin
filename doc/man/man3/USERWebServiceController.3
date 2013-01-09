@@ -1,0 +1,128 @@
+.TH "USERWebServiceController" 3 "Wed Jan 9 2013" "Version 1" "Web Service Module for Claroline" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+USERWebServiceController \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBgetUserData\fP ()"
+.br
+.ti -1c
+.RI "\fBgetCourseList\fP ()"
+.br
+.ti -1c
+.RI "\fBgetCourseToolList\fP ()"
+.br
+.ti -1c
+.RI "\fBgetUpdates\fP ()"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line 10 of file userwebservicecontroller.lib.php.
+.SH "Member Function Documentation"
+.PP 
+.SS "getCourseList ()"Returns the list of courses followed by the user. 
+.PP
+\fBWeb Service call: /module/MOBILE/User/getCourseList\fP
+.RS 4
+
+.RE
+.PP
+.PP
+.nf
+        Method : \fIgetCourseList\fP
+.fi
+.PP
+.PP
+\fBReturns:\fP
+.RS 4
+array of course object 
+.RE
+.PP
+
+.PP
+Definition at line 40 of file userwebservicecontroller.lib.php.
+.SS "getCourseToolList ()"Returns the tool list for each cours of the user.
+.PP
+\fBExceptions:\fP
+.RS 4
+\fIInvalidArgumentException\fP if the cid in not provided. 
+.RE
+.PP
+\fBWeb Service call: /module/MOBILE/User/getCourseToolList/cidReq\fP
+.RS 4
+
+.RE
+.PP
+.PP
+.nf
+        Method : \fIgetCourseToolList\fP
+.fi
+.PP
+.PP
+.PP
+.nf
+        cidReq : \fISYSCODE of requested cours\fP
+.fi
+.PP
+.PP
+\fBReturns:\fP
+.RS 4
+array of course object with only the syscode and tool-related fields filled. 
+.RE
+.PP
+
+.PP
+Definition at line 64 of file userwebservicecontroller.lib.php.
+.SS "getUpdates ()"Retrieve the notified items for the current user. Do not mark them as showed. 
+.PP
+\fBWeb Service call: /module/MOBILE/User/getUpdates\fP
+.RS 4
+
+.RE
+.PP
+.PP
+.nf
+        Method : \fI getUpdates\fP
+.fi
+.PP
+.PP
+\fBReturns:\fP
+.RS 4
+empty array if no notification. Else, return array([SYSCODE] => array([LABEL] => notified resource object, ...), ...) 
+.RE
+.PP
+
+.PP
+Definition at line 104 of file userwebservicecontroller.lib.php.
+.SS "getUserData ()"Returns the data of the current user. 
+.PP
+\fBWeb Service call: /module/MOBILE/User/getUserData\fP
+.RS 4
+
+.RE
+.PP
+.PP
+.nf
+        Method : \fIgetUserData\fP
+.fi
+.PP
+.PP
+\fBReturns:\fP
+.RS 4
+array of string 
+.RE
+.PP
+
+.PP
+Definition at line 18 of file userwebservicecontroller.lib.php.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Web Service Module for Claroline from the source code.

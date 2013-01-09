@@ -4,7 +4,8 @@ var NAVTREE =
     [ "Data Structures", "annotated.html", [
       [ "CLANNWebServiceController", "class_c_l_a_n_n_web_service_controller.html", null ],
       [ "CLDOCWebServiceController", "class_c_l_d_o_c_web_service_controller.html", null ],
-      [ "UserWebServiceController", "class_user_web_service_controller.html", null ]
+      [ "PluginLoader", "class_plugin_loader.html", null ],
+      [ "USERWebServiceController", "class_u_s_e_r_web_service_controller.html", null ]
     ] ],
     [ "Data Structure Index", "classes.html", null ],
     [ "Data Fields", "functions.html", null ],
@@ -12,10 +13,11 @@ var NAVTREE =
       [ "MOBILE", "namespace_m_o_b_i_l_e.html", null ]
     ] ],
     [ "File List", "files.html", [
-      [ "C:/Users/Quentin/GIT/claromobile-module/lib/Admin.lib.php", null, null ],
-      [ "C:/Users/Quentin/GIT/claromobile-module/lib/CLANN_WSC.lib.php", null, null ],
-      [ "C:/Users/Quentin/GIT/claromobile-module/lib/CLDOC_WSC.lib.php", null, null ],
-      [ "C:/Users/Quentin/GIT/claromobile-module/lib/User_WSC.lib.php", null, null ]
+      [ "C:/Applications/wamp/www/Claroline/module/MOBILE/lib/Admin.lib.php", null, null ],
+      [ "C:/Applications/wamp/www/Claroline/module/MOBILE/lib/pluginloader.lib.php", null, null ],
+      [ "C:/Applications/wamp/www/Claroline/module/MOBILE/lib/plugins/clannwebservicecontroller.lib.php", null, null ],
+      [ "C:/Applications/wamp/www/Claroline/module/MOBILE/lib/plugins/cldocwebservicecontroller.lib.php", null, null ],
+      [ "C:/Applications/wamp/www/Claroline/module/MOBILE/lib/plugins/userwebservicecontroller.lib.php", null, null ]
     ] ]
   ] ]
 ];

@@ -1,0 +1,99 @@
+\hypertarget{class_c_l_a_n_n_web_service_controller}{
+\section{CLANNWebServiceController Class Reference}
+\label{class_c_l_a_n_n_web_service_controller}\index{CLANNWebServiceController@{CLANNWebServiceController}}
+}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_c_l_a_n_n_web_service_controller_a0a291dd3c47edbfa1c487872efc33cdd}{getResourcesList} ()
+\item 
+\hyperlink{class_c_l_a_n_n_web_service_controller_afc17efc9f2a0083dcd801b2a2ec09c33}{getSingleResource} (\$args)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 10 of file clannwebservicecontroller.lib.php.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_c_l_a_n_n_web_service_controller_a0a291dd3c47edbfa1c487872efc33cdd}{
+\index{CLANNWebServiceController@{CLANNWebServiceController}!getResourcesList@{getResourcesList}}
+\index{getResourcesList@{getResourcesList}!CLANNWebServiceController@{CLANNWebServiceController}}
+\subsubsection[{getResourcesList}]{\setlength{\rightskip}{0pt plus 5cm}getResourcesList (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{class_c_l_a_n_n_web_service_controller_a0a291dd3c47edbfa1c487872efc33cdd}
+Returns all the announces of a course. 
+\begin{DoxyExceptions}{Exceptions}
+{\em InvalidArgumentException} & if the \$cid in not provided. \\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyParagraph}{Web Service call: /module/MOBILE/CLANN/getResourcesList/cidReq}
+
+\end{DoxyParagraph}
+
+\begin{DoxyPre}        Method : {\itshape getResourcesList\/}\end{DoxyPre}
+
+
+
+\begin{DoxyPre}        cidReq : {\itshape SYSCODE of requested cours\/}\end{DoxyPre}
+
+
+\begin{DoxyReturn}{Returns}
+array of Announce object 
+\end{DoxyReturn}
+
+
+Definition at line 20 of file clannwebservicecontroller.lib.php.
+
+\hypertarget{class_c_l_a_n_n_web_service_controller_afc17efc9f2a0083dcd801b2a2ec09c33}{
+\index{CLANNWebServiceController@{CLANNWebServiceController}!getSingleResource@{getSingleResource}}
+\index{getSingleResource@{getSingleResource}!CLANNWebServiceController@{CLANNWebServiceController}}
+\subsubsection[{getSingleResource}]{\setlength{\rightskip}{0pt plus 5cm}getSingleResource (
+\begin{DoxyParamCaption}
+\item[{\$}]{args}
+\end{DoxyParamCaption}
+)}}
+\label{class_c_l_a_n_n_web_service_controller_afc17efc9f2a0083dcd801b2a2ec09c33}
+Returns a single resquested announce. 
+\begin{DoxyParams}[1]{Parameters}
+array & {\em \$args} & must contain 'resID' key with the resource identifier of the requested resource \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em InvalidArgumentException} & if one of the paramaters is missing \\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyParagraph}{Web Service call: /module/MOBILE/CLANN/getSingleResource/cidReq/resId}
+
+\end{DoxyParagraph}
+
+\begin{DoxyPre}        Method : {\itshape getSingleResource\/}\end{DoxyPre}
+
+
+
+\begin{DoxyPre}        cidReq : {\itshape SYSCODE of requested cours\/}\end{DoxyPre}
+
+
+
+\begin{DoxyPre}        resID : {\itshape Resource Id of requested resource\/}\end{DoxyPre}
+
+
+\begin{DoxyReturn}{Returns}
+announce object (can be null if not visible for the current user) 
+\end{DoxyReturn}
+
+
+Definition at line 60 of file clannwebservicecontroller.lib.php.
+
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+C:/Applications/wamp/www/Claroline/module/MOBILE/lib/plugins/clannwebservicecontroller.lib.php\end{DoxyCompactItemize}

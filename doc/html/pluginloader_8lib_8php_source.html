@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>Web Service Module for Claroline: MOBILE Namespace Reference</title>
+<title>Web Service Module for Claroline: C:/Applications/wamp/www/Claroline/module/MOBILE/lib/pluginloader.lib.php Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
@@ -37,9 +37,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li class="current"><a href="namespaces.html"><span>Namespaces</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
-      <li><a href="files.html"><span>Files</span></a></li>
+      <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -60,7 +60,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
-      <li><a href="namespaces.html"><span>Namespace&#160;List</span></a></li>
+      <li><a href="files.html"><span>File&#160;List</span></a></li>
     </ul>
   </div>
 </div>
@@ -74,40 +74,47 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 </div>
 <script type="text/javascript">
-  initNavTree('namespace_m_o_b_i_l_e.html','');
+  initNavTree('pluginloader_8lib_8php.html','');
 </script>
 <div id="doc-content">
 <div class="header">
   <div class="headertitle">
-<div class="title">MOBILE Namespace Reference</div>  </div>
+<div class="title">C:/Applications/wamp/www/Claroline/module/MOBILE/lib/pluginloader.lib.php</div>  </div>
 </div>
 <div class="contents">
-<table class="memberdecls">
-</table>
-<hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p>Web Services Provider Administration Library</p>
-<dl class="version"><dt><b>Version:</b></dt><dd><a class="el" href="namespace_m_o_b_i_l_e.html">MOBILE</a> 1 </dd></dl>
-<dl class="rcs"><dt><b>Revision:</b></dt><dd>1 </dd></dl>
-<p>- Claroline 1.11  2001-2012 Universite Catholique de Louvain (UCL)  <a href="http://www.gnu.org/copyleft/gpl.html">http://www.gnu.org/copyleft/gpl.html</a> (GPL) GENERAL PUBLIC LICENSE</p>
-<dl class="author"><dt><b>Author:</b></dt><dd>Quentin Devos &lt;<a href="mailto:q.devos@student.uclouvain.be">q.devos@student.uclouvain.be</a>&gt;</dd></dl>
-<p>Web Service Controller - Plugin Loader</p>
-<p>2001-2013 Universite Catholique de Louvain (UCL)  <a href="http://www.gnu.org/copyleft/gpl.html">http://www.gnu.org/copyleft/gpl.html</a> (GPL) GENERAL PUBLIC LICENSE</p>
-<dl class="author"><dt><b>Author:</b></dt><dd>Quentin Devos &lt;<a href="mailto:q.devos@student.uclouvain.be">q.devos@student.uclouvain.be</a>&gt;</dd></dl>
-<p>Web Service Controller - CLANN library</p>
-<p>2001-2013 Universite Catholique de Louvain (UCL)  <a href="http://www.gnu.org/copyleft/gpl.html">http://www.gnu.org/copyleft/gpl.html</a> (GPL) GENERAL PUBLIC LICENSE</p>
-<dl class="author"><dt><b>Author:</b></dt><dd>Quentin Devos &lt;<a href="mailto:q.devos@student.uclouvain.be">q.devos@student.uclouvain.be</a>&gt;</dd></dl>
-<p>Web Service Controller - CLDOC plugin</p>
-<p>2001-2013 Universite Catholique de Louvain (UCL)  <a href="http://www.gnu.org/copyleft/gpl.html">http://www.gnu.org/copyleft/gpl.html</a> (GPL) GENERAL PUBLIC LICENSE</p>
-<dl class="author"><dt><b>Author:</b></dt><dd>Quentin Devos &lt;<a href="mailto:q.devos@student.uclouvain.be">q.devos@student.uclouvain.be</a>&gt;</dd></dl>
-<p>Web Service Controller - User plugin</p>
-<p>2001-2013 Universite Catholique de Louvain (UCL)  <a href="http://www.gnu.org/copyleft/gpl.html">http://www.gnu.org/copyleft/gpl.html</a> (GPL) GENERAL PUBLIC LICENSE</p>
-<dl class="author"><dt><b>Author:</b></dt><dd>Quentin Devos &lt;<a href="mailto:q.devos@student.uclouvain.be">q.devos@student.uclouvain.be</a>&gt; </dd></dl>
-</div></div>
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
+<a name="l00011"></a><a class="code" href="class_plugin_loader.html">00011</a> <span class="keyword">class </span><a class="code" href="class_plugin_loader.html">PluginLoader</a> {
+<a name="l00012"></a>00012      
+<a name="l00013"></a>00013      <span class="keyword">private</span> $tlabelReq = <span class="stringliteral">&#39;MOBILE&#39;</span>;
+<a name="l00014"></a>00014      
+<a name="l00020"></a><a class="code" href="class_plugin_loader.html#acba2e728a498d8ec12e0d969df2ec3d5">00020</a>      <span class="keyword">public</span> function <a class="code" href="class_plugin_loader.html#acba2e728a498d8ec12e0d969df2ec3d5">load</a>($requestedLabel){
+<a name="l00021"></a>00021           $installed = $this-&gt;loadInstalledPlugins();
+<a name="l00022"></a>00022           <span class="keywordflow">if</span>(array_key_exists(strtolower($requestedLabel), $installed)){
+<a name="l00023"></a>00023                From::Module($this-&gt;tlabelReq)-&gt;uses(<span class="stringliteral">&#39;/plugins/&#39;</span> . $installed[strtolower($requestedLabel)]);
+<a name="l00024"></a>00024                $module = strtoupper($requestedLabel) . <span class="stringliteral">&#39;WebServiceController&#39;</span>;
+<a name="l00025"></a>00025                <span class="keywordflow">return</span> <span class="keyword">new</span> $module;
+<a name="l00026"></a>00026           } <span class="keywordflow">else</span> {
+<a name="l00027"></a>00027                <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00028"></a>00028           }
+<a name="l00029"></a>00029      }
+<a name="l00030"></a>00030      
+<a name="l00031"></a>00031      <span class="keyword">private</span> function loadInstalledPlugins(){
+<a name="l00032"></a>00032           $installed = array();
+<a name="l00033"></a>00033           <span class="keywordflow">foreach</span> (<span class="keyword">new</span> DirectoryIterator(<span class="stringliteral">&#39;./lib/plugins&#39;</span>) as $pluginLibs){
+<a name="l00034"></a>00034                <span class="keywordflow">if</span>(!$pluginLibs-&gt;isDot()){
+<a name="l00035"></a>00035                     $moduleName = strtolower(str_replace(<span class="stringliteral">&quot;webservicecontroller.lib.php&quot;</span>, <span class="stringliteral">&quot;&quot;</span>,$pluginLibs-&gt;getFilename()));
+<a name="l00036"></a>00036                     $installed[$moduleName] = $pluginLibs-&gt;getFilename();
+<a name="l00037"></a>00037                }
+<a name="l00038"></a>00038           }
+<a name="l00039"></a>00039           <span class="keywordflow">return</span> $installed;
+<a name="l00040"></a>00040      }
+<a name="l00041"></a>00041 }
+</pre></div></div>
 </div>
   <div id="nav-path" class="navpath">
     <ul>
-      <li class="navelem"><a class="el" href="namespace_m_o_b_i_l_e.html">MOBILE</a>      </li>
-      <li class="footer">Generated on Wed Jan 9 2013 21:44:58 for Web Service Module for Claroline by&#160;
+      <li class="navelem"><b>pluginloader.lib.php</b>      </li>
+      <li class="footer">Generated on Wed Jan 9 2013 21:44:57 for Web Service Module for Claroline by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </li>
     </ul>

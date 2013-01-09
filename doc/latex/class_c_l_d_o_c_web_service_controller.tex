@@ -1,36 +1,33 @@
-\hypertarget{class_documents}{
-\section{Documents Class Reference}
-\label{class_documents}\index{Documents@{Documents}}
+\hypertarget{class_c_l_d_o_c_web_service_controller}{
+\section{CLDOCWebServiceController Class Reference}
+\label{class_c_l_d_o_c_web_service_controller}\index{CLDOCWebServiceController@{CLDOCWebServiceController}}
 }
-\subsection*{Static Public Member Functions}
+\subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-static \hyperlink{class_documents_aa6a32caeca124be35431bd703baa720f}{getResourcesList} (\$cid, \$args)
+\hyperlink{class_c_l_d_o_c_web_service_controller_ac67cf939e7d5e8a7fd1292c50b1467a5}{getResourcesList} (\$args)
 \end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
 
 
-Definition at line 10 of file Documents.lib.php.
+Definition at line 10 of file cldocwebservicecontroller.lib.php.
 
 
 
 \subsection{Member Function Documentation}
-\hypertarget{class_documents_aa6a32caeca124be35431bd703baa720f}{
-\index{Documents@{Documents}!getResourcesList@{getResourcesList}}
-\index{getResourcesList@{getResourcesList}!Documents@{Documents}}
-\subsubsection[{getResourcesList}]{\setlength{\rightskip}{0pt plus 5cm}static getResourcesList (
+\hypertarget{class_c_l_d_o_c_web_service_controller_ac67cf939e7d5e8a7fd1292c50b1467a5}{
+\index{CLDOCWebServiceController@{CLDOCWebServiceController}!getResourcesList@{getResourcesList}}
+\index{getResourcesList@{getResourcesList}!CLDOCWebServiceController@{CLDOCWebServiceController}}
+\subsubsection[{getResourcesList}]{\setlength{\rightskip}{0pt plus 5cm}getResourcesList (
 \begin{DoxyParamCaption}
-\item[{\$}]{cid, }
 \item[{\$}]{args}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  \mbox{[}static\mbox{]}}}}
-\label{class_documents_aa6a32caeca124be35431bd703baa720f}
+)}}
+\label{class_c_l_d_o_c_web_service_controller_ac67cf939e7d5e8a7fd1292c50b1467a5}
 Returns the documents contained into args\mbox{[}'curDirPath'\mbox{]} 
 \begin{DoxyParams}[1]{Parameters}
-string & {\em \$cid} & unique identifier of requested course \\
-\hline
 array & {\em \$args} & array of parameters, can contain :
 \begin{DoxyItemize}
 \item (boolean) recursive : if true, return the content of the requested directory and its subdirectories, if any. Default = true
@@ -43,7 +40,7 @@ array & {\em \$args} & array of parameters, can contain :
 {\em InvalidArgumentException} & if \$cid is missing \\
 \hline
 \end{DoxyExceptions}
-\begin{DoxyParagraph}{Web Service call:}
+\begin{DoxyParagraph}{Web Service call: /module/MOBILE/CLDOC/getResourceList/cidReq/\mbox{[}?recursive=BOOL\&curDirPath=''\mbox{]}}
 
 \end{DoxyParagraph}
 
@@ -67,10 +64,10 @@ array of document object
 \end{DoxyReturn}
 
 
-Definition at line 26 of file Documents.lib.php.
+Definition at line 25 of file cldocwebservicecontroller.lib.php.
 
 
 
 The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
 \item 
-C:/Users/Quentin/GIT/claromobile-\/module/lib/Documents.lib.php\end{DoxyCompactItemize}
+C:/Applications/wamp/www/Claroline/module/MOBILE/lib/plugins/cldocwebservicecontroller.lib.php\end{DoxyCompactItemize}

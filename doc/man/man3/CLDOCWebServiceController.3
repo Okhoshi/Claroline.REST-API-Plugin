@@ -1,29 +1,27 @@
-.TH "Documents" 3 "Tue Jan 8 2013" "Version 1" "Web Service Module for Claroline" \" -*- nroff -*-
+.TH "CLDOCWebServiceController" 3 "Wed Jan 9 2013" "Version 1" "Web Service Module for Claroline" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
-Documents \- 
+CLDOCWebServiceController \- 
 .SH SYNOPSIS
 .br
 .PP
-.SS "Static Public Member Functions"
+.SS "Public Member Functions"
 
 .in +1c
 .ti -1c
-.RI "static \fBgetResourcesList\fP ($cid, $args)"
+.RI "\fBgetResourcesList\fP ($args)"
 .br
 .in -1c
 .SH "Detailed Description"
 .PP 
-Definition at line 10 of file Documents.lib.php.
+Definition at line 10 of file cldocwebservicecontroller.lib.php.
 .SH "Member Function Documentation"
 .PP 
-.SS "static getResourcesList ($cid, $args)\fC [static]\fP"Returns the documents contained into args['curDirPath'] 
+.SS "getResourcesList ($args)"Returns the documents contained into args['curDirPath'] 
 .PP
 \fBParameters:\fP
 .RS 4
-\fI$cid\fP unique identifier of requested course 
-.br
 \fI$args\fP array of parameters, can contain :
 .IP "\(bu" 2
 (boolean) recursive : if true, return the content of the requested directory and its subdirectories, if any. Default = true
@@ -37,7 +35,7 @@ Definition at line 10 of file Documents.lib.php.
 \fIInvalidArgumentException\fP if $cid is missing 
 .RE
 .PP
-\fBWeb Service call:\fP
+\fBWeb Service call: /module/MOBILE/CLDOC/getResourceList/cidReq/[?recursive=BOOL&curDirPath='']\fP
 .RS 4
 
 .RE
@@ -73,7 +71,7 @@ array of document object
 .PP
 
 .PP
-Definition at line 26 of file Documents.lib.php.
+Definition at line 25 of file cldocwebservicecontroller.lib.php.
 
 .SH "Author"
 .PP 

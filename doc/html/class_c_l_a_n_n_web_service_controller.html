@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>Web Service Module for Claroline: Documents Class Reference</title>
+<title>Web Service Module for Claroline: CLANNWebServiceController Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
@@ -76,83 +76,96 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 </div>
 <script type="text/javascript">
-  initNavTree('class_documents.html','');
+  initNavTree('class_c_l_a_n_n_web_service_controller.html','');
 </script>
 <div id="doc-content">
 <div class="header">
   <div class="summary">
-<a href="#pub-static-methods">Static Public Member Functions</a>  </div>
+<a href="#pub-methods">Public Member Functions</a>  </div>
   <div class="headertitle">
-<div class="title">Documents Class Reference</div>  </div>
+<div class="title">CLANNWebServiceController Class Reference</div>  </div>
 </div>
 <div class="contents">
-<!-- doxytag: class="Documents" --><table class="memberdecls">
-<tr><td colspan="2"><h2><a name="pub-static-methods"></a>
-Static Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_documents.html#aa6a32caeca124be35431bd703baa720f">getResourcesList</a> ($cid, $args)</td></tr>
+<!-- doxytag: class="CLANNWebServiceController" --><table class="memberdecls">
+<tr><td colspan="2"><h2><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_l_a_n_n_web_service_controller.html#a0a291dd3c47edbfa1c487872efc33cdd">getResourcesList</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_l_a_n_n_web_service_controller.html#afc17efc9f2a0083dcd801b2a2ec09c33">getSingleResource</a> ($args)</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock">
-<p>Definition at line <a class="el" href="_documents_8lib_8php_source.html#l00010">10</a> of file <a class="el" href="_documents_8lib_8php_source.html">Documents.lib.php</a>.</p>
+<p>Definition at line <a class="el" href="clannwebservicecontroller_8lib_8php_source.html#l00010">10</a> of file <a class="el" href="clannwebservicecontroller_8lib_8php_source.html">clannwebservicecontroller.lib.php</a>.</p>
 </div><hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="aa6a32caeca124be35431bd703baa720f"></a><!-- doxytag: member="Documents::getResourcesList" ref="aa6a32caeca124be35431bd703baa720f" args="($cid, $args)" -->
+<a class="anchor" id="a0a291dd3c47edbfa1c487872efc33cdd"></a><!-- doxytag: member="CLANNWebServiceController::getResourcesList" ref="a0a291dd3c47edbfa1c487872efc33cdd" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">static getResourcesList </td>
+          <td class="memname">getResourcesList </td>
           <td>(</td>
-          <td class="paramtype">$&#160;</td>
-          <td class="paramname"><em>cid</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
-          <td class="paramtype">$&#160;</td>
-          <td class="paramname"><em>args</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td><code> [static]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<p>Returns the documents contained into args['curDirPath'] </p>
+<p>Returns all the announces of a course. </p>
+<dl><dt><b>Exceptions:</b></dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">InvalidArgumentException</td><td>if the $cid in not provided. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="user"><dt><b>Web Service call: /module/MOBILE/CLANN/getResourcesList/cidReq</b></dt><dd></dd></dl>
+<pre>        Method : <em>getResourcesList</em></pre><pre>        cidReq : <em>SYSCODE of requested cours</em></pre><dl class="return"><dt><b>Returns:</b></dt><dd>array of Announce object </dd></dl>
+
+<p>Definition at line <a class="el" href="clannwebservicecontroller_8lib_8php_source.html#l00020">20</a> of file <a class="el" href="clannwebservicecontroller_8lib_8php_source.html">clannwebservicecontroller.lib.php</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="afc17efc9f2a0083dcd801b2a2ec09c33"></a><!-- doxytag: member="CLANNWebServiceController::getSingleResource" ref="afc17efc9f2a0083dcd801b2a2ec09c33" args="($args)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">getSingleResource </td>
+          <td>(</td>
+          <td class="paramtype">$&#160;</td>
+          <td class="paramname"><em>args</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Returns a single resquested announce. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramtype">string</td><td class="paramname">$cid</td><td>unique identifier of requested course </td></tr>
-    <tr><td class="paramtype">array</td><td class="paramname">$args</td><td>array of parameters, can contain :<ul>
-<li>(boolean) recursive : if true, return the content of the requested directory and its subdirectories, if any. Default = true</li>
-<li>(String) curDirPath : returns the content of the directory specified by this path. Default = '' (root) </li>
-</ul>
-</td></tr>
+    <tr><td class="paramtype">array</td><td class="paramname">$args</td><td>must contain 'resID' key with the resource identifier of the requested resource </td></tr>
   </table>
   </dd>
 </dl>
 <dl><dt><b>Exceptions:</b></dt><dd>
   <table class="exception">
-    <tr><td class="paramname">InvalidArgumentException</td><td>if $cid is missing </td></tr>
+    <tr><td class="paramname">InvalidArgumentException</td><td>if one of the paramaters is missing </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="user"><dt><b>Web Service call:</b></dt><dd></dd></dl>
-<pre>        Method : <em>getResourcesList</em></pre><pre>        cidReq : <em>SYSCODE of requested cours</em></pre><pre>        recursive : <em>[Optionnal: if true, return the content of the requested directory and its subdirectories, if any. Default = true]</em></pre><pre>        curDirPath : <em>[Optionnal: returns the content of the directory specified by this path. Default = '' (root)]</em></pre><dl class="return"><dt><b>Returns:</b></dt><dd>array of document object </dd></dl>
+<dl class="user"><dt><b>Web Service call: /module/MOBILE/CLANN/getSingleResource/cidReq/resId</b></dt><dd></dd></dl>
+<pre>        Method : <em>getSingleResource</em></pre><pre>        cidReq : <em>SYSCODE of requested cours</em></pre><pre>        resID : <em>Resource Id of requested resource</em></pre><dl class="return"><dt><b>Returns:</b></dt><dd>announce object (can be null if not visible for the current user) </dd></dl>
 
-<p>Definition at line <a class="el" href="_documents_8lib_8php_source.html#l00026">26</a> of file <a class="el" href="_documents_8lib_8php_source.html">Documents.lib.php</a>.</p>
+<p>Definition at line <a class="el" href="clannwebservicecontroller_8lib_8php_source.html#l00060">60</a> of file <a class="el" href="clannwebservicecontroller_8lib_8php_source.html">clannwebservicecontroller.lib.php</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>C:/Users/Quentin/GIT/claromobile-module/lib/<a class="el" href="_documents_8lib_8php_source.html">Documents.lib.php</a></li>
+<li>C:/Applications/wamp/www/Claroline/module/MOBILE/lib/plugins/<a class="el" href="clannwebservicecontroller_8lib_8php_source.html">clannwebservicecontroller.lib.php</a></li>
 </ul>
 </div>
 </div>
   <div id="nav-path" class="navpath">
     <ul>
-      <li class="navelem"><a class="el" href="class_documents.html">Documents</a>      </li>
-      <li class="footer">Generated on Tue Jan 8 2013 23:46:05 for Web Service Module for Claroline by&#160;
+      <li class="navelem"><a class="el" href="class_c_l_a_n_n_web_service_controller.html">CLANNWebServiceController</a>      </li>
+      <li class="footer">Generated on Wed Jan 9 2013 21:44:57 for Web Service Module for Claroline by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </li>
     </ul>
