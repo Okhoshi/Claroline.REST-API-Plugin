@@ -53,10 +53,10 @@ class CLANNWebServiceController {
 	 * @param string $cid unique identifier of requested course
 	 * @param array $args must contain 'resID' key with the resource identifier of the requested resource
 	 * @throws InvalidArgumentException if one of the paramaters is missing
-	 * @webservice /module/MOBILE/CLANN/getSingleResource/cidReq/resId
+	 * @webservice /module/MOBILE/CLANN/getSingleResource/cidReq/resID
 	 * @ws_arg{Method,getSingleResource}
 	 * @ws_arg{cidReq,SYSCODE of requested cours}
-	 * @ws_arg{resId,Resource Id of requested resource}
+	 * @ws_arg{resID,Resource Id of requested resource}
 	 * @return announce object (can be null if not visible for the current user)
 	 */
 	static function getSingleResource($cid, $args){
@@ -87,7 +87,7 @@ class CLANNWebServiceController {
 			unset($announce['id']);
 			return (claro_is_allowed_to_edit() || $announce['visibility'])?$announce:null;
 		} else {
-			throw new InvalidArgumentException('Resource not found');
+			throw new RuntimeException('Resource not found');
 		}
 	}
 }

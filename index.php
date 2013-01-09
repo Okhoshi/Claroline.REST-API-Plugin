@@ -10,7 +10,7 @@
  */
     $tlabelReq = 'MOBILE';
 	
-	var_dump($_REQUEST);
+	//var_dump($_REQUEST);
     
     require dirname( __FILE__ ) . '/../../claroline/inc/claro_init_global.inc.php';
 	
@@ -89,6 +89,10 @@
 		echo json_encode($result);
 		
 		
+	} catch (RuntimeException $ex){
+		header('Not Found',true, 404);
+		echo $ex->getMessage();
+		die();
 	} catch (Exception $ex){
 		header('Bad Request',true, 400);
 		echo $ex->getMessage();
