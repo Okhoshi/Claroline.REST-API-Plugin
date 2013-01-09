@@ -21,6 +21,6 @@ RewriteRule ^([a-zA-Z]+)/([a-zA-Z]+)/?([a-zA-Z0-9]*)/?$ ?WS_Module=$1&Method=$2&
 
 #Detect the debug flag
 RewriteCond %{QUERY_STRING} debug
-RewriteRule ^([a-zA-Z]+)/([a-zA-Z]+)/?([a-zA-Z0-9]*)/?([0-9]*)/?$ ?WS_Module=$1&Method=$2&cidReq=$3&resId=$4&debug [L]
+RewriteRule ^([a-zA-Z]+)/([a-zA-Z]+)/?([a-zA-Z0-9]*)/?([0-9]*)/?$ ?WS_Module=$1&Method=$2&cidReq=$3&resID=$4&debug [L]
 
-RewriteRule ^([a-zA-Z]+)/([a-zA-Z]+)/?([a-zA-Z0-9]*)/?([0-9]*)/?$ ?WS_Module=$1&Method=$2&cidReq=$3&resId=$4 [L]
+RewriteRule ^([a-zA-Z]+)/([a-zA-Z]+)/?([a-zA-Z0-9]*)/?([0-9]*)/?$ ?WS_Module=$1&Method=$2&cidReq=$3&resID=$4 [L]
