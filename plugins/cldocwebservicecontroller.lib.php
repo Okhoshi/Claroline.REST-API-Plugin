@@ -7,7 +7,8 @@
  * @package     MOBILE
  * @author      Quentin Devos <q.devos@student.uclouvain.be>
  */
-class CLDOCWebServiceController {
+class CLDOCWebServiceController
+{
 	
 	/**
 	 * Returns the documents contained into args['curDirPath']
@@ -22,12 +23,20 @@ class CLDOCWebServiceController {
 	 * @ws_arg{curDirPath,[Optionnal: returns the content of the directory specified by this path. Default = '' (root)]}
 	 * @return array of document object
 	 */
-	function getResourcesList($args){
-		$recursive = isset($args['recursive'])?$args['recursive']:true;
-		$curDirPath = isset($args['curDirPath'])?$args['curDirPath']:'';
+	function getResourcesList( $args )
+	{
+		$recursive = isset($args['recursive'])
+			?$args['recursive']
+			:true
+			;
+		$curDirPath = isset($args['curDirPath'])
+			?$args['curDirPath']
+			:''
+			;
 		$cid = claro_get_current_course_id();
-		if($cid == null){
-			throw new InvalidArgumentException('Missing cid argument! session : ' . claro_get_current_course_id());
+		if ( $cid == null )
+		{
+			throw new InvalidArgumentException('Missing cid argument!');
 		}
 
 		/* READ CURRENT DIRECTORY CONTENT
@@ -43,11 +52,13 @@ class CLDOCWebServiceController {
 		$date = $claroline->notification->getLastActionBeforeLoginDate(claro_get_current_user_id());
 		
 	
-		if(!defined('A_DIRECTORY')){
+		if ( !defined('A_DIRECTORY') )
+		{
 			define('A_DIRECTORY', 1);
 		}
-		if(!defined('A_FILE')){
-			define('A_FILE',      2);
+		if ( !defined('A_FILE') )
+		{
+			define('A_FILE', 2);
 		}
 			
 		$baseWorkDir = get_path('coursesRepositorySys').claro_get_course_path($cid).'/document';
@@ -163,9 +174,12 @@ class CLDOCWebServiceController {
 				$fileList[] = $fileAttributeList;
 			} // end foreach $filePathList
 		}
-		if($recursive){
-			foreach ($fileList as $thisFile){
-				if($thisFile['type'] == A_DIRECTORY){
+		if ( $recursive )
+		{
+			foreach ( $fileList as $thisFile )
+			{
+				if ( $thisFile['type'] == A_DIRECTORY )
+				{
 					$args = array('curDirPath' => $thisFile['path'],'recursive' => true);
 					$new_list = Documents::getDocList($cid, $args);
 					$fileList = array_merge($fileList,$new_list);

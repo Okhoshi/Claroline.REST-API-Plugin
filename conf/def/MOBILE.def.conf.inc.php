@@ -20,8 +20,11 @@ $conf_def['section']['WS']['label']      = 'Web Service';
 $conf_def['section']['WS']['description']= '';
 $conf_def['section']['WS']['properties'] = array ( 'activeWebService',
 													'iOSAppLink',
+													'iOSAppReady',
 													'AndAppLink',
-													'WPAppLink');
+													'AndAppReady',
+													'WPAppLink',
+													'WPAppReady');
 
 // WS
 $conf_def_property_list[ 'activeWebService' ] =
@@ -43,6 +46,16 @@ array ( 'label'       => 'Lien vers l\'application iOS dans l\'Apple iOS App Sto
 		, 'readonly'    => FALSE
 );
 
+$conf_def_property_list[ 'iOSAppReady' ] =
+array ( 'label'       => 'Active le lien vers l\'application iPhone'
+		, 'description' => 'Retire le bandeau "Soon" de la bannière de l\'Apple iOS App Store et active le lien vers l\'application'
+		, 'default'     => FALSE
+		, 'type'        => 'boolean'
+		, 'display'     => TRUE
+		, 'readonly'    => FALSE
+		,'acceptedValue' => array('TRUE' => 'Oui', 'FALSE' => 'Non')
+);
+
 $conf_def_property_list[ 'AndAppLink' ] =
 array ( 'label'       => 'Lien vers l\'application Android dans l\'Android Google Play Store'
 		, 'description' => ''
@@ -52,11 +65,32 @@ array ( 'label'       => 'Lien vers l\'application Android dans l\'Android Googl
 		, 'readonly'    => FALSE
 );
 
+$conf_def_property_list[ 'AndAppReady' ] =
+array ( 'label'       => 'Active le lien vers l\'application Android'
+		, 'description' => 'Retire le bandeau "Soon" de la bannière de l\'Android Google Play Store et active le lien vers l\'application'
+		, 'default'     => FALSE
+		, 'type'        => 'boolean'
+		, 'display'     => TRUE
+		, 'readonly'    => FALSE
+		,'acceptedValue' => array('TRUE' => 'Oui', 'FALSE' => 'Non')
+);
+
 $conf_def_property_list[ 'WPAppLink' ] =
-array ( 'label'       => 'Lien vers l\'application WindowsPhone dans le Microsoft MarketPlace'
+array ( 'label'       => 'Lien vers l\'application WindowsPhone dans le Microsoft Windows Phone Store'
 		, 'description' => ''
 		, 'default'     => ''
 		, 'type'        => 'string'
 		, 'display'     => TRUE
 		, 'readonly'    => FALSE
 );
+
+$conf_def_property_list[ 'WPAppReady' ] =
+array ( 'label'       => 'Active le lien vers l\'application Windows Phone'
+		, 'description' => 'Retire le bandeau "Soon" de la bannière du Microsoft Windows Phone Store et active le lien vers l\'application'
+		, 'default'     => FALSE
+		, 'type'        => 'boolean'
+		, 'display'     => TRUE
+		, 'readonly'    => FALSE
+		,'acceptedValue' => array('TRUE' => 'Oui', 'FALSE' => 'Non')
+);
+
