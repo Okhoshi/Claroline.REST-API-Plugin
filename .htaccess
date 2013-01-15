@@ -1,10 +1,3 @@
-#--------------------------------------------------
-# Répertoire : /articles/
-#--------------------------------------------------
-
-# Le serveur doit suivre les liens symboliques :
-Options +FollowSymlinks
-
 # Activation du module de réécriture d'URL :
 RewriteEngine on
 
@@ -21,6 +14,6 @@ RewriteRule ^([a-zA-Z]+)/([a-zA-Z]+)/?([a-zA-Z0-9]*)/?$ ?module=$1&method=$2&cid
 
 #Detect the debug flag
 RewriteCond %{QUERY_STRING} debug
-RewriteRule ^([a-zA-Z]+)/([a-zA-Z]+)/?([a-zA-Z0-9]*)/?([0-9]*)/?$ ?module=$1&method=$2&cidReset&cidReq=$3&resID=$4&debug [L]
+RewriteRule ^([a-zA-Z]+)/([a-zA-Z]+)/?([a-zA-Z0-9]*)/?([a-zA-Z0-9]*)/?$ ?module=$1&method=$2&cidReset&cidReq=$3&resID=$4&debug [L]
 
-RewriteRule ^([a-zA-Z]+)/([a-zA-Z]+)/?([a-zA-Z0-9]*)/?([0-9]*)/?$ ?module=$1&method=$2&cidReset&cidReq=$3&resID=$4 [L]
+RewriteRule ^([a-zA-Z]+)/([a-zA-Z]+)/?([a-zA-Z0-9]*)/?([a-zA-Z0-9]*)/?$ ?module=$1&method=$2&cidReset&cidReq=$3&resID=$4 [L]

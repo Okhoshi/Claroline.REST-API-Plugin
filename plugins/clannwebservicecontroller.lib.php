@@ -71,7 +71,7 @@ class CLANNWebServiceController
 			?$args['resID']
 			:null
 			;
-		$cid = claro_get_current_cours_id();
+		$cid = claro_get_current_course_id();
 		
 		if ( $cid == null || $resourceId == null )
 		{
@@ -106,7 +106,7 @@ class CLANNWebServiceController
 		}
 		else
 		{
-			throw new RuntimeException('Resource not found');
+			throw new RuntimeException('Resource not found', 404);
 		}
 	}
 }

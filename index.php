@@ -43,7 +43,6 @@ if ( !( isset($_REQUEST['method']) ) || empty($_REQUEST['method']) )
 	die();
 }
 
-
 try
 {
 	/*
@@ -103,7 +102,7 @@ try
 }
 catch ( RuntimeException $ex )
 {
-	header('Not Found',true, 404);
+	header($ex->getMessage(),true, $ex->getCode());
 	echo $ex->getMessage();
 	die();
 }
