@@ -1,9 +1,13 @@
 var NAVTREE =
 [
   [ "Web Service Module for Claroline", "index.html", [
+    [ "Related Pages", "pages.html", [
+      [ "Todo List", "todo.html", null ]
+    ] ],
     [ "Data Structures", "annotated.html", [
       [ "CLANNWebServiceController", "class_c_l_a_n_n_web_service_controller.html", null ],
       [ "CLDOCWebServiceController", "class_c_l_d_o_c_web_service_controller.html", null ],
+      [ "MOBILE_Downloader", "class_m_o_b_i_l_e___downloader.html", null ],
       [ "PluginLoader", "class_plugin_loader.html", null ],
       [ "USERWebServiceController", "class_u_s_e_r_web_service_controller.html", null ]
     ] ],
@@ -13,11 +17,16 @@ var NAVTREE =
       [ "MOBILE", "namespace_m_o_b_i_l_e.html", null ]
     ] ],
     [ "File List", "files.html", [
-      [ "C:/Applications/wamp/www/Claroline/module/MOBILE/lib/Admin.lib.php", null, null ],
+      [ "C:/Applications/wamp/www/Claroline/module/MOBILE/download.php", null, null ],
+      [ "C:/Applications/wamp/www/Claroline/module/MOBILE/entry.php", null, null ],
+      [ "C:/Applications/wamp/www/Claroline/module/MOBILE/index.php", null, null ],
+      [ "C:/Applications/wamp/www/Claroline/module/MOBILE/conf/def/MOBILE.def.conf.inc.php", null, null ],
+      [ "C:/Applications/wamp/www/Claroline/module/MOBILE/connector/downloader.cnr.php", null, null ],
+      [ "C:/Applications/wamp/www/Claroline/module/MOBILE/lang/lang_french.php", null, null ],
       [ "C:/Applications/wamp/www/Claroline/module/MOBILE/lib/pluginloader.lib.php", null, null ],
-      [ "C:/Applications/wamp/www/Claroline/module/MOBILE/lib/plugins/clannwebservicecontroller.lib.php", null, null ],
-      [ "C:/Applications/wamp/www/Claroline/module/MOBILE/lib/plugins/cldocwebservicecontroller.lib.php", null, null ],
-      [ "C:/Applications/wamp/www/Claroline/module/MOBILE/lib/plugins/userwebservicecontroller.lib.php", null, null ]
+      [ "C:/Applications/wamp/www/Claroline/module/MOBILE/plugins/clannwebservicecontroller.lib.php", null, null ],
+      [ "C:/Applications/wamp/www/Claroline/module/MOBILE/plugins/cldocwebservicecontroller.lib.php", null, null ],
+      [ "C:/Applications/wamp/www/Claroline/module/MOBILE/plugins/userwebservicecontroller.lib.php", null, null ]
     ] ]
   ] ]
 ];

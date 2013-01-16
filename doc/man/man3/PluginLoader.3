@@ -1,4 +1,4 @@
-.TH "PluginLoader" 3 "Wed Jan 9 2013" "Version 1" "Web Service Module for Claroline" \" -*- nroff -*-
+.TH "PluginLoader" 3 "Wed Jan 16 2013" "Version 1" "Web Service Module for Claroline" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -10,12 +10,27 @@ PluginLoader \-
 
 .in +1c
 .ti -1c
+.RI "\fB__construct\fP ($path)"
+.br
+.ti -1c
 .RI "\fBload\fP ($requestedLabel)"
 .br
 .in -1c
 .SH "Detailed Description"
 .PP 
 Definition at line 11 of file pluginloader.lib.php.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "__construct ($path)"Instanciates the Plugin Loader with $path as plugins directory 
+.PP
+\fBParameters:\fP
+.RS 4
+\fI$path\fP relative path to the plugins directory 
+.RE
+.PP
+
+.PP
+Definition at line 20 of file pluginloader.lib.php.
 .SH "Member Function Documentation"
 .PP 
 .SS "load ($requestedLabel)"Checks the Web Service Controller for the requested module is installed, and then instanciates it. 
@@ -32,7 +47,7 @@ WebServiceController object|boolean a new instance of the Web Service Controller
 .PP
 
 .PP
-Definition at line 20 of file pluginloader.lib.php.
+Definition at line 30 of file pluginloader.lib.php.
 
 .SH "Author"
 .PP 

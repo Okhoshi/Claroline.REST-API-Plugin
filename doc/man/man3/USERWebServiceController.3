@@ -1,4 +1,4 @@
-.TH "USERWebServiceController" 3 "Wed Jan 9 2013" "Version 1" "Web Service Module for Claroline" \" -*- nroff -*-
+.TH "USERWebServiceController" 3 "Wed Jan 16 2013" "Version 1" "Web Service Module for Claroline" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -47,8 +47,13 @@ array of course object
 .PP
 
 .PP
-Definition at line 40 of file userwebservicecontroller.lib.php.
-.SS "getCourseToolList ()"Returns the tool list for each cours of the user.
+Definition at line 42 of file userwebservicecontroller.lib.php.
+.SS "getCourseToolList ()"Returns the tool list for each cours of the user. 
+.PP
+\fBTodo\fP
+.RS 4
+Rewrite in a more generic way of treating tool... 
+.RE
 .PP
 \fBExceptions:\fP
 .RS 4
@@ -79,7 +84,7 @@ array of course object with only the syscode and tool-related fields filled.
 .PP
 
 .PP
-Definition at line 64 of file userwebservicecontroller.lib.php.
+Definition at line 68 of file userwebservicecontroller.lib.php.
 .SS "getUpdates ()"Retrieve the notified items for the current user. Do not mark them as showed. 
 .PP
 \fBWeb Service call: /module/MOBILE/User/getUpdates\fP
@@ -100,7 +105,7 @@ empty array if no notification. Else, return array([SYSCODE] => array([LABEL] =>
 .PP
 
 .PP
-Definition at line 104 of file userwebservicecontroller.lib.php.
+Definition at line 108 of file userwebservicecontroller.lib.php.
 .SS "getUserData ()"Returns the data of the current user. 
 .PP
 \fBWeb Service call: /module/MOBILE/User/getUserData\fP
@@ -121,7 +126,7 @@ array of string
 .PP
 
 .PP
-Definition at line 18 of file userwebservicecontroller.lib.php.
+Definition at line 19 of file userwebservicecontroller.lib.php.
 
 .SH "Author"
 .PP 

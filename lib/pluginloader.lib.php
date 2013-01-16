@@ -13,6 +13,10 @@ class PluginLoader
 	
 	private $pluginsPath;
 	
+	/**
+	 * Instanciates the Plugin Loader with $path as plugins directory
+	 * @param string $path relative path to the plugins directory
+	 */
 	public function __construct( $path )
 	{
 		$this->pluginsPath = $path;

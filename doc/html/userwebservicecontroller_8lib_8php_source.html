@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>Web Service Module for Claroline: C:/Applications/wamp/www/Claroline/module/MOBILE/lib/plugins/userwebservicecontroller.lib.php Source File</title>
+<title>Web Service Module for Claroline: C:/Applications/wamp/www/Claroline/module/MOBILE/plugins/userwebservicecontroller.lib.php Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
@@ -37,6 +37,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
@@ -79,95 +80,102 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div id="doc-content">
 <div class="header">
   <div class="headertitle">
-<div class="title">C:/Applications/wamp/www/Claroline/module/MOBILE/lib/plugins/userwebservicecontroller.lib.php</div>  </div>
+<div class="title">C:/Applications/wamp/www/Claroline/module/MOBILE/plugins/userwebservicecontroller.lib.php</div>  </div>
 </div>
 <div class="contents">
 <div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
-<a name="l00010"></a><a class="code" href="class_u_s_e_r_web_service_controller.html">00010</a> <span class="keyword">class </span><a class="code" href="class_u_s_e_r_web_service_controller.html">USERWebServiceController</a> {
-<a name="l00011"></a>00011      
-<a name="l00018"></a><a class="code" href="class_u_s_e_r_web_service_controller.html#a5dbf7007493710c53d8a131e55bbb1a0">00018</a>      function <a class="code" href="class_u_s_e_r_web_service_controller.html#a5dbf7007493710c53d8a131e55bbb1a0">getUserData</a>() {
-<a name="l00019"></a>00019           $userData = claro_get_current_user_data();
-<a name="l00020"></a>00020           <span class="comment">//Bug fix for kernel bug, into user_get_picture_***() into user.lib. Bad index ?</span>
-<a name="l00021"></a>00021           $userData[<span class="stringliteral">&#39;user_id&#39;</span>] = $userData[<span class="stringliteral">&#39;userId&#39;</span>];
-<a name="l00022"></a>00022           $userData[<span class="stringliteral">&#39;picture&#39;</span>] = $_SERVER[<span class="stringliteral">&#39;SERVER_NAME&#39;</span>] . user_get_picture_url($userData);
-<a name="l00023"></a>00023           unset($userData[<span class="stringliteral">&#39;authSource&#39;</span>],
-<a name="l00024"></a>00024                  $userData[<span class="stringliteral">&#39;creatorId&#39;</span>],
-<a name="l00025"></a>00025                  $userData[<span class="stringliteral">&#39;lastLogin&#39;</span>],
-<a name="l00026"></a>00026                  $userData[<span class="stringliteral">&#39;mail&#39;</span>],
-<a name="l00027"></a>00027                  $userData[<span class="stringliteral">&#39;officialEmail&#39;</span>],
-<a name="l00028"></a>00028                  $userData[<span class="stringliteral">&#39;phone&#39;</span>]);
-<a name="l00029"></a>00029           $userData[<span class="stringliteral">&#39;platformName&#39;</span>] = get_conf(<span class="stringliteral">&#39;siteName&#39;</span>, <span class="stringliteral">&quot;Claroline&quot;</span>);
-<a name="l00030"></a>00030           $userData[<span class="stringliteral">&#39;institutionName&#39;</span>] = get_conf(<span class="stringliteral">&#39;institution_name&#39;</span>,<span class="stringliteral">&quot;&quot;</span>);
-<a name="l00031"></a>00031           <span class="keywordflow">return</span> $userData;
-<a name="l00032"></a>00032      }
-<a name="l00033"></a>00033 
-<a name="l00040"></a><a class="code" href="class_u_s_e_r_web_service_controller.html#a3781010b458f2d98d846dc2e2bcf4e07">00040</a>      function <a class="code" href="class_u_s_e_r_web_service_controller.html#a3781010b458f2d98d846dc2e2bcf4e07">getCourseList</a>(){
-<a name="l00041"></a>00041           FromKernel::uses(<span class="stringliteral">&#39;courselist.lib&#39;</span>);
-<a name="l00042"></a>00042           $claroNotification = Claroline::getInstance()-&gt;notification;
-<a name="l00043"></a>00043           $date = $claroNotification-&gt;getLastActionBeforeLoginDate(claro_get_current_user_id());
-<a name="l00044"></a>00044           $courseList = array();
-<a name="l00045"></a>00045           $notifiedCourses = $claroNotification-&gt;getNotifiedCourses($date,claro_get_current_user_id());
-<a name="l00046"></a>00046           <span class="keywordflow">foreach</span> (get_user_course_list(claro_get_current_user_id()) as $course){
-<a name="l00047"></a>00047                $course_data = claro_get_course_data($course[<span class="stringliteral">&#39;sysCode&#39;</span>]);
-<a name="l00048"></a>00048                $course[<span class="stringliteral">&#39;officialEmail&#39;</span>] = $course_data[<span class="stringliteral">&#39;email&#39;</span>];
-<a name="l00049"></a>00049                $course[<span class="stringliteral">&#39;notified&#39;</span>] = in_array($course[<span class="stringliteral">&#39;sysCode&#39;</span>],$notifiedCourses);
-<a name="l00050"></a>00050                $courseList[] = $course;
-<a name="l00051"></a>00051           }
-<a name="l00052"></a>00052           <span class="keywordflow">return</span> $courseList;
-<a name="l00053"></a>00053      }
-<a name="l00054"></a>00054      
-<a name="l00064"></a><a class="code" href="class_u_s_e_r_web_service_controller.html#abdc81b3a85b81e14603342bf2d4a66ae">00064</a>      function <a class="code" href="class_u_s_e_r_web_service_controller.html#abdc81b3a85b81e14603342bf2d4a66ae">getCourseToolList</a>(){
-<a name="l00065"></a>00065           $cid = claro_get_current_course_id();
-<a name="l00066"></a>00066           <span class="keywordflow">if</span>($cid == null){
-<a name="l00067"></a>00067                <span class="keywordflow">throw</span> <span class="keyword">new</span> InvalidArgumentException(<span class="stringliteral">&#39;Missing cid argument!&#39;</span>);
-<a name="l00068"></a>00068           }
-<a name="l00069"></a>00069           
-<a name="l00070"></a>00070           FromKernel::uses(<span class="stringliteral">&#39;courselist.lib&#39;</span>);
-<a name="l00071"></a>00071           $claroNotification = Claroline::getInstance()-&gt;notification;
-<a name="l00072"></a>00072           $date = $claroNotification-&gt;getLastActionBeforeLoginDate(claro_get_current_user_id());
-<a name="l00073"></a>00073           $course = array();
-<a name="l00074"></a>00074           $course[<span class="stringliteral">&#39;sysCode&#39;</span>] = $cid;
-<a name="l00075"></a>00075           $course[<span class="stringliteral">&#39;isAnn&#39;</span>] = <span class="keyword">false</span>;
-<a name="l00076"></a>00076           $course[<span class="stringliteral">&#39;annNotif&#39;</span>] = <span class="keyword">false</span>;
-<a name="l00077"></a>00077           $course[<span class="stringliteral">&#39;isDnL&#39;</span>] = <span class="keyword">false</span>;
-<a name="l00078"></a>00078           $course[<span class="stringliteral">&#39;dnlNotif&#39;</span>] = <span class="keyword">false</span>;
-<a name="l00079"></a>00079           $notifiedTools = $claroNotification-&gt;getNotifiedTools($cid,$date,claro_get_current_user_id());
-<a name="l00080"></a>00080           <span class="keywordflow">foreach</span>(claro_get_course_tool_list($course[<span class="stringliteral">&#39;sysCode&#39;</span>],claro_get_current_user_profile_id_in_course($cid)) as $tool){ 
-<a name="l00081"></a>00081                <span class="keywordflow">switch</span>($tool[<span class="stringliteral">&#39;label&#39;</span>]){
-<a name="l00082"></a>00082                     <span class="keywordflow">case</span> <span class="stringliteral">&#39;CLANN&#39;</span>:
-<a name="l00083"></a>00083                          $course[<span class="stringliteral">&#39;isAnn&#39;</span>] = ($tool[<span class="stringliteral">&#39;visibility&#39;</span>] || claro_is_allowed_to_edit());
-<a name="l00084"></a>00084                          $course[<span class="stringliteral">&#39;annNotif&#39;</span>] = in_array($tool[<span class="stringliteral">&#39;tool_id&#39;</span>],$notifiedTools);
-<a name="l00085"></a>00085                          <span class="keywordflow">break</span>;
-<a name="l00086"></a>00086                     <span class="keywordflow">case</span> <span class="stringliteral">&#39;CLDOC&#39;</span>:
-<a name="l00087"></a>00087                          $course[<span class="stringliteral">&#39;isDnL&#39;</span>] = ($tool[<span class="stringliteral">&#39;visibility&#39;</span>] || claro_is_allowed_to_edit());
-<a name="l00088"></a>00088                          $course[<span class="stringliteral">&#39;dnlNotif&#39;</span>] = in_array($tool[<span class="stringliteral">&#39;tool_id&#39;</span>],$notifiedTools);
+<a name="l00010"></a><a class="code" href="class_u_s_e_r_web_service_controller.html">00010</a> <span class="keyword">class </span><a class="code" href="class_u_s_e_r_web_service_controller.html">USERWebServiceController</a>
+<a name="l00011"></a>00011 {
+<a name="l00012"></a>00012      
+<a name="l00019"></a><a class="code" href="class_u_s_e_r_web_service_controller.html#a5dbf7007493710c53d8a131e55bbb1a0">00019</a>      function <a class="code" href="class_u_s_e_r_web_service_controller.html#a5dbf7007493710c53d8a131e55bbb1a0">getUserData</a>()
+<a name="l00020"></a>00020      {
+<a name="l00021"></a>00021           $userData = claro_get_current_user_data();
+<a name="l00022"></a>00022           <span class="comment">//Bug fix for kernel bug, into user_get_picture_***() into user.lib. Bad index ?</span>
+<a name="l00023"></a>00023           $userData[<span class="stringliteral">&#39;user_id&#39;</span>] = $userData[<span class="stringliteral">&#39;userId&#39;</span>];
+<a name="l00024"></a>00024           $userData[<span class="stringliteral">&#39;picture&#39;</span>] = $_SERVER[<span class="stringliteral">&#39;SERVER_NAME&#39;</span>] . user_get_picture_url($userData);
+<a name="l00025"></a>00025           unset($userData[<span class="stringliteral">&#39;authSource&#39;</span>],
+<a name="l00026"></a>00026                  $userData[<span class="stringliteral">&#39;creatorId&#39;</span>],
+<a name="l00027"></a>00027                  $userData[<span class="stringliteral">&#39;lastLogin&#39;</span>],
+<a name="l00028"></a>00028                  $userData[<span class="stringliteral">&#39;mail&#39;</span>],
+<a name="l00029"></a>00029                  $userData[<span class="stringliteral">&#39;officialEmail&#39;</span>],
+<a name="l00030"></a>00030                  $userData[<span class="stringliteral">&#39;phone&#39;</span>]);
+<a name="l00031"></a>00031           $userData[<span class="stringliteral">&#39;platformName&#39;</span>] = get_conf(<span class="stringliteral">&#39;siteName&#39;</span>, <span class="stringliteral">&quot;Claroline&quot;</span>);
+<a name="l00032"></a>00032           $userData[<span class="stringliteral">&#39;institutionName&#39;</span>] = get_conf(<span class="stringliteral">&#39;institution_name&#39;</span>,<span class="stringliteral">&quot;&quot;</span>);
+<a name="l00033"></a>00033           <span class="keywordflow">return</span> $userData;
+<a name="l00034"></a>00034      }
+<a name="l00035"></a>00035 
+<a name="l00042"></a><a class="code" href="class_u_s_e_r_web_service_controller.html#a3781010b458f2d98d846dc2e2bcf4e07">00042</a>      function <a class="code" href="class_u_s_e_r_web_service_controller.html#a3781010b458f2d98d846dc2e2bcf4e07">getCourseList</a>()
+<a name="l00043"></a>00043      {
+<a name="l00044"></a>00044           FromKernel::uses(<span class="stringliteral">&#39;courselist.lib&#39;</span>);
+<a name="l00045"></a>00045           $claroNotification = Claroline::getInstance()-&gt;notification;
+<a name="l00046"></a>00046           $date = $claroNotification-&gt;getLastActionBeforeLoginDate(claro_get_current_user_id());
+<a name="l00047"></a>00047           $courseList = array();
+<a name="l00048"></a>00048           $notifiedCourses = $claroNotification-&gt;getNotifiedCourses($date,claro_get_current_user_id());
+<a name="l00049"></a>00049           <span class="keywordflow">foreach</span> ( get_user_course_list(claro_get_current_user_id()) as $course )
+<a name="l00050"></a>00050           {
+<a name="l00051"></a>00051                $course_data = claro_get_course_data($course[<span class="stringliteral">&#39;sysCode&#39;</span>]);
+<a name="l00052"></a>00052                $course[<span class="stringliteral">&#39;officialEmail&#39;</span>] = $course_data[<span class="stringliteral">&#39;email&#39;</span>];
+<a name="l00053"></a>00053                $course[<span class="stringliteral">&#39;notified&#39;</span>] = in_array($course[<span class="stringliteral">&#39;sysCode&#39;</span>],$notifiedCourses);
+<a name="l00054"></a>00054                $courseList[] = $course;
+<a name="l00055"></a>00055           }
+<a name="l00056"></a>00056           <span class="keywordflow">return</span> $courseList;
+<a name="l00057"></a>00057      }
+<a name="l00058"></a>00058      
+<a name="l00068"></a><a class="code" href="class_u_s_e_r_web_service_controller.html#abdc81b3a85b81e14603342bf2d4a66ae">00068</a>      function <a class="code" href="class_u_s_e_r_web_service_controller.html#abdc81b3a85b81e14603342bf2d4a66ae">getCourseToolList</a>()
+<a name="l00069"></a>00069      {
+<a name="l00070"></a>00070           $cid = claro_get_current_course_id();
+<a name="l00071"></a>00071           <span class="keywordflow">if</span> ( $cid == null )
+<a name="l00072"></a>00072           {
+<a name="l00073"></a>00073                <span class="keywordflow">throw</span> <span class="keyword">new</span> InvalidArgumentException(<span class="stringliteral">&#39;Missing cid argument!&#39;</span>);
+<a name="l00074"></a>00074           }
+<a name="l00075"></a>00075           
+<a name="l00076"></a>00076           FromKernel::uses(<span class="stringliteral">&#39;courselist.lib&#39;</span>);
+<a name="l00077"></a>00077           $claroNotification = Claroline::getInstance()-&gt;notification;
+<a name="l00078"></a>00078           $date = $claroNotification-&gt;getLastActionBeforeLoginDate(claro_get_current_user_id());
+<a name="l00079"></a>00079           $course = array();
+<a name="l00080"></a>00080           $course[<span class="stringliteral">&#39;sysCode&#39;</span>] = $cid;
+<a name="l00081"></a>00081           $notifiedTools = $claroNotification-&gt;getNotifiedTools($cid,$date,claro_get_current_user_id());
+<a name="l00082"></a>00082           <span class="keywordflow">foreach</span> ( claro_get_course_tool_list($course[<span class="stringliteral">&#39;sysCode&#39;</span>],claro_get_current_user_profile_id_in_course($cid)) as $tool )
+<a name="l00083"></a>00083           { 
+<a name="l00084"></a>00084                <span class="keywordflow">switch</span> ( $tool[<span class="stringliteral">&#39;label&#39;</span>] )
+<a name="l00085"></a>00085                {
+<a name="l00086"></a>00086                     <span class="keywordflow">case</span> <span class="stringliteral">&#39;CLANN&#39;</span>:
+<a name="l00087"></a>00087                          $course[<span class="stringliteral">&#39;isAnn&#39;</span>] = ($tool[<span class="stringliteral">&#39;visibility&#39;</span>] || claro_is_allowed_to_edit());
+<a name="l00088"></a>00088                          $course[<span class="stringliteral">&#39;annNotif&#39;</span>] = in_array($tool[<span class="stringliteral">&#39;tool_id&#39;</span>],$notifiedTools);
 <a name="l00089"></a>00089                          <span class="keywordflow">break</span>;
-<a name="l00090"></a>00090                     <span class="keywordflow">default</span>:
-<a name="l00091"></a>00091                          <span class="keywordflow">break</span>;
-<a name="l00092"></a>00092                }
-<a name="l00093"></a>00093           }
-<a name="l00094"></a>00094           <span class="keywordflow">return</span> $course;
-<a name="l00095"></a>00095      }
-<a name="l00096"></a>00096      
-<a name="l00104"></a><a class="code" href="class_u_s_e_r_web_service_controller.html#a3d11b893dad6de79541fb58f46f6bf5b">00104</a>      function <a class="code" href="class_u_s_e_r_web_service_controller.html#a3d11b893dad6de79541fb58f46f6bf5b">getUpdates</a>(){
-<a name="l00105"></a>00105           $claroNotification = Claroline::getInstance()-&gt;notification;
-<a name="l00106"></a>00106           $gid = 0;
-<a name="l00107"></a>00107           $date = $claroNotification-&gt;getLastActionBeforeLoginDate(claro_get_current_user_id());
-<a name="l00108"></a>00108           $result = array();
-<a name="l00109"></a>00109           <span class="keywordflow">foreach</span>($claroNotification-&gt;getNotifiedCourses($date, claro_get_current_user_id()) as $cid){
-<a name="l00110"></a>00110                <span class="keywordflow">foreach</span> ( $claroNotification-&gt;getNotifiedTools($cid, $date, claro_get_current_user_id()) as $tid ) {
-<a name="l00111"></a>00111                     $result[$cid][get_module_label_from_tool_id($tid)] = $claroNotification-&gt;getNotifiedRessources($cid,$date,claro_get_current_user_id(),$gid,$tid);
-<a name="l00112"></a>00112                }
-<a name="l00113"></a>00113           }
-<a name="l00114"></a>00114           <span class="keywordflow">return</span> $result;
-<a name="l00115"></a>00115      }
-<a name="l00116"></a>00116 }
+<a name="l00090"></a>00090                     <span class="keywordflow">case</span> <span class="stringliteral">&#39;CLDOC&#39;</span>:
+<a name="l00091"></a>00091                          $course[<span class="stringliteral">&#39;isDnL&#39;</span>] = ($tool[<span class="stringliteral">&#39;visibility&#39;</span>] || claro_is_allowed_to_edit());
+<a name="l00092"></a>00092                          $course[<span class="stringliteral">&#39;dnlNotif&#39;</span>] = in_array($tool[<span class="stringliteral">&#39;tool_id&#39;</span>],$notifiedTools);
+<a name="l00093"></a>00093                          <span class="keywordflow">break</span>;
+<a name="l00094"></a>00094                     <span class="keywordflow">default</span>:
+<a name="l00095"></a>00095                          <span class="keywordflow">break</span>;
+<a name="l00096"></a>00096                }
+<a name="l00097"></a>00097           }
+<a name="l00098"></a>00098           <span class="keywordflow">return</span> $course;
+<a name="l00099"></a>00099      }
+<a name="l00100"></a>00100      
+<a name="l00108"></a><a class="code" href="class_u_s_e_r_web_service_controller.html#a3d11b893dad6de79541fb58f46f6bf5b">00108</a>      function <a class="code" href="class_u_s_e_r_web_service_controller.html#a3d11b893dad6de79541fb58f46f6bf5b">getUpdates</a>()
+<a name="l00109"></a>00109      {
+<a name="l00110"></a>00110           $claroNotification = Claroline::getInstance()-&gt;notification;
+<a name="l00111"></a>00111           $gid = 0;
+<a name="l00112"></a>00112           $date = $claroNotification-&gt;getLastActionBeforeLoginDate(claro_get_current_user_id());
+<a name="l00113"></a>00113           $result = array();
+<a name="l00114"></a>00114           <span class="keywordflow">foreach</span> ( $claroNotification-&gt;getNotifiedCourses($date, claro_get_current_user_id()) as $cid )
+<a name="l00115"></a>00115           {
+<a name="l00116"></a>00116                <span class="keywordflow">foreach</span> ( $claroNotification-&gt;getNotifiedTools($cid, $date, claro_get_current_user_id()) as $tid )
+<a name="l00117"></a>00117                {
+<a name="l00118"></a>00118                     $result[$cid][get_module_label_from_tool_id($tid)] = $claroNotification-&gt;getNotifiedRessources($cid,$date,claro_get_current_user_id(),$gid,$tid);
+<a name="l00119"></a>00119                }
+<a name="l00120"></a>00120           }
+<a name="l00121"></a>00121           <span class="keywordflow">return</span> $result;
+<a name="l00122"></a>00122      }
+<a name="l00123"></a>00123 }
 </pre></div></div>
 </div>
   <div id="nav-path" class="navpath">
     <ul>
       <li class="navelem"><b>userwebservicecontroller.lib.php</b>      </li>
-      <li class="footer">Generated on Wed Jan 9 2013 21:44:57 for Web Service Module for Claroline by&#160;
+      <li class="footer">Generated on Wed Jan 16 2013 18:38:36 for Web Service Module for Claroline by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </li>
     </ul>

@@ -76,6 +76,11 @@ class MOBILE_Downloader extends Claro_Generic_Module_Downloader
 		}
 	}
 
+	/**
+	 * Returns the complete path to the requested file, depending on the context
+	 * @param string $requestedUrl the relative path of the requested file
+	 * @return string the complete path to the requested file
+	 */
 	public function getFilePath( $requestedUrl )
 	{
 		if ( ! is_null($this->cid) )
@@ -113,6 +118,11 @@ class MOBILE_Downloader extends Claro_Generic_Module_Downloader
 		return $path;
 	}
 
+	/**
+	 * Check that the user has the privilege required to download the requested file
+	 * @param String $requestedUrl path of the requested file to test 
+	 * @return boolean true if the user can download the file
+	 */
 	public function isAllowedToDownload( $requestedUrl )
 	{
 		if ( ! $this->isModuleAllowed() )
