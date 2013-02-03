@@ -59,7 +59,7 @@ array ( 'label'       => 'Active le lien vers l\'application iPhone'
 $conf_def_property_list[ 'AndAppLink' ] =
 array ( 'label'       => 'Lien vers l\'application Android dans l\'Android Google Play Store'
 		, 'description' => ''
-		, 'default'     => ''
+		, 'default'     => 'https://play.google.com/store/apps/details?id=net.claroline.mobile.android'
 		, 'type'        => 'string'
 		, 'display'     => TRUE
 		, 'readonly'    => FALSE
@@ -68,7 +68,7 @@ array ( 'label'       => 'Lien vers l\'application Android dans l\'Android Googl
 $conf_def_property_list[ 'AndAppReady' ] =
 array ( 'label'       => 'Active le lien vers l\'application Android'
 		, 'description' => 'Retire le bandeau "Soon" de la bannière de l\'Android Google Play Store et active le lien vers l\'application'
-		, 'default'     => FALSE
+		, 'default'     => TRUE
 		, 'type'        => 'boolean'
 		, 'display'     => TRUE
 		, 'readonly'    => FALSE
