@@ -99,6 +99,46 @@ class USERWebServiceController
 	}
 	
 	/**
+	 * Returns the tool list for each cours of the user.
+	 * @throws InvalidArgumentException if the cid in not provided.
+	 * @webservice{/module/MOBILE/User/getCoursToolList/cidReq}
+	 * @ws_arg{method,getCoursToolList}
+	 * @ws_arg{cidReq,SYSCODE of requested cours}
+	 * @return array of course object with only the syscode and tool-related fields filled.
+	 */
+	function getToolList()
+	{
+		$cid = claro_get_current_course_id();
+		if ( $cid == null )
+		{
+			throw new InvalidArgumentException('Missing cid argument!');
+		}
+		
+		FromKernel::uses('courselist.lib');
+		$course = array();
+		$course['sysCode'] = $cid;
+		$course['tools'] = array();
+		foreach ( claro_get_course_tool_list($course['sysCode'],claro_get_current_user_profile_id_in_course($cid)) as $tool )
+		{
+			if ( $tool['installed'] && $tool['activated'] && ($tool['visibility'] || claro_is_allowed_to_edit()) )
+			{
+				unset($tool['id']);
+				unset($tool['tool_id']);
+				unset($tool['external_name']);
+				unset($tool['icon']);
+				unset($tool['activation']);
+				unset($tool['url']);
+				unset($tool['activated']);
+				unset($tool['installed']);
+				unset($tool['external']);
+				unset($tool['external']);
+				$course['tools'][] = $tool;
+			}
+		}
+		return $course;
+	}
+	
+	/**
 	 * Retrieve the notified items for the current user. Do not mark them as showed.
 	 * @webservice{/module/MOBILE/User/getUpdates}
 	 * @ws_arg{Method, getUpdates}
