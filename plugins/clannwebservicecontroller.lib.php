@@ -33,13 +33,17 @@ class CLANNWebServiceController
 
 		foreach ( announcement_get_item_list(array('course'=>$cid)) as $announce )
 		{
-			$announce['notified'] = $claroNotification->isANotifiedRessource($cid,
-					$date,
-					claro_get_current_user_id(),
-					claro_get_current_group_id(),
-					get_tool_id_from_module_label('CLANN'),
-					$announce['id'],
-					false);
+			$notified = $claroNotification->isANotifiedRessource($cid,
+						$date,
+						claro_get_current_user_id(),
+						claro_get_current_group_id(),
+						get_tool_id_from_module_label('CLANN'),
+						$announce['id'],
+						false);
+		
+			$announce['notified'] = $notified
+									?$date
+									:$announce['time'];
 			$announce['visibility'] = ($announce['visibility'] != 'HIDE');
 			$announce['cours']['sysCode'] = $cid;
 			$announce['date'] = $announce['time'];
@@ -85,18 +89,22 @@ class CLANNWebServiceController
 
 		if ( $announce = announcement_get_item($resourceId,$cid) )
 		{
-			$announce['visibility'] = ($announce['visibility'] != 'HIDE');
-			$announce['content'] = trim(strip_tags($announce['content']));
-			$announce['cours']['sysCode'] = $cid;
-			$announce['ressourceId'] = $announce['id'];
-			$announce['date'] = $date;
-			$announce['notified'] = $claroNotification->isANotifiedRessource($cid,
+			$notified = $claroNotification->isANotifiedRessource($cid,
 					$date,
 					claro_get_current_user_id(),
 					claro_get_current_group_id(),
 					get_tool_id_from_module_label('CLANN'),
 					$announce['id'],
 					false);
+		
+			$announce['visibility'] = ($announce['visibility'] != 'HIDE');
+			$announce['content'] = trim(strip_tags($announce['content']));
+			$announce['cours']['sysCode'] = $cid;
+			$announce['ressourceId'] = $announce['id'];
+			$announce['date'] = $announce['time'];
+			$announce['notified'] = $notified
+									?$date
+									:$announce['time'];
 			unset($announce['id']);
 			
 			return (claro_is_allowed_to_edit() || $announce['visibility'])

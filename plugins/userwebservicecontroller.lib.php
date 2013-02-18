@@ -115,27 +115,25 @@ class USERWebServiceController
 		}
 		
 		FromKernel::uses('courselist.lib');
-		$course = array();
-		$course['sysCode'] = $cid;
-		$course['tools'] = array();
-		foreach ( claro_get_course_tool_list($course['sysCode'],claro_get_current_user_profile_id_in_course($cid)) as $tool )
+		$tools = array();
+		foreach ( claro_get_course_tool_list($cid,claro_get_current_user_profile_id_in_course($cid)) as $tool )
 		{
 			if ( $tool['installed'] && $tool['activated'] && ($tool['visibility'] || claro_is_allowed_to_edit()) )
 			{
 				unset($tool['id']);
 				unset($tool['tool_id']);
 				unset($tool['external_name']);
+				unset($tool['external']);
 				unset($tool['icon']);
 				unset($tool['activation']);
 				unset($tool['url']);
 				unset($tool['activated']);
 				unset($tool['installed']);
-				unset($tool['external']);
-				unset($tool['external']);
-				$course['tools'][] = $tool;
+				$tool['visibility'] = $tool['visibility'] == true; // Force the boolean representation in JSON
+				$tools[] = $tool;
 			}
 		}
-		return $course;
+		return $tools;
 	}
 	
 	/**

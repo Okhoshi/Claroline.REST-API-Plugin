@@ -2,7 +2,7 @@
 /**
  * Web Service Controller
  *
- * @version     MOBILE 1 $Revision: 8 $ - Claroline 1.11
+ * @version     MOBILE 1 $Revision: 9 $ - Claroline 1.11
  * @copyright   2001-2013 Universite Catholique de Louvain (UCL)
  * @license     http://www.gnu.org/copyleft/gpl.html (GPL) GENERAL PUBLIC LICENSE
  * @package     MOBILE
@@ -82,18 +82,20 @@ try
 	/*
 	 * Force headers or debug mode
 	*/
-	if ( !isset($_REQUEST['debug']) )
+
+	header("Cache-Control: no-cache, must-revalidate" );
+	header("Expires: Mon, 26 Jul 1997 05:00:00 GMT" );
+	header("Last-Modified: " . gmdate( "D, d M Y H:i:s" ) . "GMT" );
+	header("Pragma: no-cache" );
+
+        if ( !isset($_REQUEST['debug']) )
 	{
 		header("Content-Type: application/json; charset=utf-8");
-		header("Cache-Control: no-cache, must-revalidate" );
-		header("Expires: Mon, 26 Jul 1997 05:00:00 GMT" );
-		header("Last-Modified: " . gmdate( "D, d M Y H:i:s" ) . "GMT" );
-		header("Pragma: no-cache" );
 	}
 	else
 	{
-		echo "\n";
 		var_dump($result);
+		echo "\n";
 	}
 
 	claro_utf8_encode_array($result);

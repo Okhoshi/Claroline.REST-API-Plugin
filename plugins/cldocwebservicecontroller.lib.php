@@ -137,11 +137,15 @@ class CLDOCWebServiceController
 
 				if( is_dir($baseWorkDir.$thisFile) )
 				{
+					$fileYear = date('n', time()) < 8
+								?date('Y',time()) - 1
+								:date('Y',time());
+				
 					$fileAttributeList['title'] = $tmp[count($tmp) -1];
 					$fileAttributeList['isFolder'] = true;
 					$fileAttributeList['type'] = A_DIRECTORY;
 					$fileAttributeList['size'] = false;
-					$fileAttributeList['date'] = date('Y-m-d',time());
+					$fileAttributeList['date'] = $fileYear . '-09-20';
 					$fileAttributeList['extension'] = "";
 					$fileAttributeList['url'] = null;
 				}
@@ -170,7 +174,11 @@ class CLDOCWebServiceController
 					$fileAttributeList['description'] = null;
 					$fileAttributeList['visibility' ] = true;
 				}
-				$fileAttributeList['notified'] = $claroline->notification->isANotifiedDocument($cid,$date,claro_get_current_user_id(),$groupId, $docToolId, $fileAttributeList, false);
+				$notified = $claroline->notification->isANotifiedDocument($cid,$date,claro_get_current_user_id(),$groupId, $docToolId, $fileAttributeList, false);
+				
+				$fileAttributeList['notified'] = $notified
+												 ?$date
+												 :$fileAttributeList['date'];
 
 				$fileList[] = $fileAttributeList;
 			} // end foreach $filePathList
@@ -225,13 +233,12 @@ class CLDOCWebServiceController
 					$sql = 'REPLACE INTO `' . $tableName . '` (`userId`, `token`, `cid`, `requestedPath`, `requestTime`) '
 							.	   'VALUES (\'' . claro_get_current_user_id() . '\', \'' . $token . '\', \'' . $cid . '\', \'' . claro_sql_escape($thisFile) . '\' , NOW());';
 					$result = Claroline::getDatabase()->exec($sql);
-					$try++;
 				}
 					
-				$response['token'] = $try == 6
-				?null
-				:$token
-				;
+				$response['token'] = $try == $limit
+									 ?null
+									 :$token
+									 ;
 				return $response;
 			}
 			else
