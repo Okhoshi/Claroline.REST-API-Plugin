@@ -1,5 +1,5 @@
-DROP TABLE IF EXISTS `__CL_MAIN__MOBILE_tokens`;
-CREATE TABLE IF NOT EXISTS `__CL_MAIN__MOBILE_tokens` (
+DROP TABLE IF EXISTS `__CL_MAIN__mobile_tokens`;
+CREATE TABLE IF NOT EXISTS `__CL_MAIN__mobile_tokens` (
   `token` varchar(30) NOT NULL,
   `userId` int(11) NOT NULL,
   `cid` varchar(40) NOT NULL,

@@ -133,7 +133,7 @@ class MOBILE_Downloader extends Claro_Generic_Module_Downloader
 		if ( ! is_null($this->cid) )
 		{
 			$courseUserPrivilege = claro_get_course_user_privilege( $this->cid, $this->uid );
-			var_dump($courseUserPrivilege);
+			
 			if ( ! $courseUserPrivilege['is_courseMember'] )
 			{
 				pushClaroMessage('course not allowed', 'debug');

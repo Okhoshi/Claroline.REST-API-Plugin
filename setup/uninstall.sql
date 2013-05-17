@@ -1,1 +1,1 @@
-DROP TABLE IF EXISTS `__CL_MAIN__MOBILE_tokens`;
+DROP TABLE IF EXISTS `__CL_MAIN__mobile_tokens`;
