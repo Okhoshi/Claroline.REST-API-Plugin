@@ -47,7 +47,7 @@ class CLANNWebServiceController
 			$announce['visibility'] = ($announce['visibility'] != 'HIDE');
 			$announce['cours']['sysCode'] = $cid;
 			$announce['date'] = $announce['time'];
-			$announce['ressourceId'] = $announce['id'];
+			$announce['resourceId'] = $announce['id'];
 			$announce['content'] = trim(strip_tags($announce['content']));
 			unset($announce['id']);
 				
@@ -100,7 +100,7 @@ class CLANNWebServiceController
 			$announce['visibility'] = ($announce['visibility'] != 'HIDE');
 			$announce['content'] = trim(strip_tags($announce['content']));
 			$announce['cours']['sysCode'] = $cid;
-			$announce['ressourceId'] = $announce['id'];
+			$announce['resourceId'] = $announce['id'];
 			$announce['date'] = $announce['time'];
 			$announce['notified'] = $notified
 									?$date
