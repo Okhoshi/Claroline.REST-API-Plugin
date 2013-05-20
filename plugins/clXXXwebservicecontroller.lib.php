@@ -1,22 +1,22 @@
 <?php
 /**
- * Web Service Controller - CLANN library
+ * Web Service Controller - CLXXX library
  *
  * @copyright   2001-2013 Universite Catholique de Louvain (UCL)
  * @license     http://www.gnu.org/copyleft/gpl.html (GPL) GENERAL PUBLIC LICENSE
  * @package     MOBILE
  * @author      Quentin Devos <q.devos@student.uclouvain.be>
  */
-class CLANNWebServiceController
+class CLXXXWebServiceController
 {
 
 	/**
-	 * Returns all the announces of a course.
+	 * Returns all the descriptions of a course.
 	 * @throws InvalidArgumentException if the $cid in not provided.
 	 * @webservice{/module/MOBILE/CLANN/getResourcesList/cidReq}
 	 * @ws_arg{Method,getResourcesList}
 	 * @ws_arg{cidReq,SYSCODE of requested cours}
-	 * @return array of Announce object
+	 * @return array of Descriptions object
 	 */
 	function getResourcesList()
 	{
@@ -25,42 +25,40 @@ class CLANNWebServiceController
 		{
 			throw new InvalidArgumentException('Missing cid argument!');
 		}
-
-		From::Module('CLANN')->uses('announcement.lib');
+		
+		From::Module('CLXXX')->uses('');
 		$claroNotification = Claroline::getInstance()->notification;
 		$date = $claroNotification->getLastActionBeforeLoginDate(claro_get_current_user_id());
-		$annList = array();
-
-		foreach ( announcement_get_item_list(array('course'=>$cid)) as $announce )
+		
+		$list = array();
+		
+		foreach (  as $item )
 		{
 			$notified = $claroNotification->isANotifiedRessource($cid,
-						$date,
-						claro_get_current_user_id(),
-						claro_get_current_group_id(),
-						get_tool_id_from_module_label('CLANN'),
-						$announce['id'],
-						false);
+							$date,
+							claro_get_current_user_id(),
+							claro_get_current_group_id(),
+							get_tool_id_from_module_label('CLXXX'),
+							$item['id'],
+							false);
 		
-			$announce['notifiedDate'] = $notified
-										?$date
-										:$announce['time'];
-			$announce['visibility'] = ($announce['visibility'] != 'HIDE');
-			$announce['cours']['sysCode'] = $cid;
-			$announce['date'] = $announce['time'];
-			$announce['resourceId'] = $announce['id'];
-			$announce['content'] = trim(strip_tags($announce['content']));
-			unset($announce['id']);
-				
-			if ( claro_is_allowed_to_edit() || $announce['visibility'] )
+			$item['notifiedDate'] = $notified
+									?$date
+									:null;
+			
+			$item['resourceId'] = $item['id'];
+			unset($item['id']);
+			
+			if ( claro_is_allowed_to_edit() || $item['visibility'] )
 			{
-				$annList[] = $announce;
+				$list[] = $item;
 			}
 		}
-		return $annList;
+		return $list;
 	}
 
 	/**
-	 * Returns a single resquested announce.
+	 * Returns a single resquested decsription.
 	 * @param array $args must contain 'resID' key with the resource identifier of the requested resource
 	 * @throws InvalidArgumentException if one of the paramaters is missing
 	 * @webservice{/module/MOBILE/CLANN/getSingleResource/cidReq/resId}
@@ -82,33 +80,29 @@ class CLANNWebServiceController
 			throw new InvalidArgumentException('Missing cid or resourceId argument!');
 		}
 
+		From::Module('CLXXX')->uses('');
 		$claroNotification = Claroline::getInstance()->notification;
 		$date = $claroNotification->getLastActionBeforeLoginDate(claro_get_current_user_id());
 
-		From::Module('CLANN')->uses('announcement.lib');
-
-		if ( $announce = announcement_get_item($resourceId,$cid) )
+		if ( $item = )
 		{
 			$notified = $claroNotification->isANotifiedRessource($cid,
 					$date,
 					claro_get_current_user_id(),
 					claro_get_current_group_id(),
 					get_tool_id_from_module_label('CLANN'),
-					$announce['id'],
+					$item['id'],
 					false);
 		
-			$announce['visibility'] = ($announce['visibility'] != 'HIDE');
-			$announce['content'] = trim(strip_tags($announce['content']));
-			$announce['cours']['sysCode'] = $cid;
-			$announce['resourceId'] = $announce['id'];
-			$announce['date'] = $announce['time'];
-			$announce['notifiedDate'] = $notified
-										?$date
-										:$announce['time'];
-			unset($announce['id']);
+			$item['visibility'] = ($item['visibility'] != 'HIDE');
+			$item['resourceId'] = $item['id'];
+			$item['notifiedDate'] = $notified
+									?$date
+									:null;
+			unset($item['id']);
 			
-			return (claro_is_allowed_to_edit() || $announce['visibility'])
-				?$announce
+			return (claro_is_allowed_to_edit() || $item['visibility'])
+				?$item
 				:null
 				;
 		}

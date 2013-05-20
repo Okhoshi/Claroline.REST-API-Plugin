@@ -50,7 +50,7 @@ class USERWebServiceController
 		{
 			$course_data = claro_get_course_data($course['sysCode']);
 			$course['officialEmail'] = $course_data['email'];
-			$course['notified'] = in_array($course['sysCode'],$notifiedCourses);
+			$course['notifiedDate'] = in_array($course['sysCode'],$notifiedCourses);
 			$courseList[] = $course;
 		}
 		return $courseList;

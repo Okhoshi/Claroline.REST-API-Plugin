@@ -176,9 +176,9 @@ class CLDOCWebServiceController
 				}
 				$notified = $claroline->notification->isANotifiedDocument($cid,$date,claro_get_current_user_id(),$groupId, $docToolId, $fileAttributeList, false);
 				
-				$fileAttributeList['notified'] = $notified
-												 ?$date
-												 :$fileAttributeList['date'];
+				$fileAttributeList['notifiedDate'] = $notified
+													?$date
+													:$fileAttributeList['date'];
 
 				$fileList[] = $fileAttributeList;
 			} // end foreach $filePathList
