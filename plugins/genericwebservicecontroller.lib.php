@@ -50,7 +50,7 @@ class GenericWebServiceController
 				}
 				$item['title'] = $lnk->getName();
 				$item['visibility'] = $lnk->isVisible();
-				//$item['clr'] = $_SERVER['SERVER_NAME'] .ResourceLinker::$Resolver->resolve( $inLocator );
+				$item['url'] = get_path('rootWeb') .ResourceLinker::$Resolver->resolve( $inLocator );
 				
 				if ( claro_is_allowed_to_edit() || $item['visibility'] )
 				{
