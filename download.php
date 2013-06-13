@@ -36,9 +36,6 @@ $tableName = $tableName['mobile_tokens'];
 
 $sql = 'SELECT * FROM `' . $tableName . '` WHERE token = \'' . claro_sql_escape($token) . '\' AND ADDTIME(`requestTime`,\'0 0:0:30\') > NOW()';
 $result = Claroline::getDatabase()->query($sql);
-$sql = 'DELETE FROM `' . $tableName . '` WHERE token = \'' . claro_sql_escape($token) . '\' OR ADDTIME(`requestTime`,\'0 0:0:30\') < NOW()';
-$resultDel = Claroline::getDatabase()->exec($sql);
-
 if ( !$result->isEmpty() )
 {
 	$row = $result->fetch();
@@ -150,18 +147,18 @@ if ( !$result->isEmpty() )
 
 				claro_send_file( $downloadArchiveFile, $downloadArchiveName );
 				unlink($downloadArchiveFile);
-				exit();
+				
+				$sql = 'DELETE FROM `' . $tableName . '` WHERE token = \'' . claro_sql_escape($token) . '\'';
+				Claroline::getDatabase()->exec($sql);
 			}
 			else
 			{
 				header('HTTP/1.1 500 Internal Server Error');
-				die();
 			}
 		}
 		else
 		{
 			header('HTTP/1.1 403 Forbidden');
-			die();
 		}
 	}
 	elseif ( is_file($baseWorkDir.$thisFile) )
@@ -208,10 +205,11 @@ if ( !$result->isEmpty() )
 
 			$dialogBox->title( get_lang('Not allowed') );
 		}
-
+		
 		// Output section
 		if ( $isDownloadable )
 		{
+			error_reporting(0);
 			// end session to avoid lock
 			session_write_close();
 
@@ -223,18 +221,19 @@ if ( !$result->isEmpty() )
 				if ( claro_send_file( $pathInfo )  !== false )
 				{
 					$claroline->notifier->event('download', array( 'data' => array('url' => $requestUrl) ) );
+					
+					//$sql = 'DELETE FROM `' . $tableName . '` WHERE token = \'' . claro_sql_escape($token) . '\'';
+					//Claroline::getDatabase()->exec($sql);
 				}
 				else
 				{
 					header('HTTP/1.1 404 Not Found');
 					claro_die( get_lang('File download failed : %failureMSg%',
 					array( '%failureMsg%' => claro_failure::get_last_failure() ) ) );
-					die();
 				}
 			}
 			else
-			{
-					
+			{	
 				if (strtoupper(substr(PHP_OS, 0, 3)) == "WIN")
 				{
 					$rootSys =  str_replace( '//', '/', strtolower( str_replace('\\', '/', $rootSys) ) );
@@ -245,19 +244,21 @@ if ( !$result->isEmpty() )
 
 				// redirect to document
 				claro_redirect($document_url);
-
-				die();
+				
+				$sql = 'DELETE FROM `' . $tableName . '` WHERE token = \'' . claro_sql_escape($token) . '\'';
+				Claroline::getDatabase()->exec($sql);
 			}
 		}
 		else
 		{
 			header('HTTP/1.1 404 Not Found');
-			die();
 		}
 	}
 }
 else
 {
 	header('HTTP/1.1 404 Not Found');
-	die();
 }
+
+$sql = 'DELETE FROM `' . $tableName . '` WHERE ADDTIME(`requestTime`,\'0 0:0:30\') < NOW()';
+Claroline::getDatabase()->exec($sql);

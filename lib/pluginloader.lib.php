@@ -37,7 +37,7 @@ class PluginLoader
 			$module = $upperLabel . 'WebServiceController';
 			return new $module;
 		} else {
-			return false;
+			return $this->load( 'GENERIC' );
 		}
 	}
 	
