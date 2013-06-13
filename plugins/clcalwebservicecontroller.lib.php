@@ -30,6 +30,9 @@ class CLCALWebServiceController
 		$claroNotification = Claroline::getInstance()->notification;
 		$date = $claroNotification->getLastActionBeforeLoginDate(claro_get_current_user_id());
 		$list = array();
+		
+		$d = new DateTime($date);
+		$d->sub(new DateInterval('P1D'));
 
 		foreach ( agenda_get_item_list(array('course'=>$cid)) as $item )
 		{
@@ -48,6 +51,8 @@ class CLCALWebServiceController
 			$item['content'] = trim(strip_tags($item['content']));
 			$item['visibility'] = ($item['visibility'] != 'HIDE');
 			$item['date'] = $item['day'] . ' ' . $item['hour'];
+			$item['seenDate'] = $d->format('Y-m-d');
+			
 			$item['resourceId'] = $item['id'];
 			unset($item['id']);
 			
@@ -85,6 +90,9 @@ class CLCALWebServiceController
 		From::Module('CLCAL')->uses('agenda.lib');
 		$claroNotification = Claroline::getInstance()->notification;
 		$date = $claroNotification->getLastActionBeforeLoginDate(claro_get_current_user_id());
+		
+		$d = new DateTime($date);
+		$d->sub(new DateInterval('P1D'));
 
 		if ( $item = agenda_get_item($resourceId,$cid) )
 		{
@@ -104,6 +112,7 @@ class CLCALWebServiceController
 			{
 				$item['notifiedDate'] = $date;
 			}
+			$item['seenDate'] = $d->format('Y-m-d');
 			unset($item['id']);
 			
 			return (claro_is_allowed_to_edit() || $item['visibility'])

@@ -129,6 +129,7 @@ class USERWebServiceController
 				unset($tool['url']);
 				unset($tool['activated']);
 				unset($tool['installed']);
+				$tool['name'] = get_lang($tool['name']);
 				$tool['visibility'] = $tool['visibility'] == true; // Force the boolean representation in JSON
 				$tools[] = $tool;
 			}

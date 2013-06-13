@@ -179,6 +179,10 @@ class CLDOCWebServiceController
 				$fileAttributeList['notifiedDate'] = $notified
 													?$date
 													:$fileAttributeList['date'];
+													
+				$d = new DateTime($date);
+				$d->sub(new DateInterval('P1D'));
+				$fileAttributeList['seenDate'] = $d->format('Y-m-d');
 
 				$fileList[] = $fileAttributeList;
 			} // end foreach $filePathList
