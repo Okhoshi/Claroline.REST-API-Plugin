@@ -94,7 +94,7 @@ class CLANNWebServiceController
 
 		From::Module('CLANN')->uses('announcement.lib');
 
-		if ( $announce = announcement_get_item($resourceId,$cid) )
+		if ( $announce = $this->announcement_get_item($resourceId,$cid) )
 		{
 			$notified = $claroNotification->isANotifiedRessource($cid,
 					$date,
@@ -124,5 +124,24 @@ class CLANNWebServiceController
 		{
 			throw new RuntimeException('Resource not found', 404);
 		}
+	}
+	
+	function announcement_get_item($announcement_id, $course_id=NULL)
+	{
+		$tbl = claro_sql_get_course_tbl(claro_get_course_db_name_glued($course_id));
+
+		$sql = "SELECT                id,
+									  title,
+					   contenu     AS content,
+						   temps   AS `time`,
+									  visibility,
+					   ordre       AS rank
+				FROM  `" . $tbl['announcement'] . "`
+				WHERE id=" . (int) $announcement_id ;
+
+		$announcement = claro_sql_query_get_single_row($sql);
+
+		if ($announcement) return $announcement;
+		else               return claro_failure::set_failure('ANNOUNCEMENT_UNKNOW');
 	}
 }
