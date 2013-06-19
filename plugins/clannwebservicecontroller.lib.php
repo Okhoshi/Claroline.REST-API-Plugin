@@ -32,7 +32,7 @@ class CLANNWebServiceController
 		$annList = array();
 		
 		$d = new DateTime($date);
-		$d->sub(new DateInterval('P1D'));
+		$d->sub(new DateInterval('PT1M'));
 
 		foreach ( announcement_get_item_list(array('course'=>$cid)) as $announce )
 		{
@@ -47,7 +47,7 @@ class CLANNWebServiceController
 			$announce['notifiedDate'] = $notified
 										?$date
 										:$announce['time'];
-			$announce['seenDate'] = $d->format('Y-m-d');
+			$announce['seenDate'] = $d->format('Y-m-d H:i');
 			$announce['visibility'] = ($announce['visibility'] != 'HIDE');
 			$announce['cours']['sysCode'] = $cid;
 			$announce['date'] = $announce['time'];
@@ -90,7 +90,7 @@ class CLANNWebServiceController
 		$date = $claroNotification->getLastActionBeforeLoginDate(claro_get_current_user_id());
 		
 		$d = new DateTime($date);
-		$d->sub(new DateInterval('P1D'));
+		$d->sub(new DateInterval('PT1M'));
 
 		From::Module('CLANN')->uses('announcement.lib');
 
@@ -112,7 +112,7 @@ class CLANNWebServiceController
 			$announce['notifiedDate'] = $notified
 										?$date
 										:$announce['time'];
-			$announce['seenDate'] = $d->format('Y-m-d');
+			$announce['seenDate'] = $d->format('Y-m-d H:i');
 			unset($announce['id']);
 			
 			return (claro_is_allowed_to_edit() || $announce['visibility'])
