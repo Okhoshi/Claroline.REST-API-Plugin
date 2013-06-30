@@ -12,7 +12,7 @@
 $tlabelReq = 'MOBILE';
 
 //Provides to the methods only the following arguments !
-$allowedArgs = array('resID', 'recursive', 'curDirPath');
+$allowedArgs = array('resID', 'recursive', 'curDirPath', 'platform' );
 
 require dirname( __FILE__ ) . '/../../claroline/inc/claro_init_global.inc.php';
 
@@ -64,6 +64,7 @@ try
 					$args[$allowed] = $_REQUEST[$allowed];
 				}
 			}
+			$args['module'] = $_REQUEST['module'];
 				
 			$result = $class->$method($args);
 		}
@@ -82,21 +83,17 @@ try
 	/*
 	 * Force headers or debug mode
 	*/
-
+	if ( isset( $_REQUEST["debug"] ) )
+	{
+		var_dump($result);
+		die();
+	}
+	
 	header("Cache-Control: no-cache, must-revalidate" );
 	header("Expires: Mon, 26 Jul 1997 05:00:00 GMT" );
 	header("Last-Modified: " . gmdate( "D, d M Y H:i:s" ) . "GMT" );
 	header("Pragma: no-cache" );
-
-        if ( !isset($_REQUEST['debug']) )
-	{
-		header("Content-Type: application/json; charset=utf-8");
-	}
-	else
-	{
-		var_dump($result);
-		echo "\n";
-	}
+	header("Content-Type: application/json; charset=utf-8");
 
 	claro_utf8_encode_array($result);
 	echo json_encode($result);
@@ -106,11 +103,11 @@ catch ( RuntimeException $ex )
 {
 	header($ex->getMessage(),true, $ex->getCode());
 	echo $ex->getMessage();
-	die();
+	//die();
 }
 catch ( Exception $ex )
 {
 	header('Bad Request',true, 400);
 	echo $ex->getMessage();
-	die();
+	//die();
 }

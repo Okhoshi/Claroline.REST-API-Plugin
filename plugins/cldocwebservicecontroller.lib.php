@@ -7,6 +7,7 @@
  * @package     MOBILE
  * @author      Quentin Devos <q.devos@student.uclouvain.be>
  */
+
 class CLDOCWebServiceController
 {
 
@@ -205,6 +206,8 @@ class CLDOCWebServiceController
 
 	function getSingleResource( $args )
 	{
+		$tlabelReq = 'MOBILE';
+		
 		$thisFile = isset( $args['resID'] )
 		?$args['resID']
 		:null
@@ -229,13 +232,118 @@ class CLDOCWebServiceController
 
 			if( is_dir($baseWorkDir.$thisFile) || is_file($baseWorkDir.$thisFile) )
 			{
+				
+				if( is_dir($baseWorkDir.$thisFile) )
+				{
+					if ( ( $is_allowedToEdit || get_conf('cldoc_allowNonManagersToDownloadFolder', true) )
+							|| ( get_conf('cldoc_allowNonManagersToDownloadFolder', true)
+									&& get_conf( 'cldoc_allowAnonymousToDownloadFolder', true ) )
+					)
+					{
+						/*
+						 * PREPARE THE FILE COLLECTION
+						*/
+
+						if (! $is_allowedToEdit )
+						{
+							// Build an exclude file list to prevent simple user
+							// to see document contained in "invisible" directories
+							$searchExcludeList = getInvisibleDocumentList($baseWorkDir);
+						}
+						else
+						{
+							$searchExcludeList = array();
+						}
+
+						$filePathList = claro_search_file(search_string_to_pcre(''),
+								$baseWorkDir . $thisFile,
+								true,
+								'FILE',
+								$searchExcludeList);
+
+						/*
+						 * BUILD THE ZIP ARCHIVE
+						*/
+
+						require_once get_path('incRepositorySys') . '/lib/thirdparty/pclzip/pclzip.lib.php';
+
+						// Build archive in tmp course folder
+
+						$downloadArchivePath = get_conf('cldoc_customTmpPath', '');
+
+						if ( empty($downloadArchivePath) )
+						{
+							$downloadArchivePath = get_path('coursesRepositorySys') . claro_get_course_path() . '/tmp/zip';
+							$downloadArchiveFile = $downloadArchivePath . '/' . uniqid('') . '.zip';
+						}
+						else
+						{
+							$downloadArchiveFile = rtrim( $downloadArchivePath, '/' )
+							. '/' . claro_get_current_course_id()
+							. '_CLDOC_' . uniqid('') . '.zip';
+						}
+
+						if ( ! is_dir( $downloadArchivePath ) )
+						{
+							mkdir( $downloadArchivePath, CLARO_FILE_PERMISSIONS, true );
+						}
+
+						$downloadArchive     = new PclZip($downloadArchiveFile);
+
+						$downloadArchive->add($filePathList,
+								PCLZIP_OPT_REMOVE_PATH,
+								$baseWorkDir . $thisFile);
+
+						if ( file_exists($downloadArchiveFile) )
+						{
+							$pathInfo = $downloadArchiveFile;
+						}
+						else
+						{
+							throw new RuntimeException('Internal Server Error', 500);
+						}
+					}
+					else
+					{
+						throw new RuntimeException('Not allowed', 403);
+					}
+				}
+				elseif ( is_file($baseWorkDir.$thisFile) )
+				{
+					require_once get_path('incRepositorySys') . '/lib/file/downloader.lib.php';
+
+					Claroline::getInstance()->notification->addListener( 'download', 'trackInCourse' );
+
+					$connectorPath = secure_file_path(get_module_path( $tlabelReq ) . '/connector/downloader.cnr.php');
+					require_once $connectorPath;
+					$className = $tlabelReq.'_Downloader';
+					$downloader = new $className( $tlabelReq, $cid, claro_get_current_user_id() );
+					
+					if ( $downloader && $downloader->isAllowedToDownload( $thisFile ) )
+					{
+						$pathInfo = $downloader->getFilePath( $thisFile );
+
+						$pathInfo = secure_file_path( $pathInfo );
+						
+						// Check if path exists in course folder
+						if ( ! file_exists($pathInfo) || is_dir($pathInfo) )
+						{
+							throw new RuntimeException('Resource not found', 404);
+						}
+					}
+					else
+					{
+						throw new RuntimeException('Not allowed', 403);
+					}
+				}
 				for ($result = $try = 0; $try < $limit && $result < 1; $try++)
 				{
 					/* Create token and register into the db. Retry until the registration complete or fail $limit times.
 					 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = */
 					$token = bin2hex(openssl_random_pseudo_bytes(15));
-					$sql = 'REPLACE INTO `' . $tableName . '` (`userId`, `token`, `cid`, `requestedPath`, `requestTime`) '
-							.	   'VALUES (\'' . claro_get_current_user_id() . '\', \'' . $token . '\', \'' . $cid . '\', \'' . claro_sql_escape($thisFile) . '\' , NOW());';
+					$sql = 'REPLACE INTO `' . $tableName . '` (`userId`, `token`, `requestedPath`, `requestTime`, `wasFolder`, `canRetry`) '
+						 .	   'VALUES (\'' . claro_get_current_user_id() . '\', \'' . $token . '\', \'' . claro_sql_escape($pathInfo) . '\', NOW(), \'' . (is_dir($baseWorkDir.$thisFile)? 1 : 0) . '\' , \'' . ($args['platform'] == 'WP'? 1 : 0) . '\');';
+
 					$result = Claroline::getDatabase()->exec($sql);
 				}
 					
@@ -252,7 +360,7 @@ class CLDOCWebServiceController
 		}
 		else
 		{
-			throw new Exception('Not allowed', 403);
+			throw new RuntimeException('Not allowed', 403);
 		}
 	}
 }
