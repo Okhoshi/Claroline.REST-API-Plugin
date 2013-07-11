@@ -6,7 +6,7 @@ RewriteEngine on
 #--------------------------------------------------
 
 # 
-RewriteBase /Claroline/module/MOBILE/
+RewriteBase %%PLATFORM_APPEND%%/module/MOBILE/
 
 #In case of CLDOC/getResources, Query String must be used
 RewriteCond %{QUERY_STRING} recursive=|curDirPath=
@@ -17,3 +17,5 @@ RewriteCond %{QUERY_STRING} debug
 RewriteRule ^([a-zA-Z]+)/([a-zA-Z]+)/?([a-zA-Z0-9]*)/?([a-zA-Z0-9]*)/?$ ?module=$1&method=$2&cidReset&cidReq=$3&resID=$4&debug [L]
 
 RewriteRule ^([a-zA-Z]+)/([a-zA-Z]+)/?([a-zA-Z0-9]*)/?([a-zA-Z0-9]*)/?$ ?module=$1&method=$2&cidReset&cidReq=$3&resID=$4 [L]
+
+RewriteRule ^([a-zA-Z]+)/([a-zA-Z]+)/?([a-zA-Z0-9]*)/?$ ?module=$1&method=$2&cidReset&cidReq=$3 [L]

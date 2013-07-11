@@ -14,7 +14,7 @@ $tlabelReq = 'MOBILE';
 //Provides to the methods only the following arguments !
 $allowedArgs = array('resID', 'recursive', 'curDirPath', 'platform' );
 
-require dirname( __FILE__ ) . '/../../claroline/inc/claro_init_global.inc.php';
+require_once dirname( __FILE__ ) . '/../../claroline/inc/claro_init_global.inc.php';
 
 if ( !claro_is_user_authenticated() )
 {
