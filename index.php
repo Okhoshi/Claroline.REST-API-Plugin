@@ -2,7 +2,7 @@
 /**
  * Web Service Controller
  *
- * @version     MOBILE 1 $Revision: 9 $ - Claroline 1.11
+ * @version     MOBILE 1 $Revision: 10 $ - Claroline 1.11
  * @copyright   2001-2013 Universite Catholique de Louvain (UCL)
  * @license     http://www.gnu.org/copyleft/gpl.html (GPL) GENERAL PUBLIC LICENSE
  * @package     MOBILE
@@ -12,9 +12,9 @@
 $tlabelReq = 'MOBILE';
 
 //Provides to the methods only the following arguments !
-$allowedArgs = array('resID', 'recursive', 'curDirPath');
+$allowedArgs = array('resID', 'recursive', 'curDirPath', 'platform' );
 
-require dirname( __FILE__ ) . '/../../claroline/inc/claro_init_global.inc.php';
+require_once dirname( __FILE__ ) . '/../../claroline/inc/claro_init_global.inc.php';
 
 if ( !claro_is_user_authenticated() )
 {
@@ -64,6 +64,7 @@ try
 					$args[$allowed] = $_REQUEST[$allowed];
 				}
 			}
+			$args['module'] = $_REQUEST['module'];
 				
 			$result = $class->$method($args);
 		}
@@ -81,22 +82,18 @@ try
 
 	/*
 	 * Force headers or debug mode
-	*/
-
+	 s*/
+	if ( isset( $_REQUEST["debug"] ) )
+	{
+		var_dump($result);
+		die();
+	}
+	
 	header("Cache-Control: no-cache, must-revalidate" );
 	header("Expires: Mon, 26 Jul 1997 05:00:00 GMT" );
 	header("Last-Modified: " . gmdate( "D, d M Y H:i:s" ) . "GMT" );
 	header("Pragma: no-cache" );
-
-        if ( !isset($_REQUEST['debug']) )
-	{
-		header("Content-Type: application/json; charset=utf-8");
-	}
-	else
-	{
-		var_dump($result);
-		echo "\n";
-	}
+	header("Content-Type: application/json; charset=utf-8");
 
 	claro_utf8_encode_array($result);
 	echo json_encode($result);
@@ -106,11 +103,11 @@ catch ( RuntimeException $ex )
 {
 	header($ex->getMessage(),true, $ex->getCode());
 	echo $ex->getMessage();
-	die();
+	//die();
 }
 catch ( Exception $ex )
 {
 	header('Bad Request',true, 400);
 	echo $ex->getMessage();
-	die();
+	//die();
 }
