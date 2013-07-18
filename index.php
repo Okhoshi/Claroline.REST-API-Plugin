@@ -82,7 +82,7 @@ try
 
 	/*
 	 * Force headers or debug mode
-	 s*/
+	*/
 	if ( isset( $_REQUEST["debug"] ) )
 	{
 		var_dump($result);

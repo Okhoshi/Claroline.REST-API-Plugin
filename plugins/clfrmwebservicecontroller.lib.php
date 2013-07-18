@@ -43,21 +43,7 @@ class CLFRMWebServiceController
 			{
 				continue;
 			}
-			
-			$notified = $claroNotification->isANotifiedRessource($cid,
-							$date,
-							claro_get_current_user_id(),
-							claro_get_current_group_id(),
-							get_tool_id_from_module_label('CLFRM'),
-							$item['forum_id'],
-							false);
-		
-			$item['notifiedDate'] = $notified
-									?$date
-									:$item['post_time'];
-									
-			$item['seenDate'] = $d->format('Y-m-d H:i');
-			
+						
 			$item['resourceId'] = $item['forum_id'];
 			$item['title'] = $item['forum_name'];
 			
@@ -75,21 +61,6 @@ class CLFRMWebServiceController
 			$topics = new topicLister($item['forum_id'], 0, $item['forum_topics']);
 			foreach ( $topics->get_topic_list() as $topic)
 			{
-				
-				$notified = $claroNotification->isANotifiedRessource($cid,
-								$date,
-								claro_get_current_user_id(),
-								claro_get_current_group_id(),
-								get_tool_id_from_module_label('CLFRM'),
-								$item['forum_id'] . '-' . $topic['topic_id'],
-								false);
-								
-				$topic['notifiedDate'] = $notified
-										?$date
-										:$topic['topic_time'];
-			
-				$topic['seenDate'] = $d->format('Y-m-d H:i');
-										
 				$topic['resourceId'] = $topic['topic_id'];
 				$topic['title'] = $topic['topic_title'];
 				$topic['poster_firstname'] = $topic['prenom'];
@@ -98,7 +69,7 @@ class CLFRMWebServiceController
 				
 				$topic['posts'] = array();
 				$posts = new postLister($topic['topic_id'], 0, $topic['topic_replies']);
-				foreach ( $posts->get_post_list() as $post )
+				/*foreach ( $posts->get_post_list() as $post )
 				{
 				
 					$notified = $claroNotification->isANotifiedRessource($cid,
@@ -126,7 +97,7 @@ class CLFRMWebServiceController
 					unset($post['poster_ip']);
 				
 					$topic['posts'][] = $post;
-				}
+				}*/
 				
 				unset($topic['topic_id']);
 				unset($topic['topic_title']);
