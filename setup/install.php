@@ -11,6 +11,8 @@
 
 $tlabelReq = 'MOBILE';
 
+rename( get_module_path( $tlabelReq ) . '/htaccess.dist' , get_module_path( $tlabelReq ) . '/.htaccess' );
+
 $file = get_module_path( $tlabelReq ) . '/.htaccess';
 $htaccess = file_get_contents( $file );
 

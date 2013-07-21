@@ -8,6 +8,9 @@ RewriteEngine on
 # 
 RewriteBase %%PLATFORM_APPEND%%/module/MOBILE/
 
+#Exclude some dirs
+RewriteRule ^(img)(/.*)?$ - [L]
+
 #In case of CLDOC/getResources, Query String must be used
 RewriteCond %{QUERY_STRING} recursive=|curDirPath=
 RewriteRule ^([a-zA-Z]+)/([a-zA-Z]+)/?([a-zA-Z0-9]*)/?$ ?module=$1&method=$2&cidReq=$3&cidReset [QSA,L]
