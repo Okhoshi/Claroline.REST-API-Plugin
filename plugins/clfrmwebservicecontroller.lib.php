@@ -69,7 +69,7 @@ class CLFRMWebServiceController
 				
 				$topic['posts'] = array();
 				$posts = new postLister($topic['topic_id'], 0, $topic['topic_replies']);
-				/*foreach ( $posts->get_post_list() as $post )
+				foreach ( $posts->get_post_list() as $post )
 				{
 				
 					$notified = $claroNotification->isANotifiedRessource($cid,
@@ -97,7 +97,7 @@ class CLFRMWebServiceController
 					unset($post['poster_ip']);
 				
 					$topic['posts'][] = $post;
-				}*/
+				}
 				
 				unset($topic['topic_id']);
 				unset($topic['topic_title']);
