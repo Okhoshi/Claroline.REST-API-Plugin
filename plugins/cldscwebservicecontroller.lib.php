@@ -30,8 +30,16 @@ class CLDSCWebServiceController
 		
 		$dscList = array();
 		
-		foreach ( course_description_get_item_list($cid) as $item )
+		$array = course_description_get_item_list($cid);
+		$lastCat = max(array_map(function($row) { return $row['category']; }, $array)) + 1;
+		
+		foreach ( $array as $item )
 		{
+			if ( $item['category'] == -1 )
+			{
+				$item['title'] = get_lang('Other');
+				$item['category'] = $lastCat;
+			}
 			$item['content'] = trim(strip_tags($item['content']));
 			$item['visibility'] = ($item['visibility'] != 'HIDE');
 			$item['resourceId'] = $item['id'];
