@@ -31,7 +31,10 @@ class CLDSCWebServiceController
 		$dscList = array();
 		
 		$array = course_description_get_item_list($cid);
-		$lastCat = max(array_map(function($row) { return $row['category']; }, $array)) + 1;
+		if ( count( $array ) )
+		{
+			$lastCat = max(array_map(function($row) { return $row['category']; }, $array)) + 1;
+		}
 		
 		foreach ( $array as $item )
 		{
