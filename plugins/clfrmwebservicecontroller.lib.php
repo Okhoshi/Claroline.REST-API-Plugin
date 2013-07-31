@@ -68,7 +68,7 @@ class CLFRMWebServiceController
 				$topic['date'] = $topic['topic_time'];
 				
 				$topic['posts'] = array();
-				$posts = new postLister($topic['topic_id'], 0, $topic['topic_replies']);
+				$posts = new postLister($topic['topic_id'], 0, $topic['topic_replies'] + 1);
 				foreach ( $posts->get_post_list() as $post )
 				{
 				
@@ -85,7 +85,7 @@ class CLFRMWebServiceController
 											:$post['post_time'];
 				
 					$post['seenDate'] = $d->format('Y-m-d H:i');
-				
+					$post['post_text'] = trim(strip_tags($post['post_text']));
 					$post['resourceId'] = $post['post_id'];
 					$post['date'] = $post['post_time'];
 				
