@@ -15,10 +15,16 @@ RewriteRule ^(img)(/.*)?$ - [L]
 RewriteCond %{QUERY_STRING} recursive=|curDirPath=
 RewriteRule ^([a-zA-Z]+)/([a-zA-Z]+)/?([a-zA-Z0-9]*)/?$ ?module=$1&method=$2&cidReq=$3&cidReset [QSA,L]
 
+#Detect login
+RewriteCond %{QUERY_STRING} login=&password=
+RewriteRule ^([a-zA-Z]+)/([a-zA-Z]+)/?([a-zA-Z0-9]*)/?([^/]*)/?$ ?module=$1&method=$2&cidReset&cidReq=$3&resID=$4 [QSA,L]
+
 #Detect the debug flag
 RewriteCond %{QUERY_STRING} debug
-RewriteRule ^([a-zA-Z]+)/([a-zA-Z]+)/?([a-zA-Z0-9]*)/?([a-zA-Z0-9]*)/?$ ?module=$1&method=$2&cidReset&cidReq=$3&resID=$4&debug [L]
+RewriteRule ^([a-zA-Z]+)/([a-zA-Z]+)/?([a-zA-Z0-9]*)/?([^/]*)/?$ ?module=$1&method=$2&cidReset&cidReq=$3&resID=$4&debug [L]
 
-RewriteRule ^([a-zA-Z]+)/([a-zA-Z]+)/?([a-zA-Z0-9]*)/?([a-zA-Z0-9]*)/?$ ?module=$1&method=$2&cidReset&cidReq=$3&resID=$4 [L]
+RewriteRule ^(USER)/(getUpdates)/?([^/]*)/?$ ?module=USER&method=getUpdates&date=$3 [L,NC]
 
 RewriteRule ^([a-zA-Z]+)/([a-zA-Z]+)/?([a-zA-Z0-9]*)/?$ ?module=$1&method=$2&cidReset&cidReq=$3 [L]
+
+RewriteRule ^([a-zA-Z]+)/([a-zA-Z]+)/?([a-zA-Z0-9]*)/?([^/]*)/?$ ?module=$1&method=$2&cidReset&cidReq=$3&resID=$4 [L]

@@ -144,11 +144,15 @@ class USERWebServiceController
 	 * @return empty array if no notification.
 	 * 		   Else, return array([SYSCODE] => array([LABEL] => notified resource object, ...), ...)
 	 */
-	function getUpdates()
+	function getUpdates( $args )
 	{
 		$claroNotification = Claroline::getInstance()->notification;
+		
+		$date = isset( $args['date'] )
+			  ?$args['date']
+			  :$claroNotification->getLastActionBeforeLoginDate(claro_get_current_user_id())
+			  ;
 		$gid = 0;
-		$date = $claroNotification->getLastActionBeforeLoginDate(claro_get_current_user_id());
 		$result = array();
 		foreach ( $claroNotification->getNotifiedCourses($date, claro_get_current_user_id()) as $cid )
 		{
