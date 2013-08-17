@@ -48,7 +48,7 @@ array ( 'label'       => 'Lien vers l\'application iOS dans l\'Apple iOS App Sto
 
 $conf_def_property_list[ 'iOSAppReady' ] =
 array ( 'label'       => 'Active le lien vers l\'application iPhone'
-		, 'description' => 'Retire le bandeau "Soon" de la bannière de l\'Apple iOS App Store et active le lien vers l\'application'
+		, 'description' => 'Retire le bandeau "Soon" de la banniï¿½re de l\'Apple iOS App Store et active le lien vers l\'application'
 		, 'default'     => FALSE
 		, 'type'        => 'boolean'
 		, 'display'     => TRUE
@@ -67,7 +67,7 @@ array ( 'label'       => 'Lien vers l\'application Android dans l\'Android Googl
 
 $conf_def_property_list[ 'AndAppReady' ] =
 array ( 'label'       => 'Active le lien vers l\'application Android'
-		, 'description' => 'Retire le bandeau "Soon" de la bannière de l\'Android Google Play Store et active le lien vers l\'application'
+		, 'description' => 'Retire le bandeau "Soon" de la banniï¿½re de l\'Android Google Play Store et active le lien vers l\'application'
 		, 'default'     => TRUE
 		, 'type'        => 'boolean'
 		, 'display'     => TRUE
@@ -78,7 +78,7 @@ array ( 'label'       => 'Active le lien vers l\'application Android'
 $conf_def_property_list[ 'WPAppLink' ] =
 array ( 'label'       => 'Lien vers l\'application WindowsPhone dans le Microsoft Windows Phone Store'
 		, 'description' => ''
-		, 'default'     => ''
+		, 'default'     => 'http://www.windowsphone.com/s?appid=b88c8db5-89ef-4ec1-89bc-6713500d18cf'
 		, 'type'        => 'string'
 		, 'display'     => TRUE
 		, 'readonly'    => FALSE
@@ -86,8 +86,8 @@ array ( 'label'       => 'Lien vers l\'application WindowsPhone dans le Microsof
 
 $conf_def_property_list[ 'WPAppReady' ] =
 array ( 'label'       => 'Active le lien vers l\'application Windows Phone'
-		, 'description' => 'Retire le bandeau "Soon" de la bannière du Microsoft Windows Phone Store et active le lien vers l\'application'
-		, 'default'     => FALSE
+		, 'description' => 'Retire le bandeau "Soon" de la banniï¿½re du Microsoft Windows Phone Store et active le lien vers l\'application'
+		, 'default'     => TRUE
 		, 'type'        => 'boolean'
 		, 'display'     => TRUE
 		, 'readonly'    => FALSE
