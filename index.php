@@ -50,7 +50,7 @@ try
 	*/
 	From::module($tlabelReq)->uses('pluginloader.lib');
 	$pl = new PluginLoader( './plugins/' );
-	if ( $class = $pl->load($_REQUEST['module']) )
+	if ( $class = $pl->load( isset($_REQUEST['forceGeneric']) ? 'GENERIC' : $_REQUEST['module']) )
 	{
 		if ( method_exists($class, $_REQUEST['method']) )
 		{

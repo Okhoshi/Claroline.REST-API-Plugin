@@ -23,6 +23,10 @@ RewriteRule ^([a-zA-Z]+)/([a-zA-Z]+)/?([a-zA-Z0-9]*)/?([^/]*)/?$ ?module=$1&meth
 RewriteCond %{QUERY_STRING} debug
 RewriteRule ^([a-zA-Z]+)/([a-zA-Z]+)/?([a-zA-Z0-9]*)/?([^/]*)/?$ ?module=$1&method=$2&cidReset&cidReq=$3&resID=$4&debug [L]
 
+#Detect the forceGeneric flag
+RewriteCond %{QUERY_STRING} forceGeneric
+RewriteRule ^([a-zA-Z]+)/([a-zA-Z]+)/?([a-zA-Z0-9]*)/?([^/]*)/?$ ?module=$1&method=$2&cidReset&cidReq=$3&resID=$4&forceGeneric [L]
+
 RewriteRule ^(USER)/(getUpdates)/?([^/]*)/?$ ?module=USER&method=getUpdates&date=$3 [L,NC]
 
 RewriteRule ^([a-zA-Z]+)/([a-zA-Z]+)/?([a-zA-Z0-9]*)/?$ ?module=$1&method=$2&cidReset&cidReq=$3 [L]
