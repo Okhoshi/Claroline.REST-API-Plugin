@@ -8,7 +8,7 @@
  *
  */
 $tlabelReq = 'MOBILE';
-if ( count( get_included_files() ) == 1 ) die( '---<!-- PLATFORM SETTINGS path=/module/' . $tlabelReq . '/# PLATFORM SETTINGS -->' );
+if ( count( get_included_files() ) == 1 ) die( '---' );
 
 if ( get_conf('activeWebService',true) )
 {
@@ -56,6 +56,7 @@ if ( get_conf('activeWebService',true) )
 	$html = "\n\n"
 	.	 '<div class="header">'
 	.	 'Claroline Mobile'
+	.	 '<!-- PLATFORM SETTINGS path=/module/' . $tlabelReq . '/# PLATFORM SETTINGS -->'
 	.	 '</div>'
 	.	 "\n</br>" . get_lang('Get the Claroline application for your smartphone !') . "\n"
 	.	 '<div style="text-align:center"></br>'
