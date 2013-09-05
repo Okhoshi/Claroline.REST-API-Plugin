@@ -7,11 +7,9 @@
  * @package MOBILE
  *
  */
-
-if ( count( get_included_files() ) == 1 ) die( '---' );
-
-
 $tlabelReq = 'MOBILE';
+if ( count( get_included_files() ) == 1 ) die( '---<!-- PLATFORM SETTINGS path=/module/' . $tlabelReq . '/# PLATFORM SETTINGS -->' );
+
 if ( get_conf('activeWebService',true) )
 {
 	

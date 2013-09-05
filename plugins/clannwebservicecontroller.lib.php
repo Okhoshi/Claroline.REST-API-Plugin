@@ -53,7 +53,7 @@ class CLANNWebServiceController
 			$announce['date'] = $announce['time'];
 			$announce['resourceId'] = $announce['id'];
 			$announce['content'] = trim(strip_tags($announce['content']));
-			unset($announce['id']);
+			unset($announce['id'], $announce['visibleFrom'], $announce['visibleUntil']);
 				
 			if ( claro_is_allowed_to_edit() || $announce['visibility'] )
 			{

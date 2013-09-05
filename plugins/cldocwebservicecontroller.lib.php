@@ -145,7 +145,7 @@ class CLDOCWebServiceController
 					$fileAttributeList['title'] = $tmp[count($tmp) -1];
 					$fileAttributeList['isFolder'] = true;
 					$fileAttributeList['type'] = A_DIRECTORY;
-					$fileAttributeList['size'] = false;
+					$fileAttributeList['size'] = 0;
 					$fileAttributeList['date'] = $fileYear . '-09-20';
 					$fileAttributeList['extension'] = "";
 					$fileAttributeList['url'] = null;
