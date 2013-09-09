@@ -19,6 +19,7 @@ $conf_def['config_name'] = 'Web Services';
 $conf_def['section']['WS']['label']      = 'Web Service';
 $conf_def['section']['WS']['description']= '';
 $conf_def['section']['WS']['properties'] = array ( 'activeWebService',
+													'webserviceVersion',
 													'iOSAppLink',
 													'iOSAppReady',
 													'AndAppLink',
@@ -36,6 +37,16 @@ array ( 'label'       => 'Active le Serveur Web Services'
 		, 'readonly'    => FALSE
 		,'acceptedValue' => array('TRUE' => 'Oui', 'FALSE' => 'Non')
 );
+
+$conf_def_property_list[ 'webserviceVersion' ] =
+array ( 'label'       => 'Version du module'
+		, 'description' => ''
+		, 'default'     => '1.0'
+		, 'type'        => 'string'
+		, 'display'     => FALSE
+		, 'readonly'    => TRUE
+);
+
 
 $conf_def_property_list[ 'iOSAppLink' ] =
 array ( 'label'       => 'Lien vers l\'application iOS dans l\'Apple iOS App Store'
