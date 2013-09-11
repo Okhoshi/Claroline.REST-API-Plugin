@@ -44,13 +44,19 @@ class GenericWebServiceController
 			foreach ( $resourceList as $lnk )
 			{
 				$inLocator = $lnk->getLocator();
+				
+				$item['title'] = $lnk->getName();
+				$item['visibility'] = $lnk->isVisible();
+				$item['url'] = str_replace(get_path('url'), "", get_path('rootWeb')) .ResourceLinker::$Resolver->resolve( $inLocator );
+				
 				if ( $inLocator->hasResourceId() )
 				{
 					$item['resourceId'] = $inLocator->getResourceId();
 				}
-				$item['title'] = $lnk->getName();
-				$item['visibility'] = $lnk->isVisible();
-				$item['url'] = str_replace(get_path('url'), "", get_path('rootWeb')) .ResourceLinker::$Resolver->resolve( $inLocator );
+				else
+				{
+					$item['resourceId'] = $item['url'];
+				}
 				
 				if ( claro_is_allowed_to_edit() || $item['visibility'] )
 				{
