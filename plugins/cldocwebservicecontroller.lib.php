@@ -134,6 +134,7 @@ class CLDOCWebServiceController
 			{
 				$fileAttributeList['cours']['sysCode'] = $cid;
 				$fileAttributeList['path'] = $thisFile;
+				$fileAttributeList['resourceId'] = $thisFile;
 				$tmp = explode('/',$thisFile);
 
 				if( is_dir($baseWorkDir.$thisFile) )
@@ -184,8 +185,10 @@ class CLDOCWebServiceController
 				$d = new DateTime($date);
 				$d->sub(new DateInterval('P1D'));
 				$fileAttributeList['seenDate'] = $d->format('Y-m-d');
-
-				$fileList[] = $fileAttributeList;
+				
+				if ($fileAttributeList['visibility'] || claro_is_allowed_to_edit()) {
+					$fileList[] = $fileAttributeList;
+				}
 			} // end foreach $filePathList
 		}
 		if ( $recursive )
