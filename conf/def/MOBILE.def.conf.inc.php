@@ -41,8 +41,8 @@ array ( 'label'       => 'Active le Serveur Web Services'
 $conf_def_property_list[ 'webserviceVersion' ] =
 array ( 'label'       => 'Version du module'
 		, 'description' => ''
-		, 'default'     => '1.0'
-		, 'type'        => 'string'
+		, 'default'     => '1'
+		, 'type'        => 'integer'
 		, 'display'     => FALSE
 		, 'readonly'    => TRUE
 );

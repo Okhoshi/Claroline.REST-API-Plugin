@@ -18,10 +18,12 @@ class USERWebServiceController
 	 */
 	function getUserData()
 	{
+		$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+	
 		$userData = claro_get_current_user_data();
 		//Bug fix for kernel bug, into user_get_picture_***() into user.lib. Bad index ?
 		$userData['user_id'] = $userData['userId'];
-		$userData['picture'] = $_SERVER['SERVER_NAME'] . user_get_picture_url($userData);
+		$userData['picture'] = $protocol . $_SERVER['SERVER_NAME'] . user_get_picture_url($userData);
 		unset($userData['authSource'],
 			  $userData['creatorId'],
 			  $userData['lastLogin'],

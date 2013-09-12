@@ -13,7 +13,7 @@ if ( count( get_included_files() ) == 1 ) die( '---' );
 if ( get_conf('activeWebService',true) )
 {
 
-	$settings = array( 'path' => '/module/' . $tlabelReq . '/', 'version' => get_conf('webservice_version', '1.0') );
+	$settings = array( 'path' => '/module/' . $tlabelReq . '/', 'version' => get_conf('webservice_version', 1) );
 	claro_utf8_encode_array( $settings );
 	
 	$iOSimg = 'alt="Claroline Mobile on Apple iOS App Store" '
