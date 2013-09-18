@@ -36,7 +36,7 @@ class CLDOCWebServiceController
 		{
 			throw new InvalidArgumentException('Missing cid argument!');
 		}
-		elseif ( !claro_is_course_allowed )
+		elseif ( !claro_is_course_allowed() )
 		{
 			throw new RuntimeException('Not allowed', 403);
 		}
