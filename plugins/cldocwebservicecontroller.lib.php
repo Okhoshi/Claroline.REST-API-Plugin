@@ -345,7 +345,7 @@ class CLDOCWebServiceController
 					 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = */
 					$token = bin2hex(openssl_random_pseudo_bytes(15));
 					$sql = 'REPLACE INTO `' . $tableName . '` (`userId`, `token`, `requestedPath`, `requestTime`, `wasFolder`, `canRetry`) '
-						 .	   'VALUES (\'' . claro_get_current_user_id() . '\', \'' . $token . '\', \'' . claro_sql_escape($pathInfo) . '\', NOW(), \'' . (is_dir($baseWorkDir.$thisFile)? 1 : 0) . '\' , \'' . ($args['platform'] == 'WP'? 1 : 0) . '\');';
+						 .	   'VALUES (\'' . claro_get_current_user_id() . '\', \'' . $token . '\', \'' . claro_sql_escape($pathInfo) . '\', NOW(), \'' . (is_dir($baseWorkDir.$thisFile)? 1 : 0) . '\' , \'' . (isset($args['platform']) && $args['platform'] == 'WP'? 1 : 0) . '\');';
 
 					$result = Claroline::getDatabase()->exec($sql);
 				}
