@@ -120,7 +120,7 @@ class USERWebServiceController
 		$tools = array();
 		foreach ( claro_get_course_tool_list($cid,claro_get_current_user_profile_id_in_course($cid)) as $tool )
 		{
-			if ( $tool['installed'] && $tool['activated'] && ($tool['visibility'] || claro_is_allowed_to_edit()) )
+			if ( isset($tool['label']) && $tool['installed'] && $tool['activated'] && ($tool['visibility'] || claro_is_allowed_to_edit()) )
 			{
 				unset($tool['id']);
 				unset($tool['tool_id']);
