@@ -54,11 +54,19 @@ if ( !$result->isEmpty() )
 		Claroline::getDatabase()->exec($sql);
 	}
 	
+	if (strtoupper(substr(PHP_OS, 0, 3)) == "WIN")
+	{
+		$rootSys =  str_replace( '//', '/', strtolower( str_replace('\\', '/', $rootSys) ) );
+		$pathInfo = strtolower( str_replace('\\', '/', $pathInfo) );
+	}
+
+	$document_url = str_replace($rootSys,$urlAppend.'/',$pathInfo);
+	
 	if ( get_conf('useSendfile', true) && ( $mimeType != 'text/html' || $extension == 'url' ) || $wasFolder )
 	{
 		if ( claro_send_file( $pathInfo )  !== false )
 		{
-			$claroline->notifier->event('download', array( 'data' => array('url' => $requestUrl) ) );
+			$claroline->notifier->event('download', array( 'data' => array('url' => $document_url) ) );
 			
 			if ( $wasFolder )
 			{
@@ -79,14 +87,6 @@ if ( !$result->isEmpty() )
 	}
 	else
 	{	
-		if (strtoupper(substr(PHP_OS, 0, 3)) == "WIN")
-		{
-			$rootSys =  str_replace( '//', '/', strtolower( str_replace('\\', '/', $rootSys) ) );
-			$pathInfo = strtolower( str_replace('\\', '/', $pathInfo) );
-		}
-
-		$document_url = str_replace($rootSys,$urlAppend.'/',$pathInfo);
-
 		$sql = 'DELETE FROM `' . $tableName . '` WHERE token = \'' . claro_sql_escape($token) . '\'';
 		Claroline::getDatabase()->exec($sql);
 		
