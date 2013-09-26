@@ -1,0 +1,134 @@
+/* GENERAL PROPERTIES */
+
+#claroBody {
+	width : 100%;
+	border : 0;
+	padding : 0;
+	margin : 0;
+}
+img {
+	border : 0;
+}
+a {
+	color : inherit;
+}
+#content {
+	width : 800px;
+	height : auto;
+	margin : auto;
+	margin-top : 10px;
+	font-family: Arial, Verdana, helvetica;
+	margin-bottom : 30px;
+}
+.toolTitleBlock {
+	margin : 20px;
+}
+.go_home {
+	float : right;
+}
+
+/* CHOOSE MENU */
+#choose {
+	width : 700px;
+	margin : auto;
+	height : 350px;
+	margin-top : 25px;
+	margin-bottom : 25px;
+}
+.item_choose {
+	float : left;
+	margin-left : 60px;
+	width : 150px;
+}
+#android_img {
+	background-image: url('../img/grey_android_logo.png');
+	background-repeat: no-repeat;
+	width : 130px;
+	height : 150px;
+	cursor : pointer;
+}
+#android_img:hover {
+	background-image : url('../img/androidlogo.png');
+}
+
+#windows_img {
+	background-image: url('../img/windows_store_grey.png');
+	background-color : rgb(168,168,168);
+	background-repeat: no-repeat;
+	width : 122px;
+	height : 150px;
+	cursor : pointer;
+}
+
+#windows_img:hover {
+	background-image: url('../img/windows_store.jpg');
+}
+
+#appstore_img {
+	background-image: url('../img/appstore_grey.png');
+	background-color : white;
+	background-repeat: no-repeat;
+	width : 142px;
+	height : 150px;
+	cursor : pointer;
+}
+
+#appstore_img:hover {
+	background-image: url('../img/appstore.png');
+}
+.item_name {
+	width : 125px;
+	height : 30px;
+	margin-top : 10px;
+	color : rgb(51, 102, 153);
+	text-align: center;
+}
+
+
+/*			CONFIGURATION 	*/
+
+.subsection_title {
+	height : 30px;
+	margin-top : 10px;
+	margin-bottom : 30px;
+	font-size : 14px;
+	color : black;
+	font-weight : bold;
+}
+.section_content {
+	font-size : 13px;
+	color : rgb(51, 102, 153);
+	background-color : rgb(249, 247, 237);
+	width : 700px;
+	height : 200px;
+	margin : auto;
+	margin-top : 20px;
+	padding : 10px;
+	border : 1px solid rgb(221, 221, 221);
+}
+.img_left {
+	float : left;
+	margin-left : 30px;
+}
+.text_right {
+	float : right;
+	text-align: justify;
+	margin-left : 30px;
+	margin-right : 30px;
+	width : 400px;
+}
+.important {
+	font-weight : bold;
+	color : blue;
+}
+.img_right {
+		float : right;
+	margin-right : 30px;
+}
+.text_left {
+	float : left;
+	text-align: justify;
+	margin-left : 30px;
+	margin-right : 30px;
+	width : 400px;
+}

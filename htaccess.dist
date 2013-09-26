@@ -9,7 +9,7 @@ RewriteEngine on
 RewriteBase %%PLATFORM_APPEND%%/module/MOBILE/
 
 #Exclude some dirs
-RewriteRule ^(img)(/.*)?$ - [L]
+RewriteRule ^(img|css|templates)(/.*)?$ - [L]
 
 #In case of CLDOC/getResources, Query String must be used
 RewriteCond %{QUERY_STRING} recursive=|curDirPath=

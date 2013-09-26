@@ -68,8 +68,10 @@ if ( get_conf('activeWebService',true) )
 	.    $iOSlink . "\n"
 	.    $Andlink . "\n"
 	.    $WPlink . "\n"
-	.	 '</div>'
-	. 	"\n\n";
+	.	 "</div>\n"
+	.	 '<button onclick="javascript:window.open(\'' . get_module_url('MOBILE') . '/popup.php\', \'' . addslashes(get_lang('Need help for the configuration ?'))
+	.	 '\',\'scrollbars=no,toolbar=no,menubar=no,status=no,width=800,height=530\');" >' . get_lang('Need help for the configuration ?') . '</button>'
+	. 	 "\n\n";
 
 
 	$claro_buffer->append($html);
