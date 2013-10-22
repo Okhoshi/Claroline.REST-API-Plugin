@@ -11,11 +11,7 @@ $tlabelReq = 'MOBILE';
 if ( count( get_included_files() ) == 1 ) die( '---' );
 
 if ( get_conf('activeWebService',true) )
-{
-
-	$settings = array( 'path' => '/module/' . $tlabelReq . '/', 'version' => get_conf('webservice_version', 1) );
-	claro_utf8_encode_array( $settings );
-	
+{	
 	$iOSimg = 'alt="Claroline Mobile on Apple iOS App Store" '
 			.  'id="ios_bagde" width="150" height="50" />';
 
@@ -59,9 +55,6 @@ if ( get_conf('activeWebService',true) )
 	$html = "\n\n"
 	.	 '<div class="header">'
 	.	 'Claroline Mobile'
-	.	 '<!-- PLATFORM SETTINGS '
-	.	 json_encode($settings)
-	.	 ' PLATFORM SETTINGS -->'
 	.	 '</div>'
 	.	 "\n</br>" . get_lang('Get the Claroline application for your smartphone !') . "\n"
 	.	 '<div style="text-align:center"></br>'

@@ -165,4 +165,14 @@ class USERWebServiceController
 		}
 		return $result;
 	}
+	
+	function getPlatformData()
+	{
+		$tlabelReq = 'MOBILE';
+		
+		$settings = array();
+		$settings['path'] = '/module/' . $tlabelReq . '/';
+		$settings['version'] = get_conf('webservice_version', 1);
+		return $settings;
+	}
 }
